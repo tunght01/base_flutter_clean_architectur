@@ -12,6 +12,11 @@ class AppBloc extends BaseBloc<AppEvent, AppState> {
 
     on<AppInitiated>(_onAppInitiated, transformer: log());
 
+    on<UpdateConnectivityType>(
+          (event, emit) => emit(state.copyWith(connectivityType: event.value)),
+      transformer: log(),
+    );
+
     on<UpdateSavedAccount>(
       (event, emit) => emit(state.copyWith(savedAccount: event.savedAccount)),
       transformer: log(),
