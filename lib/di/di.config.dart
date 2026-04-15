@@ -24,6 +24,7 @@ import 'package:soft_dream_test/domain/navigation/app_navigator.dart' as _i1042;
 import 'package:soft_dream_test/domain/repository/app_repository.dart' as _i141;
 import 'package:soft_dream_test/domain/usecase/load_initial_resource_use_case.dart'
     as _i982;
+import 'package:soft_dream_test/domain/usecase/login_use_case.dart' as _i787;
 import 'package:soft_dream_test/presentation/app/bloc/app_bloc.dart' as _i116;
 import 'package:soft_dream_test/presentation/base/bloc/common/common_bloc.dart'
     as _i852;
@@ -37,6 +38,8 @@ import 'package:soft_dream_test/presentation/navigation/middleware/route_guard.d
     as _i441;
 import 'package:soft_dream_test/presentation/navigation/routes/app_router.dart'
     as _i67;
+import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_bloc.dart'
+    as _i4;
 import 'package:soft_dream_test/presentation/ui/main/bloc/main_bloc.dart'
     as _i614;
 import 'package:soft_dream_test/shared/helper/app_info.dart' as _i906;
@@ -80,6 +83,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i141.AppRepository>(
       () => _i352.AppRepositoryImpl(gh<_i1056.FirebaseAuthDatasource>()),
     );
+    gh.factory<_i787.LoginUseCase>(
+      () => _i787.LoginUseCase(gh<_i141.AppRepository>()),
+    );
+    gh.factory<_i4.LoginBloc>(() => _i4.LoginBloc(gh<_i787.LoginUseCase>()));
     return this;
   }
 }
