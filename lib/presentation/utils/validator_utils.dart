@@ -3,14 +3,17 @@ import 'package:soft_dream_test/shared/regex/app_regex.dart';
 mixin ValidatorUtils {
   String? passwordValidator(String? value) {
     if (value?.isEmpty ?? true) {
-      return 'Trường không được để trống';
+      return 'Mật khẩu phải từ 6–50 ký tự.';
+    }
+    if (value!.length < 6 && value.length > 50) {
+      return 'Mật khẩu phải từ 6–50 ký tự.';
     }
     return null;
   }
 
   String? emailValidator(String? value, {String? emptyFieldMessage}) {
     if (value?.isEmpty ?? true) {
-      return emptyFieldMessage ?? 'Trường không được để trống';
+      return emptyFieldMessage ?? 'Email không được để trống.';
     }
     if (!AppRegex.emailContainRegex.hasMatch(value ?? '')) {
       return 'Email không hợp lệ!';

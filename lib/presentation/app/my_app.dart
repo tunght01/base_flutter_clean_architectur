@@ -3,6 +3,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -14,10 +15,12 @@ import 'package:soft_dream_test/presentation/base/base_page_state.dart';
 import 'package:soft_dream_test/presentation/navigation/observer/app_navigator_observer.dart';
 import 'package:soft_dream_test/presentation/navigation/routes/app_router.dart';
 import 'package:soft_dream_test/presentation/resource/dimens/app_dimen.dart';
+import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_themes.dart';
 import 'package:soft_dream_test/presentation/utils/app_connection_utils.dart';
 import 'package:soft_dream_test/shared/constants/device_constants.dart';
+import 'package:soft_dream_test/shared/constants/locale_constants.dart';
 import 'package:soft_dream_test/shared/constants/ui_constants.dart';
 
 import '../navigation/routes/app_router.gr.dart';
@@ -118,10 +121,11 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
         ],
         child: BlocBuilder<AppBloc, AppState>(
           buildWhen: (previous, current) =>
-              previous.isDarkTheme != current.isDarkTheme,
+              previous.isDarkTheme != current.isDarkTheme ||
+              previous.languageCode != current.languageCode,
           builder: (context, state) {
-            AppThemeSetting.currentAppThemeType = state.isDarkTheme 
-                ? AppThemeType.dark 
+            AppThemeSetting.currentAppThemeType = state.isDarkTheme
+                ? AppThemeType.dark
                 : AppThemeType.light;
             return AnnotatedRegion<SystemUiOverlayStyle>(
               value: const SystemUiOverlayStyle(
@@ -155,6 +159,19 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
                   theme: lightTheme,
                   darkTheme: darkTheme,
                   debugShowCheckedModeBanner: false,
+                  localeResolutionCallback:
+                      (Locale? locale, Iterable<Locale> supportedLocales) =>
+                          supportedLocales.contains(locale)
+                          ? locale
+                          : const Locale(LocaleConstants.defaultLocale),
+                  locale: Locale(state.languageCode.localeCode),
+                  supportedLocales: S.delegate.supportedLocales,
+                  localizationsDelegates: const [
+                    S.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
                 ),
               ),
             );

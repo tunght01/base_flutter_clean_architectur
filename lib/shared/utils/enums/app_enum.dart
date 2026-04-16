@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:soft_dream_test/shared/constants/locale_constants.dart';
+import 'package:soft_dream_test/shared/constants/server_request_response_constants.dart';
 
 enum BottomTab { home, profile }
 
@@ -30,4 +32,21 @@ extension BottomTabX on BottomTab {
         return 'Thông tin';
     }
   }
+}
+
+enum LanguageCode {
+  en(
+    localeCode: LocaleConstants.en,
+    serverValue: ServerRequestResponseConstants.en,
+  ),
+  vi(
+    localeCode: LocaleConstants.vi,
+    serverValue: ServerRequestResponseConstants.vi,
+  );
+
+  const LanguageCode({required this.localeCode, required this.serverValue});
+  final String localeCode;
+  final String serverValue;
+
+  static const defaultValue = vi;
 }

@@ -12,6 +12,7 @@ abstract class AppException implements Exception {
 
 enum AppExceptionType {
   remote,
+  firebase,
   parse,
   remoteConfig,
   uncaught,

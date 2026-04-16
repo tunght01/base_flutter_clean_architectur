@@ -4,12 +4,11 @@ import 'package:soft_dream_test/di/di.dart';
 import 'package:soft_dream_test/domain/navigation/app_navigator.dart';
 import 'package:soft_dream_test/domain/navigation/app_route_info.dart';
 import 'package:soft_dream_test/presentation/base/base_page_state.dart';
-import 'package:soft_dream_test/presentation/common_view/button/app_button.dart';
 import 'package:soft_dream_test/presentation/common_view/scaffold/common_scaffold.dart';
 import 'package:soft_dream_test/presentation/common_view/spacing/spacing_const.dart';
-import 'package:soft_dream_test/presentation/common_view/text_field/app_text_form_field.dart';
 import 'package:soft_dream_test/presentation/resource/dimens/dimens.dart';
 import 'package:soft_dream_test/presentation/resource/generated/assets.gen.dart';
+import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_text_styles.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_bloc.dart';
@@ -29,7 +28,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
   void _onLogin() {
     FocusManager.instance.primaryFocus?.unfocus();
-    bloc.add(OnPressEvent());
+    bloc.add(const OnPressEvent());
   }
 
   @override
@@ -38,7 +37,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Đăng nhập',
+          S.current.login_button,
           style: AppTextStyle.semiBold24(color: AppColors.current.textTitle),
         ),
       ),

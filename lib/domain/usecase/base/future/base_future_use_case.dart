@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:soft_dream_test/config/log_config.dart';
 import 'package:soft_dream_test/domain/usecase/base/base_use_case.dart';
 import 'package:soft_dream_test/domain/usecase/base/io/base_input.dart';
@@ -5,8 +6,13 @@ import 'package:soft_dream_test/domain/usecase/base/io/base_output.dart';
 import 'package:soft_dream_test/shared/exception/base/app_exception.dart';
 import 'package:soft_dream_test/shared/exception/uncaught/app_uncaught_exception.dart';
 
-abstract class BaseFutureUseCase<Input extends BaseInput,
-    Output extends BaseOutput> extends BaseUseCase<Input, Future<Output>> {
+import '../../../../shared/exception/firebase/app_firebase_exception.dart';
+
+abstract class BaseFutureUseCase<
+  Input extends BaseInput,
+  Output extends BaseOutput
+>
+    extends BaseUseCase<Input, Future<Output>> {
   const BaseFutureUseCase();
 
   Future<Output> execute(Input input) async {
@@ -25,7 +31,11 @@ abstract class BaseFutureUseCase<Input extends BaseInput,
         _safeLog(() => logE('FutureUseCase Error: $e'));
       }
 
-      throw e is AppException ? e : AppUncaughtException(e);
+      throw e is AppException
+          ? e
+          : e is FirebaseAuthException
+          ? AppFirebaseException(code: e.code, message: e.message)
+          : AppUncaughtException(e);
     }
   }
 

@@ -4,9 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:soft_dream_test/domain/navigation/app_navigator.dart';
-import 'package:soft_dream_test/domain/navigation/app_route_info.dart';
 import 'package:soft_dream_test/presentation/common_view/button/app_button.dart';
 import 'package:soft_dream_test/presentation/common_view/spacing/spacing_const.dart';
 import 'package:soft_dream_test/presentation/common_view/text_field/app_text_form_field.dart';
@@ -14,44 +11,48 @@ import 'package:soft_dream_test/presentation/resource/dimens/dimens.dart';
 import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_text_styles.dart';
-import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_bloc.dart';
-import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_event.dart';
-import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_state.dart';
+import 'package:soft_dream_test/presentation/ui/sign_up/bloc/sign_up_bloc.dart';
+import 'package:soft_dream_test/presentation/ui/sign_up/bloc/sign_up_event.dart';
+import 'package:soft_dream_test/presentation/ui/sign_up/bloc/sign_up_state.dart';
 import 'package:soft_dream_test/presentation/utils/validator_utils.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({
-    required this.onLoginPress,
+class SignUpForm extends StatefulWidget {
+  const SignUpForm({
+    required this.onSignUpPress,
     required this.onUsernameChanged,
     required this.onPasswordChanged,
-    required this.openAccountPress,
+    required this.onConfirmPasswordChanged,
     super.key,
   });
 
-  final VoidCallback onLoginPress;
-  final VoidCallback openAccountPress;
+  final VoidCallback onSignUpPress;
   final void Function(String?) onUsernameChanged;
   final void Function(String?) onPasswordChanged;
+  final void Function(String?) onConfirmPasswordChanged;
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
-class _LoginFormState extends State<LoginForm>
+class _SignUpFormState extends State<SignUpForm>
     with ValidatorUtils, AutomaticKeepAliveClientMixin {
   late final TextEditingController _usernameController;
   late final TextEditingController _passwordController;
+  late final TextEditingController _confirmPasswordController;
   late final FocusNode _usernameFocusNode;
   late final FocusNode _passwordFocusNode;
-  late final GlobalKey<FormState> loginFormKey;
+  late final FocusNode _confirmPasswordFocusNode;
+  late final GlobalKey<FormState> signUpFormKey;
 
   @override
   void initState() {
     _usernameController = TextEditingController();
     _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
     _usernameFocusNode = FocusNode();
     _passwordFocusNode = FocusNode();
-    loginFormKey = GlobalKey<FormState>();
+    _confirmPasswordFocusNode = FocusNode();
+    signUpFormKey = GlobalKey<FormState>();
     super.initState();
   }
 
@@ -59,8 +60,10 @@ class _LoginFormState extends State<LoginForm>
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     _usernameFocusNode.dispose();
     _passwordFocusNode.dispose();
+    _confirmPasswordFocusNode.dispose();
     super.dispose();
   }
 
@@ -88,19 +91,13 @@ class _LoginFormState extends State<LoginForm>
             horizontal: Dimens.d16,
           ),
           child: Form(
-            key: loginFormKey,
+            key: signUpFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BlocConsumer<LoginBloc, LoginState>(
-                  listenWhen: (previous, current) {
-                    return previous.initialUsername != current.initialUsername;
-                  },
-                  listener: (BuildContext context, LoginState state) {
-                    _usernameController.text = state.initialUsername!;
-                  },
+                BlocBuilder<SignUpBloc, SignUpState>(
                   buildWhen: (previous, current) {
-                    return previous.loginError != current.loginError ||
+                    return previous.signUpError != current.signUpError ||
                         previous.isFirstPress != current.isFirstPress ||
                         previous.email != current.email;
                   },
@@ -109,7 +106,7 @@ class _LoginFormState extends State<LoginForm>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Xin chào',
+                          S.current.sign_up_title,
                           style: AppTextStyle.medium24(
                             color: AppColors.current.primaryDefault,
                           ),
@@ -124,7 +121,7 @@ class _LoginFormState extends State<LoginForm>
                           },
                           fillColor: AppColors.current.neutralBlack1100
                               .withValues(alpha: 0.15),
-                          isError: state.loginError != null,
+                          isError: state.signUpError != null,
                           title: S.current.login_email_label,
                           titleColor: AppColors.current.textSubTitle,
                           autoValidate: state.isFirstPress,
@@ -139,9 +136,9 @@ class _LoginFormState extends State<LoginForm>
                   },
                 ),
                 kSpacingHeight16,
-                BlocBuilder<LoginBloc, LoginState>(
+                BlocBuilder<SignUpBloc, SignUpState>(
                   buildWhen: (previous, current) {
-                    return previous.loginError != current.loginError ||
+                    return previous.signUpError != current.signUpError ||
                         previous.isFirstPress != current.isFirstPress ||
                         previous.password != current.password;
                   },
@@ -158,94 +155,72 @@ class _LoginFormState extends State<LoginForm>
                         alpha: 0.15,
                       ),
                       onSubmitted: (_) {
-                        context.read<LoginBloc>().add(
-                          const OnChangeFirstSubmitEvent(),
-                        );
-
-                        if (loginFormKey.currentState?.validate() ?? false) {
-                          if (state.email != null) {}
-                          widget.onLoginPress.call();
-                        }
+                        _confirmPasswordFocusNode.requestFocus();
                       },
                       autoValidate: state.isFirstPress,
                       title: S.current.login_password_label,
-                      isError: state.loginError != null,
-                      errorText: state.loginError,
-                      textInputAction: TextInputAction.done,
+                      isError: state.signUpError != null,
+                      textInputAction: TextInputAction.next,
                       onChanged: widget.onPasswordChanged,
                     );
                   },
                 ),
-                kSpacingHeight8,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    BlocBuilder<LoginBloc, LoginState>(
-                      buildWhen: (previous, current) {
-                        return previous.loginError != current.loginError ||
-                            previous.email != current.email;
-                      },
-                      builder: (_, state) {
-                        return GestureDetector(
-                          onTap: () async {
-                            widget.openAccountPress.call();
-                          },
-                          child: Text(
-                            S.current.login_create_account,
-                            style: AppTextStyle.medium14(
-                              color: AppColors.current.primaryDefault,
-                            ),
-                          ),
+                kSpacingHeight16,
+                BlocBuilder<SignUpBloc, SignUpState>(
+                  buildWhen: (previous, current) {
+                    return previous.signUpError != current.signUpError ||
+                        previous.isFirstPress != current.isFirstPress ||
+                        previous.confirmPassword != current.confirmPassword;
+                  },
+                  builder: (context, state) {
+                    return AppTextFormField(
+                      maxLength: 50,
+                      required: true,
+                      controller: _confirmPasswordController,
+                      focusNode: _confirmPasswordFocusNode,
+                      validator: (value) {
+                        return samePasswordValidator(
+                          _passwordController.text,
+                          value,
                         );
                       },
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        GetIt.I.get<AppNavigator>().push(
-                          const AppRouteInfo.forgotPassword(),
-                        );
-                      },
-                      child: Text(
-                        S.current.login_forgot_password,
-                        style: AppTextStyle.medium14(
-                          color: AppColors.current.primaryDefault,
-                        ),
+                      isPassword: true,
+                      titleColor: AppColors.current.textSubTitle,
+                      fillColor: AppColors.current.neutralBlack1100.withValues(
+                        alpha: 0.15,
                       ),
-                    ),
-                  ],
+
+                      onSubmitted: (_) {
+                        context.read<SignUpBloc>().add(
+                          const OnChangeSignUpFirstSubmitEvent(),
+                        );
+
+                        if (signUpFormKey.currentState?.validate() ?? false) {
+                          widget.onSignUpPress.call();
+                        }
+                      },
+                      autoValidate: state.isFirstPress,
+                      title: S.current.sign_up_password_confirm_label,
+                      isError: state.signUpError != null,
+                      errorText: state.signUpError,
+                      textInputAction: TextInputAction.done,
+                      onChanged: widget.onConfirmPasswordChanged,
+                    );
+                  },
                 ),
                 kSpacingHeight32,
-                BlocBuilder<LoginBloc, LoginState>(
-                  buildWhen: (previous, current) =>
-                      previous.showLoginButtonLoading !=
-                          current.showLoginButtonLoading ||
-                      previous.email != current.email,
-                  builder: (context, state) {
-                    return Row(
-                      children: [
-                        Expanded(
-                          child: AppButton(
-                            isLoading: state.showLoginButtonLoading,
-                            label: S.current.login_button,
-                            labelTextStyle: AppTextStyle.bold16(
-                              color: Colors.white,
-                            ),
-                            backgroundColor: AppColors.current.primaryDefault,
-                            onPressed: () {
-                              context.read<LoginBloc>().add(
-                                const OnChangeFirstSubmitEvent(),
-                              );
-
-                              if (loginFormKey.currentState?.validate() ??
-                                  false) {
-                                if (state.email != null) {}
-                                widget.onLoginPress.call();
-                              }
-                            },
-                          ),
-                        ),
-                      ],
+                AppButton(
+                  label: S.current.sign_up_button,
+                  labelTextStyle: AppTextStyle.bold16(color: Colors.white),
+                  backgroundColor: AppColors.current.primaryDefault,
+                  onPressed: () {
+                    context.read<SignUpBloc>().add(
+                      const OnChangeSignUpFirstSubmitEvent(),
                     );
+
+                    if (signUpFormKey.currentState?.validate() ?? false) {
+                      widget.onSignUpPress.call();
+                    }
                   },
                 ),
               ],

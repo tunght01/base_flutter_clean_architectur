@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,4 +20,6 @@ class AppConfig implements Config {
       DeviceOrientation.portraitDown,
     ]);
   }
+
+
 }

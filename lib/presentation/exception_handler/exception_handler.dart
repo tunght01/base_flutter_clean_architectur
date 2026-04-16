@@ -46,6 +46,8 @@ class ExceptionHandler {
 
       case AppExceptionType.validation:
         return _showErrorSnackBar(message: message);
+      case AppExceptionType.firebase:
+        return _showErrorSnackBar(message: message);
     }
   }
 

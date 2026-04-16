@@ -12,11 +12,11 @@ abstract class ServiceModule {
   @preResolve
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 
-  FirebaseAuth get fireAuth => FirebaseAuth.instance;
+  @Singleton()
+  FirebaseAuth get fireAuth => FirebaseAuth.instance..setLanguageCode('vi');
 
+  @Singleton()
   FirebaseFirestore get firebaseFirestore => FirebaseFirestore.instance;
-
-  GoogleSignIn get googleSignIn => GoogleSignIn.instance;
 }
 
 final GetIt getIt = GetIt.instance;

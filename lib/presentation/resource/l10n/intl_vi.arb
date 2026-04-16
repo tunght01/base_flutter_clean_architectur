@@ -1,0 +1,27 @@
+{
+    "@@locale": "vi",
+    "@@last_modified": "2026-04-16",
+    "login_welcome": "Xin chào",
+    "login_email_label": "Email",
+    "login_password_label": "Mật khẩu",
+    "login_forgot_password": "Quên mật khẩu?",
+    "login_button": "Đăng nhập",
+    "login_create_account": "Tạo tài khoản mới",
+    "login_error_invalid_email": "Email không hợp lệ",
+    "login_error_empty_email": "Vui lòng nhập email",
+    "login_error_empty_password": "Vui lòng nhập mật khẩu",
+    "login_error_invalid_credential": "Thông tin đăng nhập không hợp lệ",
+    "login_error_user_not_found": "Tài khoản không tồn tại",
+    "login_error_wrong_password": "Mật khẩu không chính xác",
+    "login_error_user_disabled": "Tài khoản đã bị vô hiệu hóa",
+    "login_error_too_many_requests": "Bạn thao tác quá nhanh, vui lòng thử lại sau",
+    "login_error_unknown": "Có lỗi xảy ra. Vui lòng thử lại.",
+    "exist_email":"Email này đã được sử dụng.",
+    "invalid_credential":"Email hoặc mật khẩu không chính xác.",
+    "sign_up_title": "Đăng ký",
+    "sign_up_button": "Tạo tài khoản",
+    "sign_up_password_confirm_label": "Xác nhận mật khẩu",
+    "password_does_not_match_please_try_again":"Nhập lại mật khẩu mới không khớp",
+
+    "end":"Kết thúc"
+}

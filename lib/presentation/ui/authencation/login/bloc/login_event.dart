@@ -1,17 +1,23 @@
 import 'package:soft_dream_test/presentation/base/bloc/base_bloc_event.dart';
 
-class LoginEvent extends BaseBlocEvent {}
+abstract class LoginEvent extends BaseBlocEvent {
+  const LoginEvent();
+}
 
-class OnPressEvent extends LoginEvent {}
+class OnPressEvent extends LoginEvent {
+  const OnPressEvent();
+}
 
 class OnChangeEmailEvent extends LoginEvent {
   final String? email;
-
-  OnChangeEmailEvent({this.email});
+  const OnChangeEmailEvent({this.email});
 }
 
 class OnChangePasswordEvent extends LoginEvent {
   final String? password;
+  const OnChangePasswordEvent({this.password});
+}
 
-  OnChangePasswordEvent({this.password});
+class OnChangeFirstSubmitEvent extends LoginEvent {
+  const OnChangeFirstSubmitEvent();
 }

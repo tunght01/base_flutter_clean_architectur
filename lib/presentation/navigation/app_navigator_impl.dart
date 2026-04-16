@@ -243,7 +243,9 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
 
   @override
-  void showErrorSnackBar(String message, {Duration? duration}) {}
+  void showErrorSnackBar(String message, {Duration? duration}) {
+    print(message);
+  }
 
   @override
   void showWarningSnackBar(

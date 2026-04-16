@@ -14,21 +14,37 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     on<OnPressEvent>(_onPressEvent, transformer: log());
     on<OnChangeEmailEvent>(_onChangeEmailEvent, transformer: log());
     on<OnChangePasswordEvent>(_onChangePasswordEvent, transformer: log());
+    on<OnChangeFirstSubmitEvent>(
+      (event, emit) => emit(state.copyWith(isFirstPress: true)),
+      transformer: log(),
+    );
   }
 
   FutureOr<void> _onPressEvent(OnPressEvent event, Emitter<LoginState> emit) {
     return runBlocCatching(
       action: () async {
-        _loginUseCase.execute(LoginInput(email: state.email!, password: state.password!));
+        emit(state.copyWith(loginError: null));
+        await _loginUseCase.execute(
+          LoginInput(email: state.email!, password: state.password!),
+        );
+      },
+      doOnError: (e) async {
+        emit(state.copyWith(loginError: exceptionMessageMapper.map(e)));
       },
     );
   }
 
-  FutureOr<void> _onChangeEmailEvent(OnChangeEmailEvent event, Emitter<LoginState> emit) {
-    emit(state.copyWith(email: event.email));
+  FutureOr<void> _onChangeEmailEvent(
+    OnChangeEmailEvent event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(state.copyWith(email: event.email, loginError: null));
   }
 
-  FutureOr<void> _onChangePasswordEvent(OnChangePasswordEvent event, Emitter<LoginState> emit) {
-    emit(state.copyWith(password: event.password));
+  FutureOr<void> _onChangePasswordEvent(
+    OnChangePasswordEvent event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(state.copyWith(password: event.password, loginError: null));
   }
 }

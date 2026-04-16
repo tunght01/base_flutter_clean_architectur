@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppState {
 
- RemoteMessage? get remoteMessage; bool get appInitiated; bool get isLoggedIn; bool get savedAccount; bool get isDarkTheme; List<ConnectivityResult> get connectivityType;
+ RemoteMessage? get remoteMessage; bool get appInitiated; bool get isLoggedIn; bool get savedAccount; bool get isDarkTheme; LanguageCode get languageCode; List<ConnectivityResult> get connectivityType;
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AppStateCopyWith<AppState> get copyWith => _$AppStateCopyWithImpl<AppState>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&(identical(other.remoteMessage, remoteMessage) || other.remoteMessage == remoteMessage)&&(identical(other.appInitiated, appInitiated) || other.appInitiated == appInitiated)&&(identical(other.isLoggedIn, isLoggedIn) || other.isLoggedIn == isLoggedIn)&&(identical(other.savedAccount, savedAccount) || other.savedAccount == savedAccount)&&(identical(other.isDarkTheme, isDarkTheme) || other.isDarkTheme == isDarkTheme)&&const DeepCollectionEquality().equals(other.connectivityType, connectivityType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppState&&(identical(other.remoteMessage, remoteMessage) || other.remoteMessage == remoteMessage)&&(identical(other.appInitiated, appInitiated) || other.appInitiated == appInitiated)&&(identical(other.isLoggedIn, isLoggedIn) || other.isLoggedIn == isLoggedIn)&&(identical(other.savedAccount, savedAccount) || other.savedAccount == savedAccount)&&(identical(other.isDarkTheme, isDarkTheme) || other.isDarkTheme == isDarkTheme)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&const DeepCollectionEquality().equals(other.connectivityType, connectivityType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,remoteMessage,appInitiated,isLoggedIn,savedAccount,isDarkTheme,const DeepCollectionEquality().hash(connectivityType));
+int get hashCode => Object.hash(runtimeType,remoteMessage,appInitiated,isLoggedIn,savedAccount,isDarkTheme,languageCode,const DeepCollectionEquality().hash(connectivityType));
 
 @override
 String toString() {
-  return 'AppState(remoteMessage: $remoteMessage, appInitiated: $appInitiated, isLoggedIn: $isLoggedIn, savedAccount: $savedAccount, isDarkTheme: $isDarkTheme, connectivityType: $connectivityType)';
+  return 'AppState(remoteMessage: $remoteMessage, appInitiated: $appInitiated, isLoggedIn: $isLoggedIn, savedAccount: $savedAccount, isDarkTheme: $isDarkTheme, languageCode: $languageCode, connectivityType: $connectivityType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AppStateCopyWith<$Res>  {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) _then) = _$AppStateCopyWithImpl;
 @useResult
 $Res call({
- RemoteMessage? remoteMessage, bool appInitiated, bool isLoggedIn, bool savedAccount, bool isDarkTheme, List<ConnectivityResult> connectivityType
+ RemoteMessage? remoteMessage, bool appInitiated, bool isLoggedIn, bool savedAccount, bool isDarkTheme, LanguageCode languageCode, List<ConnectivityResult> connectivityType
 });
 
 
@@ -62,14 +62,15 @@ class _$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? remoteMessage = freezed,Object? appInitiated = null,Object? isLoggedIn = null,Object? savedAccount = null,Object? isDarkTheme = null,Object? connectivityType = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? remoteMessage = freezed,Object? appInitiated = null,Object? isLoggedIn = null,Object? savedAccount = null,Object? isDarkTheme = null,Object? languageCode = null,Object? connectivityType = null,}) {
   return _then(_self.copyWith(
 remoteMessage: freezed == remoteMessage ? _self.remoteMessage : remoteMessage // ignore: cast_nullable_to_non_nullable
 as RemoteMessage?,appInitiated: null == appInitiated ? _self.appInitiated : appInitiated // ignore: cast_nullable_to_non_nullable
 as bool,isLoggedIn: null == isLoggedIn ? _self.isLoggedIn : isLoggedIn // ignore: cast_nullable_to_non_nullable
 as bool,savedAccount: null == savedAccount ? _self.savedAccount : savedAccount // ignore: cast_nullable_to_non_nullable
 as bool,isDarkTheme: null == isDarkTheme ? _self.isDarkTheme : isDarkTheme // ignore: cast_nullable_to_non_nullable
-as bool,connectivityType: null == connectivityType ? _self.connectivityType : connectivityType // ignore: cast_nullable_to_non_nullable
+as bool,languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
+as LanguageCode,connectivityType: null == connectivityType ? _self.connectivityType : connectivityType // ignore: cast_nullable_to_non_nullable
 as List<ConnectivityResult>,
   ));
 }
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( RemoteMessage? remoteMessage,  bool appInitiated,  bool isLoggedIn,  bool savedAccount,  bool isDarkTheme,  List<ConnectivityResult> connectivityType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( RemoteMessage? remoteMessage,  bool appInitiated,  bool isLoggedIn,  bool savedAccount,  bool isDarkTheme,  LanguageCode languageCode,  List<ConnectivityResult> connectivityType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppState() when $default != null:
-return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.savedAccount,_that.isDarkTheme,_that.connectivityType);case _:
+return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.savedAccount,_that.isDarkTheme,_that.languageCode,_that.connectivityType);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.sa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( RemoteMessage? remoteMessage,  bool appInitiated,  bool isLoggedIn,  bool savedAccount,  bool isDarkTheme,  List<ConnectivityResult> connectivityType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( RemoteMessage? remoteMessage,  bool appInitiated,  bool isLoggedIn,  bool savedAccount,  bool isDarkTheme,  LanguageCode languageCode,  List<ConnectivityResult> connectivityType)  $default,) {final _that = this;
 switch (_that) {
 case _AppState():
-return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.savedAccount,_that.isDarkTheme,_that.connectivityType);case _:
+return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.savedAccount,_that.isDarkTheme,_that.languageCode,_that.connectivityType);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +197,10 @@ return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.sa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( RemoteMessage? remoteMessage,  bool appInitiated,  bool isLoggedIn,  bool savedAccount,  bool isDarkTheme,  List<ConnectivityResult> connectivityType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( RemoteMessage? remoteMessage,  bool appInitiated,  bool isLoggedIn,  bool savedAccount,  bool isDarkTheme,  LanguageCode languageCode,  List<ConnectivityResult> connectivityType)?  $default,) {final _that = this;
 switch (_that) {
 case _AppState() when $default != null:
-return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.savedAccount,_that.isDarkTheme,_that.connectivityType);case _:
+return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.savedAccount,_that.isDarkTheme,_that.languageCode,_that.connectivityType);case _:
   return null;
 
 }
@@ -211,7 +212,7 @@ return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.sa
 
 
 class _AppState extends AppState {
-  const _AppState({this.remoteMessage, this.appInitiated = false, this.isLoggedIn = false, this.savedAccount = false, this.isDarkTheme = false, final  List<ConnectivityResult> connectivityType = const []}): _connectivityType = connectivityType,super._();
+  const _AppState({this.remoteMessage, this.appInitiated = false, this.isLoggedIn = false, this.savedAccount = false, this.isDarkTheme = false, this.languageCode = LanguageCode.vi, final  List<ConnectivityResult> connectivityType = const []}): _connectivityType = connectivityType,super._();
   
 
 @override final  RemoteMessage? remoteMessage;
@@ -219,6 +220,7 @@ class _AppState extends AppState {
 @override@JsonKey() final  bool isLoggedIn;
 @override@JsonKey() final  bool savedAccount;
 @override@JsonKey() final  bool isDarkTheme;
+@override@JsonKey() final  LanguageCode languageCode;
  final  List<ConnectivityResult> _connectivityType;
 @override@JsonKey() List<ConnectivityResult> get connectivityType {
   if (_connectivityType is EqualUnmodifiableListView) return _connectivityType;
@@ -237,16 +239,16 @@ _$AppStateCopyWith<_AppState> get copyWith => __$AppStateCopyWithImpl<_AppState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&(identical(other.remoteMessage, remoteMessage) || other.remoteMessage == remoteMessage)&&(identical(other.appInitiated, appInitiated) || other.appInitiated == appInitiated)&&(identical(other.isLoggedIn, isLoggedIn) || other.isLoggedIn == isLoggedIn)&&(identical(other.savedAccount, savedAccount) || other.savedAccount == savedAccount)&&(identical(other.isDarkTheme, isDarkTheme) || other.isDarkTheme == isDarkTheme)&&const DeepCollectionEquality().equals(other._connectivityType, _connectivityType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppState&&(identical(other.remoteMessage, remoteMessage) || other.remoteMessage == remoteMessage)&&(identical(other.appInitiated, appInitiated) || other.appInitiated == appInitiated)&&(identical(other.isLoggedIn, isLoggedIn) || other.isLoggedIn == isLoggedIn)&&(identical(other.savedAccount, savedAccount) || other.savedAccount == savedAccount)&&(identical(other.isDarkTheme, isDarkTheme) || other.isDarkTheme == isDarkTheme)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&const DeepCollectionEquality().equals(other._connectivityType, _connectivityType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,remoteMessage,appInitiated,isLoggedIn,savedAccount,isDarkTheme,const DeepCollectionEquality().hash(_connectivityType));
+int get hashCode => Object.hash(runtimeType,remoteMessage,appInitiated,isLoggedIn,savedAccount,isDarkTheme,languageCode,const DeepCollectionEquality().hash(_connectivityType));
 
 @override
 String toString() {
-  return 'AppState(remoteMessage: $remoteMessage, appInitiated: $appInitiated, isLoggedIn: $isLoggedIn, savedAccount: $savedAccount, isDarkTheme: $isDarkTheme, connectivityType: $connectivityType)';
+  return 'AppState(remoteMessage: $remoteMessage, appInitiated: $appInitiated, isLoggedIn: $isLoggedIn, savedAccount: $savedAccount, isDarkTheme: $isDarkTheme, languageCode: $languageCode, connectivityType: $connectivityType)';
 }
 
 
@@ -257,7 +259,7 @@ abstract mixin class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res>
   factory _$AppStateCopyWith(_AppState value, $Res Function(_AppState) _then) = __$AppStateCopyWithImpl;
 @override @useResult
 $Res call({
- RemoteMessage? remoteMessage, bool appInitiated, bool isLoggedIn, bool savedAccount, bool isDarkTheme, List<ConnectivityResult> connectivityType
+ RemoteMessage? remoteMessage, bool appInitiated, bool isLoggedIn, bool savedAccount, bool isDarkTheme, LanguageCode languageCode, List<ConnectivityResult> connectivityType
 });
 
 
@@ -274,14 +276,15 @@ class __$AppStateCopyWithImpl<$Res>
 
 /// Create a copy of AppState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? remoteMessage = freezed,Object? appInitiated = null,Object? isLoggedIn = null,Object? savedAccount = null,Object? isDarkTheme = null,Object? connectivityType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? remoteMessage = freezed,Object? appInitiated = null,Object? isLoggedIn = null,Object? savedAccount = null,Object? isDarkTheme = null,Object? languageCode = null,Object? connectivityType = null,}) {
   return _then(_AppState(
 remoteMessage: freezed == remoteMessage ? _self.remoteMessage : remoteMessage // ignore: cast_nullable_to_non_nullable
 as RemoteMessage?,appInitiated: null == appInitiated ? _self.appInitiated : appInitiated // ignore: cast_nullable_to_non_nullable
 as bool,isLoggedIn: null == isLoggedIn ? _self.isLoggedIn : isLoggedIn // ignore: cast_nullable_to_non_nullable
 as bool,savedAccount: null == savedAccount ? _self.savedAccount : savedAccount // ignore: cast_nullable_to_non_nullable
 as bool,isDarkTheme: null == isDarkTheme ? _self.isDarkTheme : isDarkTheme // ignore: cast_nullable_to_non_nullable
-as bool,connectivityType: null == connectivityType ? _self._connectivityType : connectivityType // ignore: cast_nullable_to_non_nullable
+as bool,languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
+as LanguageCode,connectivityType: null == connectivityType ? _self._connectivityType : connectivityType // ignore: cast_nullable_to_non_nullable
 as List<ConnectivityResult>,
   ));
 }
