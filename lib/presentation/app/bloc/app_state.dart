@@ -14,7 +14,7 @@ abstract class AppState extends BaseBlocState with _$AppState {
     @Default(false) bool appInitiated,
     @Default(false) bool isLoggedIn,
     @Default(false) bool savedAccount,
-    @Default(true) bool isDarkTheme,
+    @Default(false) bool isDarkTheme,
     @Default([]) List<ConnectivityResult> connectivityType,
   }) = _AppState;
 }

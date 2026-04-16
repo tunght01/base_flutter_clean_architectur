@@ -116,36 +116,49 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
             },
           ),
         ],
-        child: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: const SystemUiOverlayStyle(
-            systemNavigationBarColor:
-                Colors.black, // navigation bar color, the one Im looking for
-            statusBarColor: Colors.transparent,
-          ),
-          child: OverlaySupport.global(
-            child: MaterialApp.router(
-              builder: (context, child) {
-                final MediaQueryData data = MediaQuery.of(context);
-                return MediaQuery(
-                  data: data.copyWith(textScaler: const TextScaler.linear(1.0)),
-                  child: child ?? const SizedBox.shrink(),
-                );
-              },
-              routerDelegate: _appRouter.delegate(
-                deepLinkBuilder: (deepLink) {
-                  return DeepLink(_mapRouteToPageRouteInfo());
-                },
-                navigatorObservers: () => [AppNavigatorObserver()],
+        child: BlocBuilder<AppBloc, AppState>(
+          buildWhen: (previous, current) =>
+              previous.isDarkTheme != current.isDarkTheme,
+          builder: (context, state) {
+            AppThemeSetting.currentAppThemeType = state.isDarkTheme 
+                ? AppThemeType.dark 
+                : AppThemeType.light;
+            return AnnotatedRegion<SystemUiOverlayStyle>(
+              value: const SystemUiOverlayStyle(
+                systemNavigationBarColor: Colors.black,
+                // navigation bar color, the one Im looking for
+                statusBarColor: Colors.transparent,
               ),
-              routeInformationParser: _appRouter.defaultRouteParser(),
-              title: UiConstants.materialAppTitle,
-              color: UiConstants.taskMenuMaterialAppColor,
-              themeMode: ThemeMode.dark,
-              theme: darkTheme,
-              darkTheme: darkTheme,
-              debugShowCheckedModeBanner: false,
-            ),
-          ),
+              child: OverlaySupport.global(
+                child: MaterialApp.router(
+                  builder: (context, child) {
+                    final MediaQueryData data = MediaQuery.of(context);
+                    return MediaQuery(
+                      data: data.copyWith(
+                        textScaler: const TextScaler.linear(1.0),
+                      ),
+                      child: child ?? const SizedBox.shrink(),
+                    );
+                  },
+                  routerDelegate: _appRouter.delegate(
+                    deepLinkBuilder: (deepLink) {
+                      return DeepLink(_mapRouteToPageRouteInfo());
+                    },
+                    navigatorObservers: () => [AppNavigatorObserver()],
+                  ),
+                  routeInformationParser: _appRouter.defaultRouteParser(),
+                  title: UiConstants.materialAppTitle,
+                  color: UiConstants.taskMenuMaterialAppColor,
+                  themeMode: state.isDarkTheme
+                      ? ThemeMode.dark
+                      : ThemeMode.light,
+                  theme: lightTheme,
+                  darkTheme: darkTheme,
+                  debugShowCheckedModeBanner: false,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

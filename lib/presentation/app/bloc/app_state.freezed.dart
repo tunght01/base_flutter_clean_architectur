@@ -211,7 +211,7 @@ return $default(_that.remoteMessage,_that.appInitiated,_that.isLoggedIn,_that.sa
 
 
 class _AppState extends AppState {
-  const _AppState({this.remoteMessage, this.appInitiated = false, this.isLoggedIn = false, this.savedAccount = false, this.isDarkTheme = true, final  List<ConnectivityResult> connectivityType = const []}): _connectivityType = connectivityType,super._();
+  const _AppState({this.remoteMessage, this.appInitiated = false, this.isLoggedIn = false, this.savedAccount = false, this.isDarkTheme = false, final  List<ConnectivityResult> connectivityType = const []}): _connectivityType = connectivityType,super._();
   
 
 @override final  RemoteMessage? remoteMessage;

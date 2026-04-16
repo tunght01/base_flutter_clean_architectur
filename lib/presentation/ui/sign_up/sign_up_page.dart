@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:soft_dream_test/presentation/common_view/scaffold/common_scaffold.dart';
 
 @RoutePage()
 class SignUpPage extends StatefulWidget {
@@ -12,6 +13,6 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return CommonScaffold(body: Column());
   }
 }

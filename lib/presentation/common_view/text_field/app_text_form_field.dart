@@ -72,12 +72,21 @@ class AppTextFormField extends FormField<String> {
              : AutovalidateMode.disabled,
          builder: (FormFieldState field) {
            final AppTextFormFieldState state = field as AppTextFormFieldState;
-           final bool hasError = state.errorText != null || errorText != null || isError;
+           final bool hasError =
+               state.errorText != null || errorText != null || isError;
            return Column(
              crossAxisAlignment: CrossAxisAlignment.start,
              mainAxisSize: MainAxisSize.min,
              children: [
-               if (labelText != null) ...[Text(labelText, style: AppTextStyle.medium12(color: AppColors.current.textSubTitle)), kSpacingHeight4],
+               if (labelText != null) ...[
+                 Text(
+                   labelText,
+                   style: AppTextStyle.medium12(
+                     color: AppColors.current.textSubTitle,
+                   ),
+                 ),
+                 kSpacingHeight4,
+               ],
                Row(
                  children: [
                    Expanded(
@@ -89,7 +98,8 @@ class AppTextFormField extends FormField<String> {
                          autocorrect: false,
                          autofocus: autoFocus ?? false,
                          enableInteractiveSelection: enableInteractiveSelection,
-                         cursorColor: cursorColor ?? AppColors.current.textSubTitle,
+                         cursorColor:
+                             cursorColor ?? AppColors.current.textSubTitle,
                          textAlign: textAlign,
                          focusNode: focusNode,
                          obscureText: isPassword ? state._obscureText : false,
@@ -101,10 +111,19 @@ class AppTextFormField extends FormField<String> {
                            FocusManager.instance.primaryFocus?.unfocus();
                          },
                          controller: state.textEditingController,
-                         style: style ?? AppTextStyle.regular14(color: enabled ? AppColors.current.textTitle : AppColors.current.textDisable),
+                         style:
+                             style ??
+                             AppTextStyle.regular14(
+                               color: enabled
+                                   ? AppColors.current.textTitle
+                                   : AppColors.current.textDisable,
+                             ),
                          textInputAction: textInputAction,
                          keyboardType: inputType ?? TextInputType.text,
-                         inputFormatters: [...inputFormatters ?? [], LengthLimitingTextInputFormatter(maxLength)],
+                         inputFormatters: [
+                           ...inputFormatters ?? [],
+                           LengthLimitingTextInputFormatter(maxLength),
+                         ],
                          onFieldSubmitted: (text) {
                            if (autoValidate) {
                              state._onChangeHandler(text, onSubmitted);
@@ -126,40 +145,106 @@ class AppTextFormField extends FormField<String> {
                            }
                          },
                          decoration: const InputDecoration()
-                             .applyDefaults(Theme.of(state.context).inputDecorationTheme)
+                             .applyDefaults(
+                               Theme.of(state.context).inputDecorationTheme,
+                             )
                              .copyWith(
                                hintText: hintText,
                                label: title != null
                                    ? Row(
-                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                       crossAxisAlignment:
+                                           CrossAxisAlignment.start,
                                        mainAxisSize: MainAxisSize.min,
                                        children: [
-                                         Text(title, style: AppTextStyle.medium14(color: enabled ? titleColor ?? AppColors.current.textSubTitle : AppColors.current.textDisable)),
-                                         if (required) Text('*', style: AppTextStyle.medium14(color: AppColors.current.errorDefault)),
+                                         Text(
+                                           title,
+                                           style: AppTextStyle.medium14(
+                                             color: enabled
+                                                 ? titleColor ??
+                                                       AppColors
+                                                           .current
+                                                           .textSubTitle
+                                                 : AppColors
+                                                       .current
+                                                       .textDisable,
+                                           ),
+                                         ),
+                                         if (required)
+                                           Text(
+                                             '*',
+                                             style: AppTextStyle.medium14(
+                                               color: AppColors
+                                                   .current
+                                                   .errorDefault,
+                                             ),
+                                           ),
                                        ],
                                      )
                                    : null,
-                               fillColor: fillColor ?? AppColors.current.mobileTab,
-                               hintStyle: hintStyle ?? AppTextStyle.regular14(color: enabled ? hintTextColor ?? AppColors.current.textSubTitle : disabledColor ?? AppColors.current.textDisable),
-                               contentPadding: contentPadding ?? const EdgeInsets.symmetric(vertical: Dimens.d12, horizontal: Dimens.d16),
+                               fillColor:
+                                   fillColor ?? AppColors.current.mobileTab,
+                               hintStyle:
+                                   hintStyle ??
+                                   AppTextStyle.regular14(
+                                     color: enabled
+                                         ? hintTextColor ??
+                                               AppColors.current.textSubTitle
+                                         : disabledColor ??
+                                               AppColors.current.textDisable,
+                                   ),
+                               contentPadding:
+                                   contentPadding ??
+                                   const EdgeInsets.symmetric(
+                                     vertical: Dimens.d12,
+                                     horizontal: Dimens.d16,
+                                   ),
                                prefixIconConstraints: const BoxConstraints(),
                                enabledBorder: OutlineInputBorder(
-                                 borderRadius: BorderRadius.all(Radius.circular(radius ?? Dimens.d12)),
-                                 borderSide: BorderSide(color: borderColor ?? Colors.transparent, width: borderColor != null ? 1 : 0, style: borderColor != null ? BorderStyle.solid : BorderStyle.none),
+                                 borderRadius: BorderRadius.all(
+                                   Radius.circular(radius ?? Dimens.d12),
+                                 ),
+                                 borderSide: BorderSide(
+                                   color: borderColor ?? Colors.transparent,
+                                   width: borderColor != null ? 1 : 0,
+                                   style: borderColor != null
+                                       ? BorderStyle.solid
+                                       : BorderStyle.none,
+                                 ),
                                ),
                                disabledBorder: OutlineInputBorder(
-                                 borderRadius: BorderRadius.all(Radius.circular(radius ?? Dimens.d12)),
-                                 borderSide: BorderSide(color: borderColor ?? Colors.transparent, width: borderColor != null ? 1 : 0, style: borderColor != null ? BorderStyle.solid : BorderStyle.none),
+                                 borderRadius: BorderRadius.all(
+                                   Radius.circular(radius ?? Dimens.d12),
+                                 ),
+                                 borderSide: BorderSide(
+                                   color: borderColor ?? Colors.transparent,
+                                   width: borderColor != null ? 1 : 0,
+                                   style: borderColor != null
+                                       ? BorderStyle.solid
+                                       : BorderStyle.none,
+                                 ),
                                ),
                                focusedBorder: OutlineInputBorder(
-                                 borderRadius: BorderRadius.all(Radius.circular(radius ?? Dimens.d12)),
-                                 borderSide: BorderSide(color: borderColor ?? AppColors.current.border, width: borderColor != null ? 1 : 0),
+                                 borderRadius: BorderRadius.all(
+                                   Radius.circular(radius ?? Dimens.d12),
+                                 ),
+                                 borderSide: BorderSide(
+                                   color:
+                                       borderColor ?? AppColors.current.border,
+                                   width: borderColor != null ? 1 : 0,
+                                 ),
                                ),
-                               errorBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(radius ?? Dimens.d12)), borderSide: BorderSide.none),
+                               errorBorder: OutlineInputBorder(
+                                 borderRadius: BorderRadius.all(
+                                   Radius.circular(radius ?? Dimens.d12),
+                                 ),
+                                 borderSide: BorderSide.none,
+                               ),
                                prefix: prefix,
                                prefixIcon: prefixIcon,
                                suffix: suffix,
-                               suffixIconConstraints: const BoxConstraints(minHeight: 32),
+                               suffixIconConstraints: const BoxConstraints(
+                                 minHeight: 32,
+                               ),
                                suffixIcon:
                                    suffixIcon ??
                                    (isPassword
@@ -169,19 +254,50 @@ class AppTextFormField extends FormField<String> {
                                            },
                                            radius: 20,
                                            child: Padding(
-                                             padding: const EdgeInsets.all(Dimens.d8),
-                                             child: SizedBox(width: suffixIconSize, height: suffixIconSize, child: !state._obscureText ? Assets.icons.icEye.svg() : Assets.icons.icEyeSlash.svg()),
+                                             padding: const EdgeInsets.all(
+                                               Dimens.d8,
+                                             ),
+                                             child: SizedBox(
+                                               width: suffixIconSize,
+                                               height: suffixIconSize,
+                                               child: !state._obscureText
+                                                   ? Assets.icons.icEye.svg(
+                                                       width: 10,
+                                                       height: 10,
+                                                     )
+                                                   : Assets.icons.icEyeSlash
+                                                         .svg(
+                                                           width: 10,
+                                                           height: 10,
+                                                         ),
+                                             ),
                                            ),
                                          )
                                        : suffixIconPath != null
                                        ? InkResponse(
                                            onTap: suffixIconTap,
                                            child: Padding(
-                                             padding: const EdgeInsets.symmetric(horizontal: Dimens.d16, vertical: Dimens.d8),
+                                             padding:
+                                                 const EdgeInsets.symmetric(
+                                                   horizontal: Dimens.d16,
+                                                   vertical: Dimens.d8,
+                                                 ),
                                              child: SizedBox(
                                                width: suffixIconSize,
                                                height: suffixIconSize,
-                                               child: SvgPicture.asset(suffixIconPath, colorFilter: ColorFilter.mode(hasError ? AppColors.current.errorDefault : AppColors.current.iconOnColor, BlendMode.srcIn)),
+                                               child: SvgPicture.asset(
+                                                 suffixIconPath,
+                                                 colorFilter: ColorFilter.mode(
+                                                   hasError
+                                                       ? AppColors
+                                                             .current
+                                                             .errorDefault
+                                                       : AppColors
+                                                             .current
+                                                             .iconOnColor,
+                                                   BlendMode.srcIn,
+                                                 ),
+                                               ),
                                              ),
                                            ),
                                          )
@@ -201,12 +317,25 @@ class AppTextFormField extends FormField<String> {
                      Assets.icons.icDangerCircle.svg(width: 16, height: 16),
                      kSpacingWidth4,
                      Expanded(
-                       child: Text(state.errorText ?? errorText!, style: AppTextStyle.regular12(color: errorTextColor ?? AppColors.current.red500)),
+                       child: Text(
+                         state.errorText ?? errorText!,
+                         style: AppTextStyle.regular12(
+                           color: errorTextColor ?? AppColors.current.red500,
+                         ),
+                       ),
                      ),
                    ],
                  ),
                ],
-               if (successText != null) ...[kSpacingHeight4, Text(successText, style: AppTextStyle.regular12(color: successTextColor ?? AppColors.current.green500))],
+               if (successText != null) ...[
+                 kSpacingHeight4,
+                 Text(
+                   successText,
+                   style: AppTextStyle.regular12(
+                     color: successTextColor ?? AppColors.current.green500,
+                   ),
+                 ),
+               ],
              ],
            );
          },
@@ -245,7 +374,10 @@ class AppTextFormFieldState extends FormFieldState<String> {
     if (oldWidget.initialValue != widget.initialValue) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
-          textEditingController.value = TextEditingValue(text: widget.initialValue ?? widget.controller?.text ?? '', selection: textEditingController.selection);
+          textEditingController.value = TextEditingValue(
+            text: widget.initialValue ?? widget.controller?.text ?? '',
+            selection: textEditingController.selection,
+          );
         }
       });
     }
@@ -255,7 +387,12 @@ class AppTextFormFieldState extends FormFieldState<String> {
   @override
   void initState() {
     super.initState();
-    textEditingController = widget.controller ?? TextEditingController(text: widget.initialValue ?? widget.controller?.text ?? '');
-    textEditingController.text = widget.initialValue ?? widget.controller?.text ?? '';
+    textEditingController =
+        widget.controller ??
+        TextEditingController(
+          text: widget.initialValue ?? widget.controller?.text ?? '',
+        );
+    textEditingController.text =
+        widget.initialValue ?? widget.controller?.text ?? '';
   }
 }

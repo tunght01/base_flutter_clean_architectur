@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginState {
 
- String? get email; String? get password;
+ String? get email; String? get password; String? get initialUsername; String? get loginError; bool get showLoginButtonLoading; bool get isFirstPress;
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $LoginStateCopyWith<LoginState> get copyWith => _$LoginStateCopyWithImpl<LoginSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginState&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginState&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.initialUsername, initialUsername) || other.initialUsername == initialUsername)&&(identical(other.loginError, loginError) || other.loginError == loginError)&&(identical(other.showLoginButtonLoading, showLoginButtonLoading) || other.showLoginButtonLoading == showLoginButtonLoading)&&(identical(other.isFirstPress, isFirstPress) || other.isFirstPress == isFirstPress));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,password);
+int get hashCode => Object.hash(runtimeType,email,password,initialUsername,loginError,showLoginButtonLoading,isFirstPress);
 
 @override
 String toString() {
-  return 'LoginState(email: $email, password: $password)';
+  return 'LoginState(email: $email, password: $password, initialUsername: $initialUsername, loginError: $loginError, showLoginButtonLoading: $showLoginButtonLoading, isFirstPress: $isFirstPress)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $LoginStateCopyWith<$Res>  {
   factory $LoginStateCopyWith(LoginState value, $Res Function(LoginState) _then) = _$LoginStateCopyWithImpl;
 @useResult
 $Res call({
- String? email, String? password
+ String? email, String? password, String? initialUsername, String? loginError, bool showLoginButtonLoading, bool isFirstPress
 });
 
 
@@ -62,11 +62,15 @@ class _$LoginStateCopyWithImpl<$Res>
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = freezed,Object? password = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = freezed,Object? password = freezed,Object? initialUsername = freezed,Object? loginError = freezed,Object? showLoginButtonLoading = null,Object? isFirstPress = null,}) {
   return _then(_self.copyWith(
 email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,initialUsername: freezed == initialUsername ? _self.initialUsername : initialUsername // ignore: cast_nullable_to_non_nullable
+as String?,loginError: freezed == loginError ? _self.loginError : loginError // ignore: cast_nullable_to_non_nullable
+as String?,showLoginButtonLoading: null == showLoginButtonLoading ? _self.showLoginButtonLoading : showLoginButtonLoading // ignore: cast_nullable_to_non_nullable
+as bool,isFirstPress: null == isFirstPress ? _self.isFirstPress : isFirstPress // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -151,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? email,  String? password)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? email,  String? password,  String? initialUsername,  String? loginError,  bool showLoginButtonLoading,  bool isFirstPress)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginState() when $default != null:
-return $default(_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.initialUsername,_that.loginError,_that.showLoginButtonLoading,_that.isFirstPress);case _:
   return orElse();
 
 }
@@ -172,10 +176,10 @@ return $default(_that.email,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? email,  String? password)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? email,  String? password,  String? initialUsername,  String? loginError,  bool showLoginButtonLoading,  bool isFirstPress)  $default,) {final _that = this;
 switch (_that) {
 case _LoginState():
-return $default(_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.initialUsername,_that.loginError,_that.showLoginButtonLoading,_that.isFirstPress);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +196,10 @@ return $default(_that.email,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? email,  String? password)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? email,  String? password,  String? initialUsername,  String? loginError,  bool showLoginButtonLoading,  bool isFirstPress)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginState() when $default != null:
-return $default(_that.email,_that.password);case _:
+return $default(_that.email,_that.password,_that.initialUsername,_that.loginError,_that.showLoginButtonLoading,_that.isFirstPress);case _:
   return null;
 
 }
@@ -207,11 +211,15 @@ return $default(_that.email,_that.password);case _:
 
 
 class _LoginState extends LoginState {
-  const _LoginState({this.email, this.password}): super._();
+  const _LoginState({this.email, this.password, this.initialUsername, this.loginError, this.showLoginButtonLoading = false, this.isFirstPress = false}): super._();
   
 
 @override final  String? email;
 @override final  String? password;
+@override final  String? initialUsername;
+@override final  String? loginError;
+@override@JsonKey() final  bool showLoginButtonLoading;
+@override@JsonKey() final  bool isFirstPress;
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +231,16 @@ _$LoginStateCopyWith<_LoginState> get copyWith => __$LoginStateCopyWithImpl<_Log
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginState&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginState&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.initialUsername, initialUsername) || other.initialUsername == initialUsername)&&(identical(other.loginError, loginError) || other.loginError == loginError)&&(identical(other.showLoginButtonLoading, showLoginButtonLoading) || other.showLoginButtonLoading == showLoginButtonLoading)&&(identical(other.isFirstPress, isFirstPress) || other.isFirstPress == isFirstPress));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,password);
+int get hashCode => Object.hash(runtimeType,email,password,initialUsername,loginError,showLoginButtonLoading,isFirstPress);
 
 @override
 String toString() {
-  return 'LoginState(email: $email, password: $password)';
+  return 'LoginState(email: $email, password: $password, initialUsername: $initialUsername, loginError: $loginError, showLoginButtonLoading: $showLoginButtonLoading, isFirstPress: $isFirstPress)';
 }
 
 
@@ -243,7 +251,7 @@ abstract mixin class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$
   factory _$LoginStateCopyWith(_LoginState value, $Res Function(_LoginState) _then) = __$LoginStateCopyWithImpl;
 @override @useResult
 $Res call({
- String? email, String? password
+ String? email, String? password, String? initialUsername, String? loginError, bool showLoginButtonLoading, bool isFirstPress
 });
 
 
@@ -260,11 +268,15 @@ class __$LoginStateCopyWithImpl<$Res>
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = freezed,Object? password = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = freezed,Object? password = freezed,Object? initialUsername = freezed,Object? loginError = freezed,Object? showLoginButtonLoading = null,Object? isFirstPress = null,}) {
   return _then(_LoginState(
 email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,initialUsername: freezed == initialUsername ? _self.initialUsername : initialUsername // ignore: cast_nullable_to_non_nullable
+as String?,loginError: freezed == loginError ? _self.loginError : loginError // ignore: cast_nullable_to_non_nullable
+as String?,showLoginButtonLoading: null == showLoginButtonLoading ? _self.showLoginButtonLoading : showLoginButtonLoading // ignore: cast_nullable_to_non_nullable
+as bool,isFirstPress: null == isFirstPress ? _self.isFirstPress : isFirstPress // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
