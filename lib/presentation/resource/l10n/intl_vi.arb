@@ -23,5 +23,15 @@
     "sign_up_password_confirm_label": "Xác nhận mật khẩu",
     "password_does_not_match_please_try_again":"Nhập lại mật khẩu mới không khớp",
 
+    "forgot_password_title": "Quên mật khẩu",
+    "forgot_password_instruction": "Vui lòng nhập địa chỉ email liên kết với tài khoản của bạn để nhận liên kết đặt lại mật khẩu.",
+    "forgot_password_send_button": "Gửi email đặt lại mật khẩu",
+    "forgot_password_success_message": "Email đặt lại mật khẩu đã được gửi, vui lòng kiểm tra hộp thư của bạn.",
+    "forgot_password_back_to_login": "Quay lại đăng nhập",
+    "forgot_password_social_note": "Lưu ý: Nếu bạn đăng ký bằng Google hoặc Apple, mật khẩu không thể đặt lại tại đây.",
+    "i_agree_policy":"Tôi đồng ý với điều khoản và chính sách",
+    "please_agree_term_policy":"Vui lòng đồng ý điều khoản và chính sách",
+    "full_name":"Họ và tên",
+
     "end":"Kết thúc"
 }

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:soft_dream_test/presentation/common_view/scaffold/common_scaffold.dart';
 
 @RoutePage()
 class ProfilePage extends StatefulWidget {
@@ -11,9 +12,19 @@ class ProfilePage extends StatefulWidget {
   }
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    super.build(context);
+    return CommonScaffold(body: Column(children: []));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

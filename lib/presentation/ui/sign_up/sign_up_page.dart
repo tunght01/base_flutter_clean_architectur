@@ -45,6 +45,9 @@ class _SignUpPageState extends BasePageState<SignUpPage, SignUpBloc> {
                   margin: const EdgeInsets.symmetric(horizontal: Dimens.d16),
                   child: SignUpForm(
                     onSignUpPress: () => _onSignUp.call(),
+                    onCheckbox: (value) {
+                      bloc.add(OnChangeAgreePoicyEvent(value: value));
+                    },
                     onUsernameChanged: (username) =>
                         bloc.add(OnChangeSignUpEmailEvent(email: username)),
                     onPasswordChanged: (password) => bloc.add(
@@ -55,6 +58,8 @@ class _SignUpPageState extends BasePageState<SignUpPage, SignUpBloc> {
                         confirmPassword: confirmPassword,
                       ),
                     ),
+                    onFullNameChanged: (String? value) =>
+                        bloc.add(OnFullNameChangedEvent(value: value)),
                   ),
                 ),
               ],

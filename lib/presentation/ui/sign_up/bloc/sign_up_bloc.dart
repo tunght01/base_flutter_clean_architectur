@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:soft_dream_test/domain/usecase/sign_up_use_case.dart';
 import 'package:soft_dream_test/presentation/base/bloc/base_bloc.dart';
+import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/presentation/ui/sign_up/bloc/sign_up_event.dart';
 import 'package:soft_dream_test/presentation/ui/sign_up/bloc/sign_up_state.dart';
 
@@ -12,15 +13,29 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
   final SignUpUseCase _signUpUseCase;
   SignUpBloc(this._signUpUseCase) : super(const SignUpState()) {
     on<OnPressSignUpEvent>(_onPressSignUpEvent, transformer: log());
-    on<OnChangeSignUpEmailEvent>(_onChangeEmailEvent, transformer: log());
-    on<OnChangeSignUpPasswordEvent>(_onChangePasswordEvent, transformer: log());
+    on<OnChangeSignUpEmailEvent>(
+      _onChangeEmailEvent,
+      transformer: debounceTime(),
+    );
+    on<OnChangeSignUpPasswordEvent>(
+      _onChangePasswordEvent,
+      transformer: debounceTime(),
+    );
     on<OnChangeSignUpConfirmPasswordEvent>(
       _onChangeConfirmPasswordEvent,
-      transformer: log(),
+      transformer: debounceTime(),
     );
     on<OnChangeSignUpFirstSubmitEvent>(
       (event, emit) => emit(state.copyWith(isFirstPress: true)),
       transformer: log(),
+    );
+    on<OnChangeAgreePoicyEvent>(
+      (event, emit) => emit(state.copyWith(isAgreePolicy: event.value)),
+      transformer: log(),
+    );
+    on<OnFullNameChangedEvent>(
+      (event, emit) => emit(state.copyWith(fullName: event.value)),
+      transformer: debounceTime(),
     );
   }
 
@@ -31,6 +46,10 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
     return runBlocCatching(
       action: () async {
         emit(state.copyWith(signUpError: null));
+        if (!state.isAgreePolicy) {
+          navigator.showWarningSnackBar(S.current.please_agree_term_policy);
+          return;
+        }
         await _signUpUseCase.execute(
           SignUpInput(email: state.email!, password: state.password!),
         );

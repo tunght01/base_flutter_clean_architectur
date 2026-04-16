@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:soft_dream_test/data/repository/source/firebase/firebase_auth_datasource.dart';
 import 'package:soft_dream_test/domain/repository/app_repository.dart';
+import 'package:soft_dream_test/shared/exception/firebase/app_firebase_exception.dart';
 
 @LazySingleton(as: AppRepository)
 class AppRepositoryImpl implements AppRepository {
@@ -17,6 +19,7 @@ class AppRepositoryImpl implements AppRepository {
       password,
     );
     final user = credential.user!;
+    print(user);
   }
 
   @override
@@ -26,5 +29,10 @@ class AppRepositoryImpl implements AppRepository {
       password,
     );
     final user = credential.user!;
+  }
+
+  @override
+  Future<void> sendPasswordResetEmail(String email) async {
+    await _authDatasource.sendPasswordResetEmail(email);
   }
 }

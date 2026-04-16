@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:soft_dream_test/domain/navigation/app_route_info.dart';
 import 'package:soft_dream_test/domain/usecase/login_use_case.dart';
+import 'package:soft_dream_test/presentation/app/bloc/app_event.dart';
 import 'package:soft_dream_test/presentation/base/bloc/base_bloc.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_event.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_state.dart';
@@ -22,14 +24,13 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
 
   FutureOr<void> _onPressEvent(OnPressEvent event, Emitter<LoginState> emit) {
     return runBlocCatching(
+      handleError: true,
       action: () async {
         emit(state.copyWith(loginError: null));
         await _loginUseCase.execute(
           LoginInput(email: state.email!, password: state.password!),
         );
-      },
-      doOnError: (e) async {
-        emit(state.copyWith(loginError: exceptionMessageMapper.map(e)));
+        appBloc.add(const IsLoggedInStatusChanged(isLoggedIn: true));
       },
     );
   }

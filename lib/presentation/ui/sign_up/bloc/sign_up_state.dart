@@ -7,10 +7,12 @@ part 'sign_up_state.freezed.dart';
 abstract class SignUpState extends BaseBlocState with _$SignUpState {
   const SignUpState._();
   const factory SignUpState({
+    String? fullName,
     String? email,
     String? password,
     String? confirmPassword,
     @Default(false) bool isFirstPress,
+    @Default(false) bool isAgreePolicy,
     String? signUpError,
   }) = _SignUpState;
 }

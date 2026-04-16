@@ -26,6 +26,28 @@ class MessageLookup extends MessageLookupByLibrary {
     "exist_email": MessageLookupByLibrary.simpleMessage(
       "Email này đã được sử dụng.",
     ),
+    "forgot_password_back_to_login": MessageLookupByLibrary.simpleMessage(
+      "Quay lại đăng nhập",
+    ),
+    "forgot_password_instruction": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng nhập địa chỉ email liên kết với tài khoản của bạn để nhận liên kết đặt lại mật khẩu.",
+    ),
+    "forgot_password_send_button": MessageLookupByLibrary.simpleMessage(
+      "Gửi email đặt lại mật khẩu",
+    ),
+    "forgot_password_social_note": MessageLookupByLibrary.simpleMessage(
+      "Lưu ý: Nếu bạn đăng ký bằng Google hoặc Apple, mật khẩu không thể đặt lại tại đây.",
+    ),
+    "forgot_password_success_message": MessageLookupByLibrary.simpleMessage(
+      "Email đặt lại mật khẩu đã được gửi, vui lòng kiểm tra hộp thư của bạn.",
+    ),
+    "forgot_password_title": MessageLookupByLibrary.simpleMessage(
+      "Quên mật khẩu",
+    ),
+    "full_name": MessageLookupByLibrary.simpleMessage("Họ và tên"),
+    "i_agree_policy": MessageLookupByLibrary.simpleMessage(
+      "Tôi đồng ý với điều khoản và chính sách",
+    ),
     "invalid_credential": MessageLookupByLibrary.simpleMessage(
       "Email hoặc mật khẩu không chính xác.",
     ),
@@ -66,6 +88,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "login_password_label": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
     "login_welcome": MessageLookupByLibrary.simpleMessage("Xin chào"),
+    "password_does_not_match_please_try_again":
+        MessageLookupByLibrary.simpleMessage(
+          "Nhập lại mật khẩu mới không khớp",
+        ),
+    "please_agree_term_policy": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng đồng ý điều khoản và chính sách",
+    ),
     "sign_up_button": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
     "sign_up_password_confirm_label": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",

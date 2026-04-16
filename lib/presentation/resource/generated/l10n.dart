@@ -234,6 +234,101 @@ class S {
     );
   }
 
+  /// `Nhập lại mật khẩu mới không khớp`
+  String get password_does_not_match_please_try_again {
+    return Intl.message(
+      'Nhập lại mật khẩu mới không khớp',
+      name: 'password_does_not_match_please_try_again',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quên mật khẩu`
+  String get forgot_password_title {
+    return Intl.message(
+      'Quên mật khẩu',
+      name: 'forgot_password_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vui lòng nhập địa chỉ email liên kết với tài khoản của bạn để nhận liên kết đặt lại mật khẩu.`
+  String get forgot_password_instruction {
+    return Intl.message(
+      'Vui lòng nhập địa chỉ email liên kết với tài khoản của bạn để nhận liên kết đặt lại mật khẩu.',
+      name: 'forgot_password_instruction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gửi email đặt lại mật khẩu`
+  String get forgot_password_send_button {
+    return Intl.message(
+      'Gửi email đặt lại mật khẩu',
+      name: 'forgot_password_send_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email đặt lại mật khẩu đã được gửi, vui lòng kiểm tra hộp thư của bạn.`
+  String get forgot_password_success_message {
+    return Intl.message(
+      'Email đặt lại mật khẩu đã được gửi, vui lòng kiểm tra hộp thư của bạn.',
+      name: 'forgot_password_success_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quay lại đăng nhập`
+  String get forgot_password_back_to_login {
+    return Intl.message(
+      'Quay lại đăng nhập',
+      name: 'forgot_password_back_to_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lưu ý: Nếu bạn đăng ký bằng Google hoặc Apple, mật khẩu không thể đặt lại tại đây.`
+  String get forgot_password_social_note {
+    return Intl.message(
+      'Lưu ý: Nếu bạn đăng ký bằng Google hoặc Apple, mật khẩu không thể đặt lại tại đây.',
+      name: 'forgot_password_social_note',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tôi đồng ý với điều khoản và chính sách`
+  String get i_agree_policy {
+    return Intl.message(
+      'Tôi đồng ý với điều khoản và chính sách',
+      name: 'i_agree_policy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vui lòng đồng ý điều khoản và chính sách`
+  String get please_agree_term_policy {
+    return Intl.message(
+      'Vui lòng đồng ý điều khoản và chính sách',
+      name: 'please_agree_term_policy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Họ và tên`
+  String get full_name {
+    return Intl.message('Họ và tên', name: 'full_name', desc: '', args: []);
+  }
+
   /// `Kết thúc`
   String get end {
     return Intl.message('Kết thúc', name: 'end', desc: '', args: []);

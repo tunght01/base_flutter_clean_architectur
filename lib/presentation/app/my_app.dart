@@ -18,11 +18,14 @@ import 'package:soft_dream_test/presentation/resource/dimens/app_dimen.dart';
 import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_themes.dart';
+import 'package:soft_dream_test/presentation/ui/account_info/bloc/account_info_bloc.dart';
+import 'package:soft_dream_test/presentation/ui/account_info/bloc/account_info_event.dart';
 import 'package:soft_dream_test/presentation/utils/app_connection_utils.dart';
 import 'package:soft_dream_test/shared/constants/device_constants.dart';
 import 'package:soft_dream_test/shared/constants/locale_constants.dart';
 import 'package:soft_dream_test/shared/constants/ui_constants.dart';
 
+import '../../di/di.dart';
 import '../navigation/routes/app_router.gr.dart';
 
 class MyApp extends StatefulWidget {
@@ -36,6 +39,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends BasePageState<MyApp, AppBloc> {
   final _appRouter = GetIt.instance.get<AppRouter>();
+  final AccountInfoBloc accountInfoBloc = getIt.get<AccountInfoBloc>();
+
   late final AppConnectionUtils connectionUtils;
   bool firstNetworkChange = true;
 
@@ -115,7 +120,10 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
                 previous.isLoggedIn != current.isLoggedIn,
             listener: (context, state) {
               if (state.isLoggedIn) {
-              } else {}
+                accountInfoBloc.add(AccountInfoInitEvent());
+              } else {
+                accountInfoBloc.add(const RemoveDataAfterLogout());
+              }
             },
           ),
         ],
@@ -124,9 +132,6 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
               previous.isDarkTheme != current.isDarkTheme ||
               previous.languageCode != current.languageCode,
           builder: (context, state) {
-            AppThemeSetting.currentAppThemeType = state.isDarkTheme
-                ? AppThemeType.dark
-                : AppThemeType.light;
             return AnnotatedRegion<SystemUiOverlayStyle>(
               value: const SystemUiOverlayStyle(
                 systemNavigationBarColor: Colors.black,

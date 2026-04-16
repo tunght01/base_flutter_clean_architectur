@@ -10,15 +10,14 @@ import 'package:soft_dream_test/presentation/app/bloc/app_bloc.dart';
 import 'package:soft_dream_test/presentation/navigation/base/base_route_info_mapper.dart';
 import 'package:soft_dream_test/presentation/navigation/routes/app_router.dart';
 import 'package:soft_dream_test/presentation/navigation/routes/app_router.gr.dart';
+import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
+import 'package:soft_dream_test/presentation/resource/styles/app_text_styles.dart';
 import 'package:soft_dream_test/shared/mixin/log_mixin.dart';
 import '../../di/di.dart';
 
 @LazySingleton(as: AppNavigator)
 class AppNavigatorImpl extends AppNavigator with LogMixin {
-  AppNavigatorImpl(
-    this._appRouter,
-    this._appRouteInfoMapper,
-  );
+  AppNavigatorImpl(this._appRouter, this._appRouteInfoMapper);
 
   final tabRoutes = const [HomeTab(), ProfileTab()];
 
@@ -241,10 +240,21 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     return _appRouter.removeLast();
   }
 
-
   @override
   void showErrorSnackBar(String message, {Duration? duration}) {
-    print(message);
+    m.ScaffoldMessenger.of(_rootRouterContext)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        m.SnackBar(
+          content: m.Text(
+            message,
+            style: AppTextStyle.medium12(color: AppColors.current.textBody),
+          ),
+          backgroundColor: AppColors.current.errorDefault,
+          behavior: m.SnackBarBehavior.floating,
+          duration: duration ?? const Duration(seconds: 3),
+        ),
+      );
   }
 
   @override
@@ -254,14 +264,42 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     String? title,
     TextStyle? messageStyle,
     TextStyle? titleStyle,
-  }) {}
+  }) {
+    m.ScaffoldMessenger.of(_rootRouterContext)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        m.SnackBar(
+          content: m.Text(
+            message,
+            style: AppTextStyle.medium12(color: AppColors.current.textBody),
+          ),
+          backgroundColor: AppColors.current.yellow500,
+          behavior: m.SnackBarBehavior.floating,
+          duration: duration ?? const Duration(seconds: 3),
+        ),
+      );
+  }
 
   @override
   void showSuccessSnackBar(
     String message, {
     Duration? duration,
     String? title,
-  }) {}
+  }) {
+    m.ScaffoldMessenger.of(_rootRouterContext)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        m.SnackBar(
+          content: m.Text(
+            message,
+            style: AppTextStyle.medium12(color: AppColors.current.textBody),
+          ),
+          backgroundColor: AppColors.current.successDefault,
+          behavior: m.SnackBarBehavior.floating,
+          duration: duration ?? const Duration(seconds: 3),
+        ),
+      );
+  }
 
   @override
   Future<T?> showAlertDialog<T extends Object?>(

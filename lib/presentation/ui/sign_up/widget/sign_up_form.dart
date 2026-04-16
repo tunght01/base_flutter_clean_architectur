@@ -1,10 +1,9 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soft_dream_test/presentation/common_view/button/app_button.dart';
+import 'package:soft_dream_test/presentation/common_view/check_box/checkbox_widget.dart';
 import 'package:soft_dream_test/presentation/common_view/spacing/spacing_const.dart';
 import 'package:soft_dream_test/presentation/common_view/text_field/app_text_form_field.dart';
 import 'package:soft_dream_test/presentation/resource/dimens/dimens.dart';
@@ -19,16 +18,20 @@ import 'package:soft_dream_test/presentation/utils/validator_utils.dart';
 class SignUpForm extends StatefulWidget {
   const SignUpForm({
     required this.onSignUpPress,
+    required this.onFullNameChanged,
     required this.onUsernameChanged,
     required this.onPasswordChanged,
     required this.onConfirmPasswordChanged,
+    required this.onCheckbox,
     super.key,
   });
 
   final VoidCallback onSignUpPress;
+  final void Function(String?) onFullNameChanged;
   final void Function(String?) onUsernameChanged;
   final void Function(String?) onPasswordChanged;
   final void Function(String?) onConfirmPasswordChanged;
+  final void Function(bool) onCheckbox;
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();
@@ -36,9 +39,11 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm>
     with ValidatorUtils, AutomaticKeepAliveClientMixin {
+  late final TextEditingController _fullNameController;
   late final TextEditingController _usernameController;
   late final TextEditingController _passwordController;
   late final TextEditingController _confirmPasswordController;
+  late final FocusNode _fullNameFocusNode;
   late final FocusNode _usernameFocusNode;
   late final FocusNode _passwordFocusNode;
   late final FocusNode _confirmPasswordFocusNode;
@@ -46,9 +51,11 @@ class _SignUpFormState extends State<SignUpForm>
 
   @override
   void initState() {
+    _fullNameController = TextEditingController();
     _usernameController = TextEditingController();
     _passwordController = TextEditingController();
     _confirmPasswordController = TextEditingController();
+    _fullNameFocusNode = FocusNode();
     _usernameFocusNode = FocusNode();
     _passwordFocusNode = FocusNode();
     _confirmPasswordFocusNode = FocusNode();
@@ -58,11 +65,13 @@ class _SignUpFormState extends State<SignUpForm>
 
   @override
   void dispose() {
+    _fullNameController.dispose();
     _usernameController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     _usernameFocusNode.dispose();
     _passwordFocusNode.dispose();
+    _fullNameFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
     super.dispose();
   }
@@ -102,36 +111,50 @@ class _SignUpFormState extends State<SignUpForm>
                         previous.email != current.email;
                   },
                   builder: (_, state) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          S.current.sign_up_title,
-                          style: AppTextStyle.medium24(
-                            color: AppColors.current.primaryDefault,
-                          ),
-                        ),
-                        kSpacingHeight24,
-                        AppTextFormField(
-                          controller: _usernameController,
-                          focusNode: _usernameFocusNode,
-                          required: true,
-                          validator: (value) {
-                            return emailValidator(_usernameController.text);
-                          },
-                          fillColor: AppColors.current.neutralBlack1100
-                              .withValues(alpha: 0.15),
-                          isError: state.signUpError != null,
-                          title: S.current.login_email_label,
-                          titleColor: AppColors.current.textSubTitle,
-                          autoValidate: state.isFirstPress,
-                          onChanged: widget.onUsernameChanged,
-                          textInputAction: TextInputAction.next,
-                          onSubmitted: (_) {
-                            _passwordFocusNode.requestFocus();
-                          },
-                        ),
-                      ],
+                    return AppTextFormField(
+                      controller: _fullNameController,
+                      focusNode: _fullNameFocusNode,
+                      required: true,
+                      fillColor: AppColors.current.neutralBlack1100
+                          .withValues(alpha: 0.15),
+                      title: S.current.full_name,
+                      titleColor: AppColors.current.textSubTitle,
+                      autoValidate: state.isFirstPress,
+                      validator: emptyValidator,
+                      onChanged: widget.onFullNameChanged,
+                      textInputAction: TextInputAction.next,
+                      onSubmitted: (_) {
+                        _usernameFocusNode.requestFocus();
+                      },
+                    );
+                  },
+                ),
+                kSpacingHeight16,
+                BlocBuilder<SignUpBloc, SignUpState>(
+                  buildWhen: (previous, current) {
+                    return previous.signUpError != current.signUpError ||
+                        previous.isFirstPress != current.isFirstPress ||
+                        previous.email != current.email;
+                  },
+                  builder: (_, state) {
+                    return AppTextFormField(
+                      controller: _usernameController,
+                      focusNode: _usernameFocusNode,
+                      required: true,
+                      validator: (value) {
+                        return emailValidator(_usernameController.text);
+                      },
+                      fillColor: AppColors.current.neutralBlack1100
+                          .withValues(alpha: 0.15),
+                      isError: state.signUpError != null,
+                      title: S.current.login_email_label,
+                      titleColor: AppColors.current.textSubTitle,
+                      autoValidate: state.isFirstPress,
+                      onChanged: widget.onUsernameChanged,
+                      textInputAction: TextInputAction.next,
+                      onSubmitted: (_) {
+                        _passwordFocusNode.requestFocus();
+                      },
                     );
                   },
                 ),
@@ -208,7 +231,16 @@ class _SignUpFormState extends State<SignUpForm>
                     );
                   },
                 ),
+
                 kSpacingHeight32,
+                CheckboxWidget(
+                  contentStyle: AppTextStyle.medium10(),
+                  content: S.current.i_agree_policy,
+                  onChanged: (bool value) {
+                    widget.onCheckbox.call(value);
+                  },
+                ),
+                kSpacingHeight10,
                 AppButton(
                   label: S.current.sign_up_button,
                   labelTextStyle: AppTextStyle.bold16(color: Colors.white),

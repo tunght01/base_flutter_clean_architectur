@@ -36,10 +36,10 @@ class BottomNavBarWidget extends StatelessWidget {
           ) {
             return BottomNavItem(
               onTap: () {
-                onChanged(index + 1);
+                onChanged(index);
               },
               item: [BottomTab.home, BottomTab.profile][index],
-              isSelected: pageIndex - 1 == index,
+              isSelected: pageIndex == index,
             );
           }).toList(),
         ),

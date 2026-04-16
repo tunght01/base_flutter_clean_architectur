@@ -21,6 +21,8 @@ import 'package:soft_dream_test/data/repository/source/firebase/firebase_auth_da
 import 'package:soft_dream_test/di/di.dart' as _i570;
 import 'package:soft_dream_test/domain/navigation/app_navigator.dart' as _i1042;
 import 'package:soft_dream_test/domain/repository/app_repository.dart' as _i141;
+import 'package:soft_dream_test/domain/usecase/forgot_password_use_case.dart'
+    as _i966;
 import 'package:soft_dream_test/domain/usecase/load_initial_resource_use_case.dart'
     as _i982;
 import 'package:soft_dream_test/domain/usecase/login_use_case.dart' as _i787;
@@ -38,6 +40,10 @@ import 'package:soft_dream_test/presentation/navigation/middleware/route_guard.d
     as _i441;
 import 'package:soft_dream_test/presentation/navigation/routes/app_router.dart'
     as _i67;
+import 'package:soft_dream_test/presentation/ui/account_info/bloc/account_info_bloc.dart'
+    as _i768;
+import 'package:soft_dream_test/presentation/ui/authencation/forgot_password/bloc/forgot_password_bloc.dart'
+    as _i443;
 import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_bloc.dart'
     as _i4;
 import 'package:soft_dream_test/presentation/ui/main/bloc/main_bloc.dart'
@@ -70,6 +76,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i116.AppBloc>(() => _i116.AppBloc());
     gh.lazySingleton<_i67.AppRouter>(() => _i67.AppRouter());
+    gh.lazySingleton<_i768.AccountInfoBloc>(() => _i768.AccountInfoBloc());
     gh.lazySingleton<_i906.AppInfo>(() => _i906.AppInfo());
     gh.lazySingleton<_i21.BaseRouteInfoMapper>(
       () => _i878.AppRouteInfoMapper(),
@@ -86,6 +93,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i141.AppRepository>(
       () => _i352.AppRepositoryImpl(gh<_i1056.FirebaseAuthDatasource>()),
     );
+    gh.factory<_i966.ForgotPasswordUseCase>(
+      () => _i966.ForgotPasswordUseCase(gh<_i141.AppRepository>()),
+    );
     gh.factory<_i787.LoginUseCase>(
       () => _i787.LoginUseCase(gh<_i141.AppRepository>()),
     );
@@ -95,6 +105,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i4.LoginBloc>(() => _i4.LoginBloc(gh<_i787.LoginUseCase>()));
     gh.factory<_i673.SignUpBloc>(
       () => _i673.SignUpBloc(gh<_i119.SignUpUseCase>()),
+    );
+    gh.factory<_i443.ForgotPasswordBloc>(
+      () => _i443.ForgotPasswordBloc(gh<_i966.ForgotPasswordUseCase>()),
     );
     return this;
   }

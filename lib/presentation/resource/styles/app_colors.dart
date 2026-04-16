@@ -577,13 +577,6 @@ class AppColors {
   late Color iconOnColor;
   late Color iconBlack;
 
-  /// stock
-  late Color stockTextGreen;
-  late Color stockTextRed;
-  late Color stockTextYellow;
-  late Color stockTextPurple;
-  late Color stockTextBlue;
-
   /// border
   late Color border;
   late Color border2;

@@ -4,13 +4,13 @@ import 'package:soft_dream_test/di/di.dart';
 import 'package:soft_dream_test/domain/navigation/app_navigator.dart';
 import 'package:soft_dream_test/domain/navigation/app_route_info.dart';
 import 'package:soft_dream_test/presentation/base/base_page_state.dart';
+import 'package:soft_dream_test/presentation/common_view/app_bar/base_app_bar.dart';
 import 'package:soft_dream_test/presentation/common_view/scaffold/common_scaffold.dart';
 import 'package:soft_dream_test/presentation/common_view/spacing/spacing_const.dart';
 import 'package:soft_dream_test/presentation/resource/dimens/dimens.dart';
 import 'package:soft_dream_test/presentation/resource/generated/assets.gen.dart';
 import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
-import 'package:soft_dream_test/presentation/resource/styles/app_text_styles.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_bloc.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_event.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/login/widget/login_form.dart';
@@ -34,13 +34,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
   @override
   Widget buildPage(BuildContext context) {
     return CommonScaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          S.current.login_button,
-          style: AppTextStyle.semiBold24(color: AppColors.current.textTitle),
-        ),
-      ),
+      appBar: BaseAppBar(centerTitle: true, label: S.current.login_button),
       backgroundColor: AppColors.current.mobileBackground,
       body: SafeArea(
         child: Center(

@@ -8,13 +8,10 @@ class FirebaseAuthDatasource {
 
   FirebaseAuthDatasource(this._firebaseAuth);
 
-  /// Get current user
   User? get currentUser => _firebaseAuth.currentUser;
 
-  /// Auth state changes stream
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  /// Sign in with email and password
   Future<UserCredential> signInWithEmailAndPassword(
     String email,
     String password,
@@ -34,6 +31,11 @@ class FirebaseAuthDatasource {
       email: email,
       password: password,
     );
+  }
+
+  /// Send password reset email
+  Future<void> sendPasswordResetEmail(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
   /// Update display name

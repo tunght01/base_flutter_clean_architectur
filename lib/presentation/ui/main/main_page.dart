@@ -23,17 +23,16 @@ class _MainPageState extends BasePageState<MainPage, MainBloc> {
     return AutoTabsScaffold(
       extendBody: true,
       backgroundColor: Colors.transparent,
+      animationDuration: Duration.zero,
       routes: (navigator as AppNavigatorImpl).tabRoutes,
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBuilder: (_, tabsRouter) {
         (navigator as AppNavigatorImpl).tabsRouter = tabsRouter;
         return BottomNavBarWidget(
           key: _bottomBarKey,
           pageIndex: tabsRouter.activeIndex,
           onChanged: (index) async {
-            if (index == tabsRouter.activeIndex) {
-              (navigator as AppNavigatorImpl).popUntilRootOfCurrentBottomTab();
-            }
             tabsRouter.setActiveIndex(index);
           },
         );

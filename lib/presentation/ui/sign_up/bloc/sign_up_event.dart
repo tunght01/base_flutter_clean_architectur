@@ -14,6 +14,11 @@ class OnChangeSignUpEmailEvent extends SignUpEvent {
   const OnChangeSignUpEmailEvent({this.email});
 }
 
+class OnFullNameChangedEvent extends SignUpEvent {
+  final String? value;
+  const OnFullNameChangedEvent({this.value});
+}
+
 class OnChangeSignUpPasswordEvent extends SignUpEvent {
   final String? password;
   const OnChangeSignUpPasswordEvent({this.password});
@@ -26,4 +31,9 @@ class OnChangeSignUpConfirmPasswordEvent extends SignUpEvent {
 
 class OnChangeSignUpFirstSubmitEvent extends SignUpEvent {
   const OnChangeSignUpFirstSubmitEvent();
+}
+
+class OnChangeAgreePoicyEvent extends SignUpEvent {
+  final bool value;
+  const OnChangeAgreePoicyEvent({required this.value});
 }
