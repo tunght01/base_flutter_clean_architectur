@@ -109,7 +109,7 @@ class _LoginFormState extends State<LoginForm>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Xin chào',
+                          S.current.login_welcome,
                           style: AppTextStyle.medium24(
                             color: AppColors.current.primaryDefault,
                           ),

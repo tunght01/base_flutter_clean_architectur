@@ -329,6 +329,16 @@ class S {
     return Intl.message('Họ và tên', name: 'full_name', desc: '', args: []);
   }
 
+  /// `Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản.`
+  String get sign_up_success {
+    return Intl.message(
+      'Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản.',
+      name: 'sign_up_success',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Kết thúc`
   String get end {
     return Intl.message('Kết thúc', name: 'end', desc: '', args: []);

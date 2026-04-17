@@ -99,6 +99,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "sign_up_password_confirm_label": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",
     ),
+    "sign_up_success": MessageLookupByLibrary.simpleMessage(
+      "Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản.",
+    ),
     "sign_up_title": MessageLookupByLibrary.simpleMessage("Đăng ký"),
   };
 }

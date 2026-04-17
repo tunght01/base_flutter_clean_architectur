@@ -110,7 +110,7 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
           ),
         );
         navigator.showSuccessSnackBar(
-          'Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản.',
+          S.current.sign_up_success,
         );
         navigator.pop();
       },
