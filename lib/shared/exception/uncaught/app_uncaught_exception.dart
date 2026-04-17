@@ -1,4 +1,3 @@
-
 import 'package:soft_dream_test/shared/exception/base/app_exception.dart';
 
 class AppUncaughtException extends AppException {

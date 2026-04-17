@@ -7,7 +7,11 @@ import 'package:soft_dream_test/shared/exception/base/app_exception.dart';
 import 'package:soft_dream_test/shared/exception/remote/remote_exception.dart';
 import 'package:soft_dream_test/shared/exception/uncaught/app_uncaught_exception.dart';
 
-abstract class BaseCoreFutureUseCase<Input extends BaseInput, Output extends BaseOutput> extends BaseFutureUseCase<Input, Output> {
+abstract class BaseCoreFutureUseCase<
+  Input extends BaseInput,
+  Output extends BaseOutput
+>
+    extends BaseFutureUseCase<Input, Output> {
   const BaseCoreFutureUseCase(this.repository);
   final AuthRepository repository;
 

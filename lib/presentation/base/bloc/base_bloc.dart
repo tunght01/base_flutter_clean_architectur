@@ -21,13 +21,16 @@ import 'package:soft_dream_test/shared/mixin/log_mixin.dart';
 import 'package:soft_dream_test/shared/utils/log_utils.dart';
 import 'package:soft_dream_test/shared/utils/num_utils.dart';
 
-
 abstract class BaseBloc<E extends BaseBlocEvent, S extends BaseBlocState>
-    extends BaseBlocDelegate<E, S> with EventTransformerMixin, LogMixin {
+    extends BaseBlocDelegate<E, S>
+    with EventTransformerMixin, LogMixin {
   BaseBloc(super.initialState);
 }
 
-abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState>
+abstract class BaseBlocDelegate<
+  E extends BaseBlocEvent,
+  S extends BaseBlocState
+>
     extends Bloc<E, S> {
   BaseBlocDelegate(super.initialState);
 
@@ -44,7 +47,8 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
 
   bool lateInitialization = false;
 
-  CommonBloc get commonBloc => this is CommonBloc ? this as CommonBloc : _commonBloc;
+  CommonBloc get commonBloc =>
+      this is CommonBloc ? this as CommonBloc : _commonBloc;
 
   void setParamBloc({
     required AppNavigator navigator,
@@ -87,9 +91,7 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
   }
 
   Future<void> addException(AppExceptionWrapper appExceptionWrapper) async {
-    commonBloc.add(ExceptionEmitted(
-      appExceptionWrapper: appExceptionWrapper,
-    ));
+    commonBloc.add(ExceptionEmitted(appExceptionWrapper: appExceptionWrapper));
 
     return appExceptionWrapper.exceptionCompleter?.future;
   }
@@ -101,7 +103,6 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
   void hideLoading() {
     commonBloc.add(const LoadingVisibilityEmitted(isLoading: false));
   }
-
 
   Future<void> runBlocCatching({
     required Future<void> Function() action,
@@ -138,46 +139,51 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
       if (e is ValidationException &&
           (e.kind == ValidationExceptionKind.logOut ||
               e.kind == ValidationExceptionKind.notLogin)) {
-        addException(AppExceptionWrapper(
-          appException: e,
-          exceptionCompleter: Completer<void>()
-            ..future.then((_) async {
-              navigator.replaceAll([const AppRouteInfo.login()]);
-            }),
-          overrideMessage: overrideErrorMessage,
-        ));
+        addException(
+          AppExceptionWrapper(
+            appException: e,
+            exceptionCompleter: Completer<void>()
+              ..future.then((_) async {
+                navigator.replaceAll([const AppRouteInfo.login()]);
+              }),
+            overrideMessage: overrideErrorMessage,
+          ),
+        );
       }
 
       await doOnSuccessOrError?.call();
       await doOnError?.call(e);
 
       if (handleError || (forceHandleError?.call(e) ?? _forceHandleError(e))) {
-        await addException(AppExceptionWrapper(
-          appException: e,
-          doOnRetry: doOnRetry ??
-              (handleRetry && maxRetries != 1
-                  ? () async {
-                      recursion = Completer();
-                      await runBlocCatching(
-                        action: action,
-                        doOnEventCompleted: doOnEventCompleted,
-                        doOnSubscribe: doOnSubscribe,
-                        doOnSuccessOrError: doOnSuccessOrError,
-                        doOnError: doOnError,
-                        doOnRetry: doOnRetry,
-                        forceHandleError: forceHandleError,
-                        handleError: handleError,
-                        handleLoading: handleLoading,
-                        handleRetry: handleRetry,
-                        overrideErrorMessage: overrideErrorMessage,
-                        maxRetries: maxRetries?.minus(1),
-                      );
-                      recursion?.complete();
-                    }
-                  : null),
-          exceptionCompleter: Completer<void>(),
-          overrideMessage: overrideErrorMessage,
-        ));
+        await addException(
+          AppExceptionWrapper(
+            appException: e,
+            doOnRetry:
+                doOnRetry ??
+                (handleRetry && maxRetries != 1
+                    ? () async {
+                        recursion = Completer();
+                        await runBlocCatching(
+                          action: action,
+                          doOnEventCompleted: doOnEventCompleted,
+                          doOnSubscribe: doOnSubscribe,
+                          doOnSuccessOrError: doOnSuccessOrError,
+                          doOnError: doOnError,
+                          doOnRetry: doOnRetry,
+                          forceHandleError: forceHandleError,
+                          handleError: handleError,
+                          handleLoading: handleLoading,
+                          handleRetry: handleRetry,
+                          overrideErrorMessage: overrideErrorMessage,
+                          maxRetries: maxRetries?.minus(1),
+                        );
+                        recursion?.complete();
+                      }
+                    : null),
+            exceptionCompleter: Completer<void>(),
+            overrideMessage: overrideErrorMessage,
+          ),
+        );
       }
     } finally {
       await recursion?.future;
@@ -223,46 +229,51 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
       if (e is ValidationException &&
           (e.kind == ValidationExceptionKind.logOut ||
               e.kind == ValidationExceptionKind.notLogin)) {
-        addException(AppExceptionWrapper(
-          appException: e,
-          // exceptionCompleter: Completer<void>()
-          //   ..future.then((_) async {
-          //     await navigator.replace(const AppRouteInfo.login());
-          //   }),
-          overrideMessage: overrideErrorMessage,
-        ));
+        addException(
+          AppExceptionWrapper(
+            appException: e,
+            // exceptionCompleter: Completer<void>()
+            //   ..future.then((_) async {
+            //     await navigator.replace(const AppRouteInfo.login());
+            //   }),
+            overrideMessage: overrideErrorMessage,
+          ),
+        );
       }
 
       await doOnSuccessOrError?.call();
       await doOnError?.call(e);
 
       if (handleError || (forceHandleError?.call(e) ?? _forceHandleError(e))) {
-        await addException(AppExceptionWrapper(
-          appException: e,
-          doOnRetry: doOnRetry ??
-              (handleRetry && maxRetries != 1
-                  ? () async {
-                      recursion = Completer();
-                      await runBlocCatching(
-                        action: action,
-                        doOnEventCompleted: doOnEventCompleted,
-                        doOnSubscribe: doOnSubscribe,
-                        doOnSuccessOrError: doOnSuccessOrError,
-                        doOnError: doOnError,
-                        doOnRetry: doOnRetry,
-                        forceHandleError: forceHandleError,
-                        handleError: handleError,
-                        handleLoading: handleLoading,
-                        handleRetry: handleRetry,
-                        overrideErrorMessage: overrideErrorMessage,
-                        maxRetries: maxRetries?.minus(1),
-                      );
-                      recursion?.complete();
-                    }
-                  : null),
-          exceptionCompleter: Completer<void>(),
-          overrideMessage: overrideErrorMessage,
-        ));
+        await addException(
+          AppExceptionWrapper(
+            appException: e,
+            doOnRetry:
+                doOnRetry ??
+                (handleRetry && maxRetries != 1
+                    ? () async {
+                        recursion = Completer();
+                        await runBlocCatching(
+                          action: action,
+                          doOnEventCompleted: doOnEventCompleted,
+                          doOnSubscribe: doOnSubscribe,
+                          doOnSuccessOrError: doOnSuccessOrError,
+                          doOnError: doOnError,
+                          doOnRetry: doOnRetry,
+                          forceHandleError: forceHandleError,
+                          handleError: handleError,
+                          handleLoading: handleLoading,
+                          handleRetry: handleRetry,
+                          overrideErrorMessage: overrideErrorMessage,
+                          maxRetries: maxRetries?.minus(1),
+                        );
+                        recursion?.complete();
+                      }
+                    : null),
+            exceptionCompleter: Completer<void>(),
+            overrideMessage: overrideErrorMessage,
+          ),
+        );
       }
     } finally {
       await recursion?.future;

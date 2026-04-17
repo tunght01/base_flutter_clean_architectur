@@ -14,36 +14,17 @@ class StorageRepositoryImpl implements StorageRepository {
 
   /// mapper
   final LanguageCodeDataMapper _languageCodeDataMapper;
-  StorageRepositoryImpl(
-    this._secureStoreLocalDataSource,
-    this._appPreferences,
-    this._languageCodeDataMapper,
-  );
+  StorageRepositoryImpl(this._secureStoreLocalDataSource, this._appPreferences, this._languageCodeDataMapper);
 
   @override
   Future<bool> savePassword(String password) async {
-    await _secureStoreLocalDataSource.write(
-      key: SecureStorageKeys.password,
-      value: password,
-    );
+    await _secureStoreLocalDataSource.write(key: SecureStorageKeys.password, value: password);
     return true;
   }
 
   @override
-  Future<bool> saveCurrentUser({
-    String? uid,
-    String? fullName,
-    String? email,
-    String? avtUrl,
-  }) {
-    return _appPreferences.saveCurrentUser(
-      PreferenceUserData(
-        uid: uid ?? '',
-        fullName: fullName ?? '',
-        username: email ?? '',
-        avatarUrl: avtUrl ?? '',
-      ),
-    );
+  Future<bool> saveCurrentUser({required String uid, String? fullName, String? email, String? avtUrl}) {
+    return _appPreferences.saveCurrentUser(PreferenceUserData(uid: uid, fullName: fullName, username: email, avatarUrl: avtUrl));
   }
 
   @override
@@ -53,8 +34,7 @@ class StorageRepositoryImpl implements StorageRepository {
   bool get isDarkMode => _appPreferences.isDarkMode;
 
   @override
-  LanguageCode get languageCode =>
-      _languageCodeDataMapper.mapToEntity(_appPreferences.languageCode);
+  LanguageCode get languageCode => _languageCodeDataMapper.mapToEntity(_appPreferences.languageCode);
 
   @override
   Future<void> clearCurrentUserData() async {

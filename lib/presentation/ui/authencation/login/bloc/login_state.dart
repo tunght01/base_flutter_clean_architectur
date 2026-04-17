@@ -11,7 +11,7 @@ abstract class LoginState extends BaseBlocState with _$LoginState {
     String? password,
     String? initialUsername,
     String? loginError,
-   @Default(false)  bool showLoginButtonLoading,
-   @Default(false)  bool isFirstPress,
+    @Default(false) bool showLoginButtonLoading,
+    @Default(false) bool isFirstPress,
   }) = _LoginState;
 }

@@ -23,4 +23,3 @@ class AccountInfo {
     this.termsAcceptedAt,
   });
 }
-

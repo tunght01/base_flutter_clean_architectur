@@ -11,8 +11,12 @@ class BottomNavItem extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const BottomNavItem(
-      {super.key, required this.isSelected, required this.item, required this.onTap});
+  const BottomNavItem({
+    super.key,
+    required this.isSelected,
+    required this.item,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +39,7 @@ class BottomNavItem extends StatelessWidget {
                     Color.fromRGBO(15, 108, 189, 0.0),
                     Color.fromRGBO(15, 108, 189, 0.26),
                   ],
-                  stops: [
-                    0.1833,
-                    1,
-                  ],
+                  stops: [0.1833, 1],
                 )
               : null,
         ),
@@ -66,7 +67,7 @@ class BottomNavItem extends StatelessWidget {
                       ? AppColors.of(context).textTitle
                       : AppColors.of(context).surfacePrimary,
                 ),
-              )
+              ),
             ],
           ),
         ),

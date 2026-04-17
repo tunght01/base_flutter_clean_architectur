@@ -31,7 +31,8 @@ class DashDivider extends StatelessWidget {
                 height: dashHeight,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                      color: color ?? AppColors.of(context).border),
+                    color: color ?? AppColors.of(context).border,
+                  ),
                 ),
               );
             }),

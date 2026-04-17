@@ -16,48 +16,44 @@ class CommonBloc extends BaseBloc<CommonEvent, CommonState> {
       transformer: log(),
     );
 
-    on<ExceptionEmitted>(
-      _onExceptionEmitted,
-      transformer: log(),
-    );
+    on<ExceptionEmitted>(_onExceptionEmitted, transformer: log());
 
     on<ForceLogoutButtonPressed>(
       _onForceLogoutButtonPressed,
       transformer: log(),
     );
-    on<SnackbarEmitted>(
-      _onSnackbarEmitted,
-      transformer: log(),
-    );
-    on<SnackbarShowOff>(
-      _onSnackbarShowOff,
-      transformer: log(),
-    );
+    on<SnackbarEmitted>(_onSnackbarEmitted, transformer: log());
+    on<SnackbarShowOff>(_onSnackbarShowOff, transformer: log());
     on<SnackbarExceptionEmitted>(
       _onSnackbarExceptionEmitted,
       transformer: log(),
     );
-    on<SnackbarSuccessEmitted>(
-      _onSnackbarSuccessEmitted,
-      transformer: log(),
-    );
+    on<SnackbarSuccessEmitted>(_onSnackbarSuccessEmitted, transformer: log());
   }
 
   FutureOr<void> _onLoadingVisibilityEmitted(
     LoadingVisibilityEmitted event,
     Emitter<CommonState> emit,
   ) {
-    emit(state.copyWith(
-      isLoading: state.loadingCount == 0 && event.isLoading
-          ? true
-          : state.loadingCount == 1 && !event.isLoading || state.loadingCount <= 0
-              ? false
-              : state.isLoading,
-      loadingCount: event.isLoading ? state.loadingCount.plus(1) : state.loadingCount.minus(1),
-    ));
+    emit(
+      state.copyWith(
+        isLoading: state.loadingCount == 0 && event.isLoading
+            ? true
+            : state.loadingCount == 1 && !event.isLoading ||
+                  state.loadingCount <= 0
+            ? false
+            : state.isLoading,
+        loadingCount: event.isLoading
+            ? state.loadingCount.plus(1)
+            : state.loadingCount.minus(1),
+      ),
+    );
   }
 
-  FutureOr<void> _onExceptionEmitted(ExceptionEmitted event, Emitter<CommonState> emit) {
+  FutureOr<void> _onExceptionEmitted(
+    ExceptionEmitted event,
+    Emitter<CommonState> emit,
+  ) {
     emit(state.copyWith(appExceptionWrapper: event.appExceptionWrapper));
   }
 
@@ -72,7 +68,6 @@ class CommonBloc extends BaseBloc<CommonEvent, CommonState> {
     );
   }
 
-
   FutureOr<void> _onSnackbarEmitted(
     SnackbarEmitted event,
     Emitter<CommonState> emit,
@@ -81,33 +76,43 @@ class CommonBloc extends BaseBloc<CommonEvent, CommonState> {
       message: event.message,
       snackbarType: event.snackbarType,
     );
-    emit(state.copyWith(snackbarContents: List.from(state.snackbarContents)..add(snackbarContent)));
+    emit(
+      state.copyWith(
+        snackbarContents: List.from(state.snackbarContents)
+          ..add(snackbarContent),
+      ),
+    );
   }
 
   FutureOr<void> _onSnackbarShowOff(
     SnackbarShowOff event,
     Emitter<CommonState> emit,
   ) {
-    emit(state.copyWith(snackbarContents: List.from(state.snackbarContents)..removeAt(0)));
+    emit(
+      state.copyWith(
+        snackbarContents: List.from(state.snackbarContents)..removeAt(0),
+      ),
+    );
   }
 
   FutureOr<void> _onSnackbarExceptionEmitted(
     SnackbarExceptionEmitted event,
     Emitter<CommonState> emit,
   ) {
-    add(SnackbarEmitted(
-      snackbarType: SnackbarType.error,
-      message: event.message,
-    ));
+    add(
+      SnackbarEmitted(snackbarType: SnackbarType.error, message: event.message),
+    );
   }
 
   FutureOr<void> _onSnackbarSuccessEmitted(
     SnackbarSuccessEmitted event,
     Emitter<CommonState> emit,
   ) {
-    add(SnackbarEmitted(
-      snackbarType: SnackbarType.success,
-      message: event.message,
-    ));
+    add(
+      SnackbarEmitted(
+        snackbarType: SnackbarType.success,
+        message: event.message,
+      ),
+    );
   }
 }

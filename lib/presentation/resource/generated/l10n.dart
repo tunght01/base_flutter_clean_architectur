@@ -54,6 +54,21 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Trang chủ`
+  String get home {
+    return Intl.message('Trang chủ', name: 'home', desc: '', args: []);
+  }
+
+  /// `Thông tin`
+  String get profile {
+    return Intl.message('Thông tin', name: 'profile', desc: '', args: []);
+  }
+
+  /// `Thông báo`
+  String get notification {
+    return Intl.message('Thông báo', name: 'notification', desc: '', args: []);
+  }
+
   /// `Xin chào`
   String get login_welcome {
     return Intl.message('Xin chào', name: 'login_welcome', desc: '', args: []);

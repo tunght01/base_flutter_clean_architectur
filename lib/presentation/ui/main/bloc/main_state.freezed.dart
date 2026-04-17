@@ -206,7 +206,7 @@ return $default(_that.tabIndex);case _:
 
 
 class _MainState extends MainState {
-  const _MainState({this.tabIndex = 1}): super._();
+  const _MainState({this.tabIndex = 0}): super._();
   
 
 @override@JsonKey() final  int tabIndex;

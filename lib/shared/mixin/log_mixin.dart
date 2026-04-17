@@ -1,4 +1,3 @@
-
 import '../utils/log_utils.dart';
 
 mixin LogMixin on Object {

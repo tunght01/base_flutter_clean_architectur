@@ -25,9 +25,9 @@ class ModalDraggableSheet extends StatelessWidget {
       expand: false,
       builder: (context, ScrollController scrollController) =>
           DraggableScrollController(
-        scrollController: scrollController,
-        child: child,
-      ),
+            scrollController: scrollController,
+            child: child,
+          ),
     );
   }
 }
@@ -58,9 +58,13 @@ class DraggableScrollController extends InheritedWidget {
           .dependOnInheritedWidgetOfExactType<DraggableScrollController>()
           ?.scrollController;
     }
-    final widget = context
-        .getElementForInheritedWidgetOfExactType<DraggableScrollController>()
-        ?.widget as DraggableScrollController?;
+    final widget =
+        context
+                .getElementForInheritedWidgetOfExactType<
+                  DraggableScrollController
+                >()
+                ?.widget
+            as DraggableScrollController?;
     return widget?.scrollController;
   }
 

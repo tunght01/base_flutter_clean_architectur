@@ -8,7 +8,6 @@ abstract class AppNavigator {
 
   int get currentBottomTab;
 
-
   String getCurrentRouteName({bool useRootNavigator = false});
 
   void popUntilRootOfCurrentBottomTab();

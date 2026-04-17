@@ -36,28 +36,33 @@ class ViewUtils {
   }
 
   static Future<void> setPreferredOrientations(
-      List<DeviceOrientation> orientations) {
+    List<DeviceOrientation> orientations,
+  ) {
     return SystemChrome.setPreferredOrientations(orientations);
   }
 
   /// set status bar color & navigation bar color
   static void setSystemUIOverlayStyle(
-      SystemUiOverlayStyle systemUiOverlayStyle) {
+    SystemUiOverlayStyle systemUiOverlayStyle,
+  ) {
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 
   static Offset? getWidgetPosition(GlobalKey globalKey) {
-    return (globalKey.currentContext?.findRenderObject() as RenderBox?)
-        ?.let((it) => it.localToGlobal(Offset.zero));
+    return (globalKey.currentContext?.findRenderObject() as RenderBox?)?.let(
+      (it) => it.localToGlobal(Offset.zero),
+    );
   }
 
   static double? getWidgetWidth(GlobalKey globalKey) {
-    return (globalKey.currentContext?.findRenderObject() as RenderBox?)
-        ?.let((it) => it.size.width);
+    return (globalKey.currentContext?.findRenderObject() as RenderBox?)?.let(
+      (it) => it.size.width,
+    );
   }
 
   static double? getWidgetHeight(GlobalKey globalKey) {
-    return (globalKey.currentContext?.findRenderObject() as RenderBox?)
-        ?.let((it) => it.size.height);
+    return (globalKey.currentContext?.findRenderObject() as RenderBox?)?.let(
+      (it) => it.size.height,
+    );
   }
 }

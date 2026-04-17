@@ -1,6 +1,6 @@
 class DataConstant {
-  static const  userCollection = 'users';
-  static const  defaultString = '';
-  static const  defaultBool = false;
-  static const  defaultInt = 0;
+  static const userCollection = 'users';
+  static const defaultString = '';
+  static const defaultBool = false;
+  static const defaultInt = 0;
 }

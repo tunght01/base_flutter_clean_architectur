@@ -5,7 +5,10 @@ import 'package:soft_dream_test/domain/usecase/base/io/base_output.dart';
 import 'package:soft_dream_test/shared/exception/base/app_exception.dart';
 import 'package:soft_dream_test/shared/exception/uncaught/app_uncaught_exception.dart';
 
-abstract class BaseSyncUseCase<Input extends BaseInput, Output extends BaseOutput>
+abstract class BaseSyncUseCase<
+  Input extends BaseInput,
+  Output extends BaseOutput
+>
     extends BaseUseCase<Input, Output> {
   const BaseSyncUseCase();
 

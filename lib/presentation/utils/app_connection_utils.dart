@@ -28,7 +28,6 @@ class AppConnectionUtils {
 
   bool get isActive => _isActive;
 
-
   List<ConnectivityResult> get type => _type;
 
   void dispose() {
@@ -47,14 +46,12 @@ class AppConnectionUtils {
       return;
     }
 
-    _subscription = Connectivity().onConnectivityChanged.listen(
-      (result) {
-        _type = result;
-        _isActive = !_type.contains(ConnectivityResult.none);
-        _onStatusChange.forEach((id, callback) {
-          callback?.call(this);
-        });
-      },
-    );
+    _subscription = Connectivity().onConnectivityChanged.listen((result) {
+      _type = result;
+      _isActive = !_type.contains(ConnectivityResult.none);
+      _onStatusChange.forEach((id, callback) {
+        callback?.call(this);
+      });
+    });
   }
 }

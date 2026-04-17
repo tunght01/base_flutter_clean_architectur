@@ -5,7 +5,8 @@ import 'package:soft_dream_test/domain/usecase/base/io/base_input.dart';
 import 'package:soft_dream_test/domain/usecase/base/io/base_output.dart';
 
 @Injectable()
-class ForgotPasswordUseCase extends BaseFutureUseCase<ForgotPasswordInput, ForgotPasswordOutput> {
+class ForgotPasswordUseCase
+    extends BaseFutureUseCase<ForgotPasswordInput, ForgotPasswordOutput> {
   final AuthRepository _authRepository;
 
   ForgotPasswordUseCase(this._authRepository);

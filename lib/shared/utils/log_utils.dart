@@ -9,11 +9,7 @@ class Log {
 
   static const _enableLog = LogConfig.enableGeneralLog;
   static const _logOnConsole = LogConfig.logOnConsole;
-  static void d(
-    Object? message, {
-    String? name,
-    DateTime? time,
-  }) {
+  static void d(Object? message, {String? name, DateTime? time}) {
     _log('💡 $message', name: name ?? '', time: time);
   }
 
@@ -123,8 +119,11 @@ class MyLogger {
     }
   }
 
-  void log(dynamic message,
-      {bool printFullText = false, StackTrace? stackTrace}) {
+  void log(
+    dynamic message, {
+    bool printFullText = false,
+    StackTrace? stackTrace,
+  }) {
     if (printFullText) {
       _log(message);
     } else {

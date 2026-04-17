@@ -1,5 +1,3 @@
-
-
 import 'package:soft_dream_test/config/log_config.dart';
 import 'package:soft_dream_test/domain/usecase/base/base_use_case.dart';
 import 'package:soft_dream_test/domain/usecase/base/io/base_input.dart';

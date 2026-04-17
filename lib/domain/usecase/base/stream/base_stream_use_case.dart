@@ -29,17 +29,19 @@ abstract class BaseStreamUseCase<Input extends BaseInput, Output>
 
       final stream = buildUseCase(input);
 
-      return stream.map((output) {
-        if (LogConfig.enableLogUseCaseOutput) {
-          _safeLog(() => logD('StreamUseCase Output: $output'));
-        }
-        return output;
-      }).handleError((e, stackTrace) {
-        if (LogConfig.enableLogUseCaseError) {
-          _safeLog(() => logE('StreamUseCase Error: $e'));
-        }
-        throw e is AppException ? e : AppUncaughtException(e);
-      });
+      return stream
+          .map((output) {
+            if (LogConfig.enableLogUseCaseOutput) {
+              _safeLog(() => logD('StreamUseCase Output: $output'));
+            }
+            return output;
+          })
+          .handleError((e, stackTrace) {
+            if (LogConfig.enableLogUseCaseError) {
+              _safeLog(() => logE('StreamUseCase Error: $e'));
+            }
+            throw e is AppException ? e : AppUncaughtException(e);
+          });
     } catch (e) {
       return Stream.error(e is AppException ? e : AppUncaughtException(e));
     }

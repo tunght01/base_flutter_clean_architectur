@@ -1,4 +1,3 @@
-
 import 'log_utils.dart';
 
 T run<T>(T Function() block) {

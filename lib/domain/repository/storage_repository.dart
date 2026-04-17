@@ -9,10 +9,5 @@ abstract class StorageRepository {
 
   Future<void> clearCurrentUserData();
 
-  Future<bool> saveCurrentUser({
-     String uid,
-     String fullName,
-     String email,
-     String avtUrl,
-  });
+  Future<bool> saveCurrentUser({required String uid, String? fullName, String? email, String? avtUrl});
 }

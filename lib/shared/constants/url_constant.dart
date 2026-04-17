@@ -1,3 +1,1 @@
-class UrlConstant{
-
-}
+class UrlConstant {}

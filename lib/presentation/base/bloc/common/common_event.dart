@@ -8,23 +8,18 @@ abstract class CommonEvent extends BaseBlocEvent {
 
 class ExceptionEmitted extends CommonEvent {
   final AppExceptionWrapper appExceptionWrapper;
-  const ExceptionEmitted({
-    required this.appExceptionWrapper,
-  });
+  const ExceptionEmitted({required this.appExceptionWrapper});
 }
 
 class LoadingVisibilityEmitted extends CommonEvent {
   final bool isLoading;
 
-  const LoadingVisibilityEmitted({
-    required this.isLoading,
-  });
+  const LoadingVisibilityEmitted({required this.isLoading});
 }
 
 class ForceLogoutButtonPressed extends CommonEvent {
   const ForceLogoutButtonPressed();
 }
-
 
 class DevelopingFeatureAbsorbed extends CommonEvent {
   const DevelopingFeatureAbsorbed();

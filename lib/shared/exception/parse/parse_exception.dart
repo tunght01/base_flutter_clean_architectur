@@ -1,9 +1,8 @@
-
 import 'package:soft_dream_test/shared/exception/base/app_exception.dart';
 
 class ParseException extends AppException {
   const ParseException(this.kind, this.rootException)
-      : super(AppExceptionType.parse);
+    : super(AppExceptionType.parse);
 
   final ParseExceptionKind kind;
   final Object? rootException;

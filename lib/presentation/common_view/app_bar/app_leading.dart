@@ -10,7 +10,9 @@ class AppLeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: icon ?? Icon(Icons.arrow_back,color: AppColors.current.primaryDefault,),
+      icon:
+          icon ??
+          Icon(Icons.arrow_back, color: AppColors.current.primaryDefault),
       onPressed:
           onPressed ??
           () {

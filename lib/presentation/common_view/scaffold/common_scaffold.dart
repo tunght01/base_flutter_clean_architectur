@@ -39,7 +39,8 @@ class CommonScaffold extends StatelessWidget {
           data: bottomSheet != null ? Theme.of(context) : Theme.of(context),
           child: Scaffold(
             resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-            backgroundColor: backgroundColor ?? AppColors.current.mobileBackground,
+            backgroundColor:
+                backgroundColor ?? AppColors.current.mobileBackground,
             body: Shimmer(child: body),
             appBar: appBar,
             drawer: drawer,

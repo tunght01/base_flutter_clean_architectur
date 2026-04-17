@@ -12,7 +12,8 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
     super.didPush(route, previousRoute);
     if (_enableLog) {
       logD(
-          'didPush from ${previousRoute?.settings.name} to ${route.settings.name}');
+        'didPush from ${previousRoute?.settings.name} to ${route.settings.name}',
+      );
     }
   }
 
@@ -21,7 +22,8 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
     super.didPop(route, previousRoute);
     if (_enableLog) {
       logD(
-          'didPop ${route.settings.name}, back to ${previousRoute?.settings.name}');
+        'didPop ${route.settings.name}, back to ${previousRoute?.settings.name}',
+      );
     }
   }
 
@@ -30,7 +32,8 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
     super.didRemove(route, previousRoute);
     if (_enableLog) {
       logD(
-          'didRemove ${route.settings.name}, back to ${previousRoute?.settings.name}');
+        'didRemove ${route.settings.name}, back to ${previousRoute?.settings.name}',
+      );
     }
   }
 
@@ -39,7 +42,8 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
     super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
     if (_enableLog) {
       logD(
-          'didReplace ${oldRoute?.settings.name} by ${newRoute?.settings.name}');
+        'didReplace ${oldRoute?.settings.name} by ${newRoute?.settings.name}',
+      );
     }
   }
 }

@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:soft_dream_test/shared/utils/log_utils.dart';
 
-
 @LazySingleton()
 class AppInfo {
   PackageInfo? _packageInfo;

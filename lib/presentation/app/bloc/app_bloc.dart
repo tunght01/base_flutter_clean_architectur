@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:soft_dream_test/domain/usecase/get_initial_app_data_use_case.dart';
@@ -12,39 +14,31 @@ class AppBloc extends BaseBloc<AppEvent, AppState> {
 
     on<AppInitiated>(_onAppInitiated, transformer: log());
 
-    on<UpdateConnectivityType>(
-      (event, emit) => emit(state.copyWith(connectivityType: event.value)),
-      transformer: log(),
-    );
+    on<UpdateConnectivityType>((event, emit) => emit(state.copyWith(connectivityType: event.value)), transformer: log());
+    on<IsGoToNotifyChangedEvent>((event, emit) => emit(state.copyWith(isGoToNotify: event.isGotoNotidy)), transformer: log());
+    on<SetRemoteMessage>(_onSetRemoteMessage, transformer: log());
 
-    on<UpdateSavedAccount>(
-      (event, emit) => emit(state.copyWith(savedAccount: event.savedAccount)),
-      transformer: log(),
-    );
+    on<UpdateSavedAccount>((event, emit) => emit(state.copyWith(savedAccount: event.savedAccount)), transformer: log());
   }
 
   final GetInitialAppDataUseCase _getInitialAppDataUseCase;
 
-  void _onIsLoggedInStatusChanged(
-    IsLoggedInStatusChanged event,
-    Emitter<AppState> emit,
-  ) {
+  void _onIsLoggedInStatusChanged(IsLoggedInStatusChanged event, Emitter<AppState> emit) {
     emit(state.copyWith(isLoggedIn: event.isLoggedIn));
   }
 
-  Future<void> _onAppInitiated(
-    AppInitiated event,
-    Emitter<AppState> emit,
-  ) async {
+  Future<void> _onAppInitiated(AppInitiated event, Emitter<AppState> emit) async {
     await runBlocCatching(
       action: () async {
-        final output = await _getInitialAppDataUseCase.execute(
-          const GetInitialAppDataInput(),
-        );
+        final output = await _getInitialAppDataUseCase.execute(const GetInitialAppDataInput());
 
         emit(state.copyWith(appInitiated: true));
         add(IsLoggedInStatusChanged(isLoggedIn: output.isLoggedIn));
       },
     );
+  }
+
+  FutureOr<void> _onSetRemoteMessage(SetRemoteMessage event, Emitter<AppState> emit) {
+    emit(state.copyWith(remoteMessage: event.value));
   }
 }

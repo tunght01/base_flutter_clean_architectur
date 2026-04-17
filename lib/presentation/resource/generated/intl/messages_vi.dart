@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Quên mật khẩu",
     ),
     "full_name": MessageLookupByLibrary.simpleMessage("Họ và tên"),
+    "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
     "i_agree_policy": MessageLookupByLibrary.simpleMessage(
       "Tôi đồng ý với điều khoản và chính sách",
     ),
@@ -88,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "login_password_label": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
     "login_welcome": MessageLookupByLibrary.simpleMessage("Xin chào"),
+    "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
     "password_does_not_match_please_try_again":
         MessageLookupByLibrary.simpleMessage(
           "Nhập lại mật khẩu mới không khớp",
@@ -95,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "please_agree_term_policy": MessageLookupByLibrary.simpleMessage(
       "Vui lòng đồng ý điều khoản và chính sách",
     ),
+    "profile": MessageLookupByLibrary.simpleMessage("Thông tin"),
     "sign_up_button": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
     "sign_up_password_confirm_label": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",

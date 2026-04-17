@@ -23,14 +23,20 @@ import 'package:soft_dream_test/shared/utils/log_utils.dart';
 import 'bloc/base_bloc.dart';
 
 abstract class BasePageState<T extends StatefulWidget, B extends BaseBloc>
-    extends BasePageStateDelegate<T, B> with LogMixin {}
+    extends BasePageStateDelegate<T, B>
+    with LogMixin {}
 
-abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBloc> extends State<T>
+abstract class BasePageStateDelegate<
+  T extends StatefulWidget,
+  B extends BaseBloc
+>
+    extends State<T>
     with WidgetsBindingObserver
     implements ExceptionHandlerListener {
   late final AppNavigator navigator = GetIt.instance.get<AppNavigator>();
   late final AppBloc appBloc = GetIt.instance.get<AppBloc>();
-  late final ExceptionMessageMapper exceptionMessageMapper = const ExceptionMessageMapper();
+  late final ExceptionMessageMapper exceptionMessageMapper =
+      const ExceptionMessageMapper();
   late final ExceptionHandler exceptionHandler = ExceptionHandler(
     navigator: navigator,
     listener: this,
@@ -59,21 +65,24 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
 
   late final CommonBloc commonBloc = GetIt.instance.get<CommonBloc>()
     ..setParamBloc(
-        navigator: navigator,
-        appBloc: appBloc,
-        exceptionHandler: exceptionHandler,
-        exceptionMessageMapper: exceptionMessageMapper,
-        disposeBag: disposeBag);
+      navigator: navigator,
+      appBloc: appBloc,
+      exceptionHandler: exceptionHandler,
+      exceptionMessageMapper: exceptionMessageMapper,
+      disposeBag: disposeBag,
+    );
 
-  late final B bloc = GetIt.instance.get<B>(param1: blocParam1, param2: blocParam2)
-    ..setParamBloc(
-        navigator: navigator,
-        appBloc: appBloc,
-        exceptionHandler: exceptionHandler,
-        exceptionMessageMapper: exceptionMessageMapper,
-        disposeBag: disposeBag,
-        commonBloc: commonBloc,
-        onBlocEvent: onEvent);
+  late final B bloc =
+      GetIt.instance.get<B>(param1: blocParam1, param2: blocParam2)
+        ..setParamBloc(
+          navigator: navigator,
+          appBloc: appBloc,
+          exceptionHandler: exceptionHandler,
+          exceptionMessageMapper: exceptionMessageMapper,
+          disposeBag: disposeBag,
+          commonBloc: commonBloc,
+          onBlocEvent: onEvent,
+        );
 
   late final DisposeBag disposeBag = DisposeBag();
 
@@ -98,7 +107,8 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.hidden) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.hidden) {
       onPauseApp();
       isAppInBackground = true;
     }
@@ -159,7 +169,8 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
                     children: [
                       buildPage(context),
                       BlocBuilder<CommonBloc, CommonState>(
-                        buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+                        buildWhen: (previous, current) =>
+                            previous.isLoading != current.isLoading,
                         builder: (context, state) => Visibility(
                           visible: state.isLoading,
                           child: buildPageLoading(),
@@ -176,13 +187,11 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
   Widget buildPageListeners({required Widget child}) => child;
 
   Widget buildPageLoading() => Container(
-        color: Colors.black.withValues(alpha: 0.5),
-        child: Center(
-          child: CircularProgressIndicator(
-            color: AppColors.current.primaryDefault,
-          ),
-        ),
-      );
+    color: Colors.black.withValues(alpha: 0.5),
+    child: Center(
+      child: CircularProgressIndicator(color: AppColors.current.primaryDefault),
+    ),
+  );
 
   Widget buildPage(BuildContext context);
 
@@ -196,12 +205,12 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
   void handleException(AppExceptionWrapper appExceptionWrapper) {
     exceptionHandler
         .handleException(
-      appExceptionWrapper,
-      handleExceptionMessage(appExceptionWrapper.appException),
-    )
+          appExceptionWrapper,
+          handleExceptionMessage(appExceptionWrapper.appException),
+        )
         .then((value) {
-      appExceptionWrapper.exceptionCompleter?.complete();
-    });
+          appExceptionWrapper.exceptionCompleter?.complete();
+        });
   }
 
   void handleSnackBar({
@@ -218,10 +227,9 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
           else if (snackBarContent.title != null)
             Text(
               snackBarContent.title!,
-              style: snackBarContent.titleStyle ??
-                  AppTextStyle.medium14(
-                    color: AppColors.current.textTitle,
-                  ),
+              style:
+                  snackBarContent.titleStyle ??
+                  AppTextStyle.medium14(color: AppColors.current.textTitle),
             ),
 
           if (snackBarContent.messageWidget != null)
@@ -229,9 +237,9 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
           else if (snackBarContent.message != null ||
               snackBarContent.messageWidget == null)
             Text(
-              snackBarContent.message ??
-                  '',
-              style: snackBarContent.messageStyle ??
+              snackBarContent.message ?? '',
+              style:
+                  snackBarContent.messageStyle ??
                   AppTextStyle.medium14(
                     color: snackBarContent.title != null
                         ? AppColors.current.textBody
@@ -241,8 +249,7 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
         ],
       ),
 
-      backgroundColor:
-      snackBarContent.snackbarType.getBackGroundColor(context),
+      backgroundColor: snackBarContent.snackbarType.getBackGroundColor(context),
 
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(
@@ -258,9 +265,9 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
 
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(snackBar)
-          .closed
-          .then((_) => commonBloc.add(const SnackbarShowOff()));
+      ..showSnackBar(
+        snackBar,
+      ).closed.then((_) => commonBloc.add(const SnackbarShowOff()));
   }
 
   String handleExceptionMessage(AppException appException) {
@@ -273,14 +280,24 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
   }
 }
 
-abstract class BasePageStateKeepAlive<T extends StatefulWidget, B extends BaseBloc>
-    extends BasePageStateDelegateKeepAlive<T, B> with LogMixin {}
+abstract class BasePageStateKeepAlive<
+  T extends StatefulWidget,
+  B extends BaseBloc
+>
+    extends BasePageStateDelegateKeepAlive<T, B>
+    with LogMixin {}
 
-abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extends BaseBloc>
-    extends State<T> with AutomaticKeepAliveClientMixin implements ExceptionHandlerListener {
+abstract class BasePageStateDelegateKeepAlive<
+  T extends StatefulWidget,
+  B extends BaseBloc
+>
+    extends State<T>
+    with AutomaticKeepAliveClientMixin
+    implements ExceptionHandlerListener {
   late final AppNavigator navigator = GetIt.instance.get<AppNavigator>();
   late final AppBloc appBloc = GetIt.instance.get<AppBloc>();
-  late final ExceptionMessageMapper exceptionMessageMapper = const ExceptionMessageMapper();
+  late final ExceptionMessageMapper exceptionMessageMapper =
+      const ExceptionMessageMapper();
   late final ExceptionHandler exceptionHandler = ExceptionHandler(
     navigator: navigator,
     listener: this,
@@ -291,21 +308,24 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
 
   late final CommonBloc commonBloc = GetIt.instance.get<CommonBloc>()
     ..setParamBloc(
-        navigator: navigator,
-        appBloc: appBloc,
-        exceptionHandler: exceptionHandler,
-        exceptionMessageMapper: exceptionMessageMapper,
-        disposeBag: disposeBag);
+      navigator: navigator,
+      appBloc: appBloc,
+      exceptionHandler: exceptionHandler,
+      exceptionMessageMapper: exceptionMessageMapper,
+      disposeBag: disposeBag,
+    );
 
-  late final B bloc = GetIt.instance.get<B>(param1: blocParam1, param2: blocParam2)
-    ..setParamBloc(
-        navigator: navigator,
-        appBloc: appBloc,
-        exceptionHandler: exceptionHandler,
-        exceptionMessageMapper: exceptionMessageMapper,
-        disposeBag: disposeBag,
-        commonBloc: commonBloc,
-        onBlocEvent: onEvent);
+  late final B bloc =
+      GetIt.instance.get<B>(param1: blocParam1, param2: blocParam2)
+        ..setParamBloc(
+          navigator: navigator,
+          appBloc: appBloc,
+          exceptionHandler: exceptionHandler,
+          exceptionMessageMapper: exceptionMessageMapper,
+          disposeBag: disposeBag,
+          commonBloc: commonBloc,
+          onBlocEvent: onEvent,
+        );
 
   late final DisposeBag disposeBag = DisposeBag();
 
@@ -360,7 +380,8 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
                     children: [
                       buildPage(context),
                       BlocBuilder<CommonBloc, CommonState>(
-                        buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+                        buildWhen: (previous, current) =>
+                            previous.isLoading != current.isLoading,
                         builder: (context, state) => Visibility(
                           visible: state.isLoading,
                           child: buildPageLoading(),
@@ -377,13 +398,11 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
   Widget buildPageListeners({required Widget child}) => child;
 
   Widget buildPageLoading() => Container(
-        color: Colors.black.withValues(alpha: 0.5),
-        child: Center(
-          child: CircularProgressIndicator(
-            color: AppColors.current.primaryDefault,
-          ),
-        ),
-      );
+    color: Colors.black.withValues(alpha: 0.5),
+    child: Center(
+      child: CircularProgressIndicator(color: AppColors.current.primaryDefault),
+    ),
+  );
 
   Widget buildPage(BuildContext context);
 
@@ -396,12 +415,12 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
   void handleException(AppExceptionWrapper appExceptionWrapper) {
     exceptionHandler
         .handleException(
-      appExceptionWrapper,
-      handleExceptionMessage(appExceptionWrapper.appException),
-    )
+          appExceptionWrapper,
+          handleExceptionMessage(appExceptionWrapper.appException),
+        )
         .then((value) {
-      appExceptionWrapper.exceptionCompleter?.complete();
-    });
+          appExceptionWrapper.exceptionCompleter?.complete();
+        });
   }
 
   void handleSnackBar({
@@ -410,8 +429,7 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
   }) {
     final snackBar = SnackBar(
       behavior: SnackBarBehavior.floating,
-      backgroundColor:
-      snackBarContent.snackbarType.getBackGroundColor(context),
+      backgroundColor: snackBarContent.snackbarType.getBackGroundColor(context),
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: snackBarContent.snackbarType.getBorderColor(context),
@@ -422,10 +440,7 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
       content: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ...[
-          snackBarContent.snackbarType.icon,
-          const SizedBox(width: 8),
-        ],
+          ...[snackBarContent.snackbarType.icon, const SizedBox(width: 8)],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -436,7 +451,8 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
                 else if (snackBarContent.title != null)
                   Text(
                     snackBarContent.title!,
-                    style: snackBarContent.titleStyle ??
+                    style:
+                        snackBarContent.titleStyle ??
                         AppTextStyle.medium14(
                           color: AppColors.current.textTitle,
                         ),
@@ -445,9 +461,9 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
                   snackBarContent.messageWidget!
                 else
                   Text(
-                    snackBarContent.message ??
-                        '',
-                    style: snackBarContent.messageStyle ??
+                    snackBarContent.message ?? '',
+                    style:
+                        snackBarContent.messageStyle ??
                         AppTextStyle.medium14(
                           color: snackBarContent.title != null
                               ? AppColors.current.textBody
@@ -473,7 +489,7 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
 
   @override
   void onRefreshTokenFailed() {
-   //todo
+    //todo
   }
 
   @override

@@ -109,9 +109,7 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
             ),
           ),
         );
-        navigator.showSuccessSnackBar(
-          S.current.sign_up_success,
-        );
+        navigator.showSuccessSnackBar(S.current.sign_up_success);
         navigator.pop();
       },
       doOnError: (e) async {

@@ -33,19 +33,20 @@ class AccountInfoModel {
       emailVerified: json['emailVerified'] as bool? ?? false,
       createdAt: json['createdAt'] != null
           ? (json['createdAt']?.toDate() as DateTime?) // Firestore timestamp
-              ?? DateTime.tryParse(json['createdAt'].toString()) // ISO string
+                ??
+                DateTime.tryParse(json['createdAt'].toString()) // ISO string
           : null,
       updatedAt: json['updatedAt'] != null
-          ? (json['updatedAt']?.toDate() as DateTime?) 
-              ?? DateTime.tryParse(json['updatedAt'].toString())
+          ? (json['updatedAt']?.toDate() as DateTime?) ??
+                DateTime.tryParse(json['updatedAt'].toString())
           : null,
       lastLoginAt: json['lastLoginAt'] != null
-          ? (json['lastLoginAt']?.toDate() as DateTime?) 
-              ?? DateTime.tryParse(json['lastLoginAt'].toString())
+          ? (json['lastLoginAt']?.toDate() as DateTime?) ??
+                DateTime.tryParse(json['lastLoginAt'].toString())
           : null,
       termsAcceptedAt: json['termsAcceptedAt'] != null
-          ? (json['termsAcceptedAt']?.toDate() as DateTime?) 
-              ?? DateTime.tryParse(json['termsAcceptedAt'].toString())
+          ? (json['termsAcceptedAt']?.toDate() as DateTime?) ??
+                DateTime.tryParse(json['termsAcceptedAt'].toString())
           : null,
     );
   }

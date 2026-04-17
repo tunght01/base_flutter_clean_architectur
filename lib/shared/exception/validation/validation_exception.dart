@@ -13,7 +13,7 @@ class ValidationException extends AppException {
 
 class DataValidationException extends ValidationException {
   const DataValidationException(this.type)
-      : super(ValidationExceptionKind.dataValidation);
+    : super(ValidationExceptionKind.dataValidation);
   final DataValidationExceptionKind type;
 
   @override

@@ -42,7 +42,9 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       decoration: linearGradient != null
           ? BoxDecoration(gradient: linearGradient)
-          : BoxDecoration(color: backgroundColor ?? AppColors.current.mobileBackground),
+          : BoxDecoration(
+              color: backgroundColor ?? AppColors.current.mobileBackground,
+            ),
       child: AppBar(
         backgroundColor: Colors.transparent,
         elevation: elevation ?? 0,
@@ -50,7 +52,10 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleSpacing: titleSpacing ?? 0,
         primary: primary,
         leading:
-            leading ?? (showBackButton ?? Navigator.canPop(context) ? const AppLeading() : null),
+            leading ??
+            (showBackButton ?? Navigator.canPop(context)
+                ? const AppLeading()
+                : null),
         title: label != null
             ? Text(
                 label!,
@@ -62,7 +67,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
             : title,
         actions: [...actions ?? [], kSpacingWidth16],
         centerTitle: centerTitle ?? false,
-        bottom: bottom ??
+        bottom:
+            bottom ??
             PreferredSize(
               preferredSize: const Size.fromHeight(1),
               child: Container(
@@ -70,11 +76,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: 1,
               ),
             ),
-        automaticallyImplyLeading: automaticallyImplyLeading ?? showBackButton ?? true,
+        automaticallyImplyLeading:
+            automaticallyImplyLeading ?? showBackButton ?? true,
       ),
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + (bottomHeight ?? 0));
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight + (bottomHeight ?? 0));
 }

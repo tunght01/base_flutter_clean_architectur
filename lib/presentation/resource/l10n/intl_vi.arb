@@ -1,6 +1,9 @@
 {
     "@@locale": "vi",
     "@@last_modified": "2026-04-16",
+    "home":"Trang chủ",
+    "profile":"Thông tin",
+    "notification":"Thông báo",
     "login_welcome": "Xin chào",
     "login_email_label": "Email",
     "login_password_label": "Mật khẩu",

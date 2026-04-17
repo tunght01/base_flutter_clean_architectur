@@ -1,9 +1,5 @@
 abstract class AppException implements Exception {
-  const AppException(
-    this.appExceptionType, {
-    this.message,
-    this.stackTrace,
-  });
+  const AppException(this.appExceptionType, {this.message, this.stackTrace});
 
   final AppExceptionType appExceptionType;
   final String? message;
@@ -18,4 +14,3 @@ enum AppExceptionType {
   uncaught,
   validation,
 }
-

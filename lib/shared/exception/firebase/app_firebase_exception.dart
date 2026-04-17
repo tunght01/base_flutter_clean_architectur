@@ -10,6 +10,7 @@ enum AppFirebaseExceptionType {
   tooManyRequests('too-many-requests'),
   permissionDeny('permission-denied'),
   unknown('unknown');
+
   final String code;
   const AppFirebaseExceptionType(this.code);
 
@@ -22,11 +23,9 @@ enum AppFirebaseExceptionType {
 }
 
 class AppFirebaseException extends AppException {
-  AppFirebaseException({
-    required this.code,
-    String? message,
-  }) : type = AppFirebaseExceptionType.fromCode(code),
-       super(AppExceptionType.firebase, message: message);
+  AppFirebaseException({required this.code, String? message})
+    : type = AppFirebaseExceptionType.fromCode(code),
+      super(AppExceptionType.firebase, message: message);
 
   final String code;
   final AppFirebaseExceptionType type;
