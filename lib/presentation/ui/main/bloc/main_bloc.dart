@@ -6,29 +6,20 @@ import 'main.dart';
 
 @Injectable()
 class MainBloc extends BaseBloc<MainEvent, MainState> {
-  MainBloc(
-  ) : super(const MainState()) {
-    on<MainPageInitiated>(
-      _onMainPageInitiated,
-      transformer: log(),
-    );
+  MainBloc() : super(const MainState()) {
+    on<MainPageInitiated>(_onMainPageInitiated, transformer: log());
+    on<ChangeTabIndexEvent>(_onChangeTabIndexEvent, transformer: log());
   }
 
-  FutureOr<void> _onMainPageInitiated(MainPageInitiated event, Emitter<MainState> emit) {
-    // final appSupported = _doesAppSupportMestricUseCase
-    //     .execute(const DoesAppSupportMestricUseCaseInput());
-    // final registered = _biomestricRegisteredUseCase
-    //     .execute(const BiomestricRegisteredUseCaseInput());
-    // if (appSupported.supported && !registered.registered) {
-    //   navigator
-    //       .showDialog(AppPopupInfo.infoDialog(
-    //           message: S.current.biometric_authentication))
-    //       .then((value) {
-    //     if (value == true) {
-    //       _registerBioMestricUseCase
-    //           .execute(const RegisterBioMestricUseCaseInput());
-    //     }
-    //   });
-    // }
+  FutureOr<void> _onMainPageInitiated(
+    MainPageInitiated event,
+    Emitter<MainState> emit,
+  ) {}
+
+  void _onChangeTabIndexEvent(
+    ChangeTabIndexEvent event,
+    Emitter<MainState> emit,
+  ) {
+    emit(state.copyWith(tabIndex: event.index));
   }
 }

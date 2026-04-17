@@ -33,7 +33,7 @@ abstract class BaseFutureUseCase<
 
       throw e is AppException
           ? e
-          : e is FirebaseAuthException
+          : e is FirebaseException
           ? AppFirebaseException(code: e.code, message: e.message)
           : AppUncaughtException(e);
     }

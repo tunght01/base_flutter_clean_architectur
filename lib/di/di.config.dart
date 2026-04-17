@@ -21,31 +21,47 @@ import 'package:soft_dream_test/data/repository/source/firebase/auth_datasource.
     as _i704;
 import 'package:soft_dream_test/data/repository/source/firebase/cloud_store_data_source.dart'
     as _i675;
+import 'package:soft_dream_test/data/repository/source/preference/app_preferences.dart'
+    as _i517;
+import 'package:soft_dream_test/data/repository/source/secure_storage/secure_store_local_data_source.dart'
+    as _i682;
+import 'package:soft_dream_test/data/repository/storage_repository_impl.dart'
+    as _i126;
 import 'package:soft_dream_test/data/repository/store_repository_impl.dart'
     as _i811;
 import 'package:soft_dream_test/di/di.dart' as _i570;
 import 'package:soft_dream_test/domain/mapper/account_info_mapper.dart'
     as _i829;
+import 'package:soft_dream_test/domain/mapper/storage/language_code_data_mapper.dart'
+    as _i835;
 import 'package:soft_dream_test/domain/navigation/app_navigator.dart' as _i1042;
 import 'package:soft_dream_test/domain/repository/auth_repository.dart'
     as _i146;
+import 'package:soft_dream_test/domain/repository/storage_repository.dart'
+    as _i301;
 import 'package:soft_dream_test/domain/repository/store_repository.dart'
     as _i15;
 import 'package:soft_dream_test/domain/usecase/auth/forgot_password_use_case.dart'
     as _i1071;
 import 'package:soft_dream_test/domain/usecase/auth/login_use_case.dart'
     as _i68;
+import 'package:soft_dream_test/domain/usecase/auth/logout_use_case.dart'
+    as _i286;
 import 'package:soft_dream_test/domain/usecase/auth/sign_up_use_case.dart'
     as _i515;
 import 'package:soft_dream_test/domain/usecase/cloud/get_user_profile_use_case.dart'
     as _i105;
 import 'package:soft_dream_test/domain/usecase/cloud/save_user_profile_use_case.dart'
     as _i166;
+import 'package:soft_dream_test/domain/usecase/get_initial_app_data_use_case.dart'
+    as _i811;
 import 'package:soft_dream_test/domain/usecase/load_initial_resource_use_case.dart'
     as _i982;
 import 'package:soft_dream_test/presentation/app/bloc/app_bloc.dart' as _i116;
 import 'package:soft_dream_test/presentation/base/bloc/common/common_bloc.dart'
     as _i852;
+import 'package:soft_dream_test/presentation/helper/local_push_notification_helper.dart'
+    as _i605;
 import 'package:soft_dream_test/presentation/navigation/app_navigator_impl.dart'
     as _i34;
 import 'package:soft_dream_test/presentation/navigation/base/base_route_info_mapper.dart'
@@ -81,20 +97,28 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i829.AccountInfoMapper>(() => const _i829.AccountInfoMapper());
-    gh.factory<_i982.LoadInitialResourceUseCase>(
-      () => const _i982.LoadInitialResourceUseCase(),
+    gh.factory<_i835.LanguageCodeDataMapper>(
+      () => _i835.LanguageCodeDataMapper(),
     );
     gh.factory<_i852.CommonBloc>(() => _i852.CommonBloc());
     gh.factory<_i441.RouteGuard>(() => _i441.RouteGuard());
     gh.factory<_i614.MainBloc>(() => _i614.MainBloc());
+    gh.lazySingleton<_i682.SecureStoreLocalDataSource>(
+      () => const _i682.SecureStoreLocalDataSource(),
+    );
     gh.lazySingleton<_i59.FirebaseAuth>(() => serviceModule.fireAuth);
     gh.lazySingleton<_i974.FirebaseFirestore>(() => serviceModule.fireStore);
     gh.lazySingleton<_i116.GoogleSignIn>(() => serviceModule.google);
-    gh.lazySingleton<_i116.AppBloc>(() => _i116.AppBloc());
+    gh.lazySingleton<_i605.LocalPushNotificationHelper>(
+      () => _i605.LocalPushNotificationHelper(),
+    );
     gh.lazySingleton<_i67.AppRouter>(() => _i67.AppRouter());
     gh.lazySingleton<_i906.AppInfo>(() => _i906.AppInfo());
     gh.lazySingleton<_i21.BaseRouteInfoMapper>(
       () => _i878.AppRouteInfoMapper(),
+    );
+    gh.lazySingleton<_i517.AppPreferences>(
+      () => _i517.AppPreferences(gh<_i460.SharedPreferences>()),
     );
     gh.lazySingleton<_i1042.AppNavigator>(
       () => _i34.AppNavigatorImpl(
@@ -108,39 +132,72 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i704.AuthDatasource>(
       () => _i704.AuthDatasource(gh<_i59.FirebaseAuth>()),
     );
+    gh.lazySingleton<_i301.StorageRepository>(
+      () => _i126.StorageRepositoryImpl(
+        gh<_i682.SecureStoreLocalDataSource>(),
+        gh<_i517.AppPreferences>(),
+        gh<_i835.LanguageCodeDataMapper>(),
+      ),
+    );
+    gh.factory<_i811.GetInitialAppDataUseCase>(
+      () => _i811.GetInitialAppDataUseCase(gh<_i301.StorageRepository>()),
+    );
+    gh.lazySingleton<_i116.AppBloc>(
+      () => _i116.AppBloc(gh<_i811.GetInitialAppDataUseCase>()),
+    );
     gh.lazySingleton<_i15.StoreRepository>(
       () => _i811.StoreRepositoryImpl(
+        gh<_i517.AppPreferences>(),
         gh<_i704.AuthDatasource>(),
         gh<_i829.AccountInfoMapper>(),
         gh<_i675.CloudStoreDataSource>(),
       ),
     );
+    gh.factory<_i105.GetUserProfileUseCase>(
+      () => _i105.GetUserProfileUseCase(
+        gh<_i15.StoreRepository>(),
+        gh<_i301.StorageRepository>(),
+      ),
+    );
+    gh.factory<_i982.LoadInitialResourceUseCase>(
+      () => _i982.LoadInitialResourceUseCase(gh<_i301.StorageRepository>()),
+    );
     gh.lazySingleton<_i146.AuthRepository>(
       () => _i1052.AuthRepositoryImpl(gh<_i704.AuthDatasource>()),
-    );
-    gh.factory<_i105.GetUserProfileUseCase>(
-      () => _i105.GetUserProfileUseCase(gh<_i15.StoreRepository>()),
     );
     gh.factory<_i166.SaveUserProfileUseCase>(
       () => _i166.SaveUserProfileUseCase(gh<_i15.StoreRepository>()),
     );
+    gh.factory<_i68.LoginUseCase>(
+      () => _i68.LoginUseCase(
+        gh<_i146.AuthRepository>(),
+        gh<_i301.StorageRepository>(),
+      ),
+    );
+    gh.factory<_i4.LoginBloc>(() => _i4.LoginBloc(gh<_i68.LoginUseCase>()));
     gh.factory<_i515.SignUpUseCase>(
       () => _i515.SignUpUseCase(gh<_i146.AuthRepository>()),
     );
     gh.factory<_i1071.ForgotPasswordUseCase>(
       () => _i1071.ForgotPasswordUseCase(gh<_i146.AuthRepository>()),
     );
-    gh.factory<_i68.LoginUseCase>(
-      () => _i68.LoginUseCase(gh<_i146.AuthRepository>()),
+    gh.factory<_i286.LogoutUseCase>(
+      () => _i286.LogoutUseCase(
+        gh<_i301.StorageRepository>(),
+        gh<_i1042.AppNavigator>(),
+        gh<_i146.AuthRepository>(),
+      ),
     );
-    gh.lazySingleton<_i768.AccountInfoBloc>(
-      () => _i768.AccountInfoBloc(gh<_i105.GetUserProfileUseCase>()),
-    );
-    gh.factory<_i4.LoginBloc>(() => _i4.LoginBloc(gh<_i68.LoginUseCase>()));
     gh.factory<_i673.SignUpBloc>(
       () => _i673.SignUpBloc(
         gh<_i515.SignUpUseCase>(),
         gh<_i166.SaveUserProfileUseCase>(),
+      ),
+    );
+    gh.lazySingleton<_i768.AccountInfoBloc>(
+      () => _i768.AccountInfoBloc(
+        gh<_i105.GetUserProfileUseCase>(),
+        gh<_i286.LogoutUseCase>(),
       ),
     );
     gh.factory<_i443.ForgotPasswordBloc>(

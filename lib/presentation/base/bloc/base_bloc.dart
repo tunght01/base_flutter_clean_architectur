@@ -63,7 +63,7 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
       this.exceptionMessageMapper = exceptionMessageMapper;
       this.disposeBag = disposeBag;
       if (commonBloc != null) {
-        this._commonBloc = commonBloc;
+        _commonBloc = commonBloc;
       }
       if (onBlocEvent != null) {
         this.onBlocEvent = onBlocEvent;

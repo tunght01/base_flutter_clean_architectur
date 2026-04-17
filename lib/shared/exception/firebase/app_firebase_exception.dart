@@ -8,8 +8,8 @@ enum AppFirebaseExceptionType {
   invalidEmail('invalid-email'),
   emailAlreadyInUse('email-already-in-use'),
   tooManyRequests('too-many-requests'),
+  permissionDeny('permission-denied'),
   unknown('unknown');
-
   final String code;
   const AppFirebaseExceptionType(this.code);
 

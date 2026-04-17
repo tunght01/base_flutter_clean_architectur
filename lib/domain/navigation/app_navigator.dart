@@ -8,9 +8,6 @@ abstract class AppNavigator {
 
   int get currentBottomTab;
 
-  bool get isAssetTab;
-
-  bool get isMoneyTab;
 
   String getCurrentRouteName({bool useRootNavigator = false});
 

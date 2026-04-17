@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MainState {
 
- String get id;
+ int get tabIndex;
 /// Create a copy of MainState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $MainStateCopyWith<MainState> get copyWith => _$MainStateCopyWithImpl<MainState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MainState&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MainState&&(identical(other.tabIndex, tabIndex) || other.tabIndex == tabIndex));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id);
+int get hashCode => Object.hash(runtimeType,tabIndex);
 
 @override
 String toString() {
-  return 'MainState(id: $id)';
+  return 'MainState(tabIndex: $tabIndex)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $MainStateCopyWith<$Res>  {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) _then) = _$MainStateCopyWithImpl;
 @useResult
 $Res call({
- String id
+ int tabIndex
 });
 
 
@@ -62,10 +62,10 @@ class _$MainStateCopyWithImpl<$Res>
 
 /// Create a copy of MainState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? tabIndex = null,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,
+tabIndex: null == tabIndex ? _self.tabIndex : tabIndex // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -150,10 +150,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int tabIndex)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MainState() when $default != null:
-return $default(_that.id);case _:
+return $default(_that.tabIndex);case _:
   return orElse();
 
 }
@@ -171,10 +171,10 @@ return $default(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int tabIndex)  $default,) {final _that = this;
 switch (_that) {
 case _MainState():
-return $default(_that.id);case _:
+return $default(_that.tabIndex);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +191,10 @@ return $default(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int tabIndex)?  $default,) {final _that = this;
 switch (_that) {
 case _MainState() when $default != null:
-return $default(_that.id);case _:
+return $default(_that.tabIndex);case _:
   return null;
 
 }
@@ -206,10 +206,10 @@ return $default(_that.id);case _:
 
 
 class _MainState extends MainState {
-  const _MainState({this.id = ''}): super._();
+  const _MainState({this.tabIndex = 1}): super._();
   
 
-@override@JsonKey() final  String id;
+@override@JsonKey() final  int tabIndex;
 
 /// Create a copy of MainState
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +221,16 @@ _$MainStateCopyWith<_MainState> get copyWith => __$MainStateCopyWithImpl<_MainSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MainState&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MainState&&(identical(other.tabIndex, tabIndex) || other.tabIndex == tabIndex));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id);
+int get hashCode => Object.hash(runtimeType,tabIndex);
 
 @override
 String toString() {
-  return 'MainState(id: $id)';
+  return 'MainState(tabIndex: $tabIndex)';
 }
 
 
@@ -241,7 +241,7 @@ abstract mixin class _$MainStateCopyWith<$Res> implements $MainStateCopyWith<$Re
   factory _$MainStateCopyWith(_MainState value, $Res Function(_MainState) _then) = __$MainStateCopyWithImpl;
 @override @useResult
 $Res call({
- String id
+ int tabIndex
 });
 
 
@@ -258,10 +258,10 @@ class __$MainStateCopyWithImpl<$Res>
 
 /// Create a copy of MainState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? tabIndex = null,}) {
   return _then(_MainState(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,
+tabIndex: null == tabIndex ? _self.tabIndex : tabIndex // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

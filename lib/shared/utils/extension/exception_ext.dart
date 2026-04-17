@@ -20,6 +20,8 @@ extension FirebaseExeptionExt on AppFirebaseExceptionType {
         return S.current.login_error_too_many_requests;
       case AppFirebaseExceptionType.unknown:
         return S.current.login_error_unknown;
+      case AppFirebaseExceptionType.permissionDeny:
+        return S.current.login_error_unknown;
     }
   }
 }

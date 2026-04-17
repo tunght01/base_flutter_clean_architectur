@@ -9,7 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i9;
 import 'package:soft_dream_test/presentation/navigation/routes/app_router.dart'
     as _i3;
 import 'package:soft_dream_test/presentation/ui/authencation/forgot_password/forgot_password_page.dart'
@@ -18,20 +18,22 @@ import 'package:soft_dream_test/presentation/ui/authencation/login/login_page.da
     as _i4;
 import 'package:soft_dream_test/presentation/ui/home/home_page.dart' as _i2;
 import 'package:soft_dream_test/presentation/ui/main/main_page.dart' as _i5;
-import 'package:soft_dream_test/presentation/ui/profile/profile_page.dart'
+import 'package:soft_dream_test/presentation/ui/notification/notification_page.dart'
     as _i6;
-import 'package:soft_dream_test/presentation/ui/sign_up/sign_up_page.dart'
+import 'package:soft_dream_test/presentation/ui/profile/profile_page.dart'
     as _i7;
+import 'package:soft_dream_test/presentation/ui/sign_up/sign_up_page.dart'
+    as _i8;
 
 /// generated route for
 /// [_i1.ForgotPasswordPage]
-class ForgotPasswordRoute extends _i8.PageRouteInfo<void> {
-  const ForgotPasswordRoute({List<_i8.PageRouteInfo>? children})
+class ForgotPasswordRoute extends _i9.PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<_i9.PageRouteInfo>? children})
     : super(ForgotPasswordRoute.name, initialChildren: children);
 
   static const String name = 'ForgotPasswordRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i1.ForgotPasswordPage();
@@ -41,13 +43,13 @@ class ForgotPasswordRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomePage]
-class HomeRoute extends _i8.PageRouteInfo<void> {
-  const HomeRoute({List<_i8.PageRouteInfo>? children})
+class HomeRoute extends _i9.PageRouteInfo<void> {
+  const HomeRoute({List<_i9.PageRouteInfo>? children})
     : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i2.HomePage();
@@ -57,13 +59,13 @@ class HomeRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.HomeTabPage]
-class HomeTab extends _i8.PageRouteInfo<void> {
-  const HomeTab({List<_i8.PageRouteInfo>? children})
+class HomeTab extends _i9.PageRouteInfo<void> {
+  const HomeTab({List<_i9.PageRouteInfo>? children})
     : super(HomeTab.name, initialChildren: children);
 
   static const String name = 'HomeTab';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i3.HomeTabPage();
@@ -73,13 +75,13 @@ class HomeTab extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.LoginPage]
-class LoginRoute extends _i8.PageRouteInfo<void> {
-  const LoginRoute({List<_i8.PageRouteInfo>? children})
+class LoginRoute extends _i9.PageRouteInfo<void> {
+  const LoginRoute({List<_i9.PageRouteInfo>? children})
     : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i4.LoginPage();
@@ -89,13 +91,13 @@ class LoginRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.MainPage]
-class MainRoute extends _i8.PageRouteInfo<void> {
-  const MainRoute({List<_i8.PageRouteInfo>? children})
+class MainRoute extends _i9.PageRouteInfo<void> {
+  const MainRoute({List<_i9.PageRouteInfo>? children})
     : super(MainRoute.name, initialChildren: children);
 
   static const String name = 'MainRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i5.MainPage();
@@ -104,30 +106,62 @@ class MainRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.ProfilePage]
-class ProfileRoute extends _i8.PageRouteInfo<void> {
-  const ProfileRoute({List<_i8.PageRouteInfo>? children})
+/// [_i6.NotificationPage]
+class NotificationRoute extends _i9.PageRouteInfo<void> {
+  const NotificationRoute({List<_i9.PageRouteInfo>? children})
+    : super(NotificationRoute.name, initialChildren: children);
+
+  static const String name = 'NotificationRoute';
+
+  static _i9.PageInfo page = _i9.PageInfo(
+    name,
+    builder: (data) {
+      return const _i6.NotificationPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i3.NotificationTabPage]
+class NotificationTab extends _i9.PageRouteInfo<void> {
+  const NotificationTab({List<_i9.PageRouteInfo>? children})
+    : super(NotificationTab.name, initialChildren: children);
+
+  static const String name = 'NotificationTab';
+
+  static _i9.PageInfo page = _i9.PageInfo(
+    name,
+    builder: (data) {
+      return const _i3.NotificationTabPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i7.ProfilePage]
+class ProfileRoute extends _i9.PageRouteInfo<void> {
+  const ProfileRoute({List<_i9.PageRouteInfo>? children})
     : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
-      return const _i6.ProfilePage();
+      return const _i7.ProfilePage();
     },
   );
 }
 
 /// generated route for
 /// [_i3.ProfileTabPage]
-class ProfileTab extends _i8.PageRouteInfo<void> {
-  const ProfileTab({List<_i8.PageRouteInfo>? children})
+class ProfileTab extends _i9.PageRouteInfo<void> {
+  const ProfileTab({List<_i9.PageRouteInfo>? children})
     : super(ProfileTab.name, initialChildren: children);
 
   static const String name = 'ProfileTab';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i3.ProfileTabPage();
@@ -136,17 +170,17 @@ class ProfileTab extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.SignUpPage]
-class SignUpRoute extends _i8.PageRouteInfo<void> {
-  const SignUpRoute({List<_i8.PageRouteInfo>? children})
+/// [_i8.SignUpPage]
+class SignUpRoute extends _i9.PageRouteInfo<void> {
+  const SignUpRoute({List<_i9.PageRouteInfo>? children})
     : super(SignUpRoute.name, initialChildren: children);
 
   static const String name = 'SignUpRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
-      return const _i7.SignUpPage();
+      return const _i8.SignUpPage();
     },
   );
 }

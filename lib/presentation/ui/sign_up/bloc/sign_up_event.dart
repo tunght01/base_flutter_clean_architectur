@@ -1,4 +1,3 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:soft_dream_test/presentation/base/bloc/base_bloc_event.dart';
 
 abstract class SignUpEvent extends BaseBlocEvent {

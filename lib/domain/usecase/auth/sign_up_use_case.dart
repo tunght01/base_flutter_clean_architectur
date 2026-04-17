@@ -1,7 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:soft_dream_test/domain/entities/request/create_user_request.dart';
 import 'package:soft_dream_test/domain/repository/auth_repository.dart';
-import 'package:soft_dream_test/domain/repository/store_repository.dart';
 import 'package:soft_dream_test/domain/usecase/base/future/base_future_use_case.dart';
 import 'package:soft_dream_test/domain/usecase/base/io/base_input.dart';
 import 'package:soft_dream_test/domain/usecase/base/io/base_output.dart';

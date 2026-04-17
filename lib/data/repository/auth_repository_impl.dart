@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:soft_dream_test/data/repository/source/firebase/auth_datasource.dart';
-import 'package:soft_dream_test/domain/entities/account_info.dart';
 import 'package:soft_dream_test/domain/repository/auth_repository.dart';
 
 @LazySingleton(as: AuthRepository)
@@ -11,12 +9,15 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._authDatasource);
 
   @override
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
-    final credential = await _authDatasource.signInWithEmailAndPassword(
+  Future<String> signInWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    final response = await _authDatasource.signInWithEmailAndPassword(
       email,
       password,
     );
-    final user = credential.user!;
+    return response.user?.uid ?? '';
   }
 
   @override
@@ -29,12 +30,16 @@ class AuthRepositoryImpl implements AuthRepository {
       email,
       password,
     );
-    final user = credential.user!;
-    await user.sendEmailVerification();
+    await credential.user!.sendEmailVerification();
   }
 
   @override
   Future<void> sendPasswordResetEmail(String email) async {
     await _authDatasource.sendPasswordResetEmail(email);
+  }
+
+  @override
+  Future<void> logout() async {
+    await _authDatasource.signOut();
   }
 }

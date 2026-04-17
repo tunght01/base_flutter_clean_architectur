@@ -385,7 +385,7 @@ class AppTextFormFieldState extends FormFieldState<String> {
     _isClear = false;
   }
 
-  void _onChangeClear(String? value, [ValueChanged<String?>? onChanged]) {
+  void _onChangeClear(String? value) {
     _isClear = value?.isNotEmpty ?? false;
   }
 

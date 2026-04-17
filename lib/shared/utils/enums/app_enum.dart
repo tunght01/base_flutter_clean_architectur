@@ -33,6 +33,10 @@ extension BottomTabX on BottomTab {
     }
   }
 }
+enum InitialAppRoute {
+  login,
+  main,
+}
 
 enum LanguageCode {
   en(

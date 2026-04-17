@@ -5,6 +5,11 @@ abstract class MainEvent extends BaseBlocEvent {
 }
 
 class MainPageInitiated extends MainEvent {
-  final int id;
-  const MainPageInitiated({required this.id});
+  final int index;
+  const MainPageInitiated({required this.index});
+}
+
+class ChangeTabIndexEvent extends MainEvent {
+  final int index;
+  const ChangeTabIndexEvent({required this.index});
 }

@@ -193,7 +193,7 @@ const ElevatedButtonThemeData darkElevatedButtonThemeData =
       // ),
     );
 CardThemeData _darkCardTheme = CardThemeData(
-  color: AppColors.current.surfaceSecondary.withOpacity(0.06),
+  color: AppColors.current.surfaceSecondary.withValues(alpha: 0.06),
   elevation: 0.0,
   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
 );
@@ -307,7 +307,7 @@ const ElevatedButtonThemeData lightElevatedButtonThemeData =
     ElevatedButtonThemeData();
 
 CardThemeData _lightCardTheme = CardThemeData(
-  color: AppColors.lightAppColor.surfaceSecondary.withOpacity(0.06),
+  color: AppColors.lightAppColor.surfaceSecondary.withValues(alpha: 0.06),
   elevation: 0.0,
   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
 );

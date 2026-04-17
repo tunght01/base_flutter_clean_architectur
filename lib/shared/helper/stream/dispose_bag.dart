@@ -12,7 +12,7 @@ class DisposeBag with LogMixin {
   }
 
   void dispose() {
-    _disposable.forEach((disposable) {
+    for (var disposable in _disposable) {
       if (disposable is StreamSubscription) {
         disposable.cancel();
         if (_enableLogging) {
@@ -31,7 +31,7 @@ class DisposeBag with LogMixin {
       } else if (disposable is Disposable) {
         disposable.dispose();
       }
-    });
+    }
 
     _disposable.clear();
   }

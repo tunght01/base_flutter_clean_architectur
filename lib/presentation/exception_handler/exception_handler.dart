@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:soft_dream_test/domain/navigation/app_navigator.dart';
 import 'package:soft_dream_test/presentation/app/bloc/app_bloc.dart';
 import 'package:soft_dream_test/presentation/app/bloc/app_event.dart';
 import 'package:soft_dream_test/shared/constants/duration_constants.dart';
 import 'package:soft_dream_test/shared/exception/base/app_exception.dart';
 import 'package:soft_dream_test/shared/exception/base/app_exception_wrapper.dart';
+import 'package:soft_dream_test/shared/exception/firebase/app_firebase_exception.dart';
 import 'package:soft_dream_test/shared/exception/remote/remote_exception.dart';
 
 import '../../di/di.dart';
@@ -47,6 +49,12 @@ class ExceptionHandler {
       case AppExceptionType.validation:
         return _showErrorSnackBar(message: message);
       case AppExceptionType.firebase:
+        if (appExceptionWrapper.appException is FirebaseAuthException &&
+            (appExceptionWrapper.appException as AppFirebaseException).type ==
+                AppFirebaseExceptionType.permissionDeny) {
+          logout();
+          return;
+        }
         return _showErrorSnackBar(message: message);
     }
   }

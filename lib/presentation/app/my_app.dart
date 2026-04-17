@@ -24,6 +24,7 @@ import 'package:soft_dream_test/presentation/utils/app_connection_utils.dart';
 import 'package:soft_dream_test/shared/constants/device_constants.dart';
 import 'package:soft_dream_test/shared/constants/locale_constants.dart';
 import 'package:soft_dream_test/shared/constants/ui_constants.dart';
+import 'package:soft_dream_test/shared/utils/enums/app_enum.dart';
 
 import '../../di/di.dart';
 import '../navigation/routes/app_router.gr.dart';
@@ -187,6 +188,13 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
   }
 
   List<PageRouteInfo> _mapRouteToPageRouteInfo() {
-    return [const LoginRoute()];
+    return widget.initialResource.initialRoutes.map<PageRouteInfo>((e) {
+      switch (e) {
+        case InitialAppRoute.login:
+          return const LoginRoute();
+        case InitialAppRoute.main:
+          return const MainRoute();
+      }
+    }).toList(growable: false);
   }
 }

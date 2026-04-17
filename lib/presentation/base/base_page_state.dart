@@ -176,7 +176,7 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
   Widget buildPageListeners({required Widget child}) => child;
 
   Widget buildPageLoading() => Container(
-        color: Colors.black.withOpacity(0.5),
+        color: Colors.black.withValues(alpha: 0.5),
         child: Center(
           child: CircularProgressIndicator(
             color: AppColors.current.primaryDefault,
@@ -377,7 +377,7 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
   Widget buildPageListeners({required Widget child}) => child;
 
   Widget buildPageLoading() => Container(
-        color: Colors.black.withOpacity(0.5),
+        color: Colors.black.withValues(alpha: 0.5),
         child: Center(
           child: CircularProgressIndicator(
             color: AppColors.current.primaryDefault,
@@ -422,10 +422,10 @@ abstract class BasePageStateDelegateKeepAlive<T extends StatefulWidget, B extend
       content: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (snackBarContent.snackbarType.icon != null) ...[
-            snackBarContent.snackbarType.icon!,
-            const SizedBox(width: 8),
-          ],
+          ...[
+          snackBarContent.snackbarType.icon,
+          const SizedBox(width: 8),
+        ],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

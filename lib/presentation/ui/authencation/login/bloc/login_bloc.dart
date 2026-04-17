@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:soft_dream_test/domain/navigation/app_route_info.dart';
 import 'package:soft_dream_test/domain/usecase/auth/login_use_case.dart';
 import 'package:soft_dream_test/presentation/app/bloc/app_event.dart';
 import 'package:soft_dream_test/presentation/base/bloc/base_bloc.dart';
@@ -27,6 +26,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       handleError: true,
       action: () async {
         emit(state.copyWith(loginError: null));
+        appBloc.add(const IsLoggedInStatusChanged(isLoggedIn: false));
         await _loginUseCase.execute(
           LoginInput(email: state.email!, password: state.password!),
         );

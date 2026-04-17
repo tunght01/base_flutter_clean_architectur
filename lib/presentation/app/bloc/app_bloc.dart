@@ -1,19 +1,19 @@
-import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:soft_dream_test/domain/usecase/get_initial_app_data_use_case.dart';
 import 'package:soft_dream_test/presentation/app/bloc/app_event.dart';
 import 'package:soft_dream_test/presentation/app/bloc/app_state.dart';
 import 'package:soft_dream_test/presentation/base/bloc/base_bloc.dart';
 
 @LazySingleton()
 class AppBloc extends BaseBloc<AppEvent, AppState> {
-  AppBloc() : super(const AppState()) {
+  AppBloc(this._getInitialAppDataUseCase) : super(const AppState()) {
     on<IsLoggedInStatusChanged>(_onIsLoggedInStatusChanged, transformer: log());
 
     on<AppInitiated>(_onAppInitiated, transformer: log());
 
     on<UpdateConnectivityType>(
-          (event, emit) => emit(state.copyWith(connectivityType: event.value)),
+      (event, emit) => emit(state.copyWith(connectivityType: event.value)),
       transformer: log(),
     );
 
@@ -23,7 +23,7 @@ class AppBloc extends BaseBloc<AppEvent, AppState> {
     );
   }
 
-  // final GetInitialAppDataUseCase _getInitialAppDataUseCase;
+  final GetInitialAppDataUseCase _getInitialAppDataUseCase;
 
   void _onIsLoggedInStatusChanged(
     IsLoggedInStatusChanged event,
@@ -38,11 +38,12 @@ class AppBloc extends BaseBloc<AppEvent, AppState> {
   ) async {
     await runBlocCatching(
       action: () async {
-        // final output = await _getInitialAppDataUseCase.execute(
-        //   const GetInitialAppDataInput(),
-        // );
+        final output = await _getInitialAppDataUseCase.execute(
+          const GetInitialAppDataInput(),
+        );
 
         emit(state.copyWith(appInitiated: true));
+        add(IsLoggedInStatusChanged(isLoggedIn: output.isLoggedIn));
       },
     );
   }

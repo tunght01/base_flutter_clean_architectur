@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:soft_dream_test/presentation/resource/generated/assets.gen.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
 
 class AppLeading extends StatelessWidget {

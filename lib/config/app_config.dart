@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:soft_dream_test/di/di.dart';
+import 'package:soft_dream_test/presentation/utils/device_utils.dart';
+import '../presentation/helper/local_push_notification_helper.dart';
 import 'config.dart';
 
 class AppConfig implements Config {
@@ -19,7 +19,8 @@ class AppConfig implements Config {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    if (DeviceUtils.isMobile()) {
+      await getIt.get<LocalPushNotificationHelper>().init();
+    }
   }
-
-
 }

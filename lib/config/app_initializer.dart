@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:async/async.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:soft_dream_test/di/di.dart' as di;
 
 import 'config.dart';

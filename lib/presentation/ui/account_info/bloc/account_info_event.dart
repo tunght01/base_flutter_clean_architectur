@@ -11,3 +11,8 @@ class AccountInfoInitEvent extends AccountInfoEvent {
 class RemoveDataAfterLogout extends AccountInfoEvent {
   const RemoveDataAfterLogout();
 }
+
+class PressedLogout extends AccountInfoEvent {
+  final bool logoutAll;
+  const PressedLogout([this.logoutAll = false]);
+}

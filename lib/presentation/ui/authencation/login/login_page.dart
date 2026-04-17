@@ -34,7 +34,11 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
   @override
   Widget buildPage(BuildContext context) {
     return CommonScaffold(
-      appBar: BaseAppBar(centerTitle: true, label: S.current.login_button),
+      appBar: BaseAppBar(
+        centerTitle: true,
+        label: S.current.login_button,
+        leading: const SizedBox.shrink(),
+      ),
       backgroundColor: AppColors.current.mobileBackground,
       body: SafeArea(
         child: Center(

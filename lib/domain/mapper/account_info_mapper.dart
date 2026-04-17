@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:soft_dream_test/data/model/account_info_model.dart';
 import 'package:soft_dream_test/domain/entities/account_info.dart';
 import 'package:soft_dream_test/domain/mapper/base/base_data_mapper.dart';
-import 'package:soft_dream_test/shared/constants/data_constant.dart';
 
 @injectable
 class AccountInfoMapper extends BaseDataMapper<AccountInfoModel, AccountInfo> {

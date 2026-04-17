@@ -8,7 +8,6 @@ import 'package:soft_dream_test/presentation/resource/dimens/dimens.dart';
 import 'package:soft_dream_test/presentation/resource/generated/assets.gen.dart';
 import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
-import 'package:soft_dream_test/presentation/resource/styles/app_text_styles.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/forgot_password/bloc/forgot_password_event.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/forgot_password/widget/forgot_password_form.dart';

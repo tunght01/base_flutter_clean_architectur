@@ -39,5 +39,6 @@ abstract class BaseVoidUseCase<Input extends BaseInput>
     }
   }
 
+  @override
   Future<void> buildUseCase(Input input);
 }

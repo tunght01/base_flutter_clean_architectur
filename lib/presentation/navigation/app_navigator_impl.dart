@@ -19,7 +19,7 @@ import '../../di/di.dart';
 class AppNavigatorImpl extends AppNavigator with LogMixin {
   AppNavigatorImpl(this._appRouter, this._appRouteInfoMapper);
 
-  final tabRoutes = const [HomeTab(), ProfileTab()];
+  final tabRoutes = const [HomeTab(), ProfileTab(), NotificationTab()];
 
   TabsRouter? tabsRouter;
 
@@ -49,24 +49,6 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     }
 
     return tabsRouter?.activeIndex ?? 0;
-  }
-
-  @override
-  bool get isAssetTab {
-    if (tabsRouter == null) {
-      throw 'Not found any TabRouter';
-    }
-
-    return currentBottomTab == 5;
-  }
-
-  @override
-  bool get isMoneyTab {
-    if (tabsRouter == null) {
-      throw 'Not found any TabRouter';
-    }
-
-    return currentBottomTab == 4;
   }
 
   @override
