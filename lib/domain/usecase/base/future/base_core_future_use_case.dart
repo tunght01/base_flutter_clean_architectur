@@ -1,20 +1,15 @@
 import 'package:soft_dream_test/config/log_config.dart';
-import 'package:soft_dream_test/domain/repository/app_repository.dart';
+import 'package:soft_dream_test/domain/repository/auth_repository.dart';
 import 'package:soft_dream_test/domain/usecase/base/future/base_future_use_case.dart';
 import 'package:soft_dream_test/domain/usecase/base/io/base_input.dart';
 import 'package:soft_dream_test/domain/usecase/base/io/base_output.dart';
 import 'package:soft_dream_test/shared/exception/base/app_exception.dart';
 import 'package:soft_dream_test/shared/exception/remote/remote_exception.dart';
 import 'package:soft_dream_test/shared/exception/uncaught/app_uncaught_exception.dart';
-import 'package:soft_dream_test/shared/exception/validation/validation_exception.dart';
 
-abstract class BaseCoreFutureUseCase<
-  Input extends BaseInput,
-  Output extends BaseOutput
->
-    extends BaseFutureUseCase<Input, Output> {
+abstract class BaseCoreFutureUseCase<Input extends BaseInput, Output extends BaseOutput> extends BaseFutureUseCase<Input, Output> {
   const BaseCoreFutureUseCase(this.repository);
-  final AppRepository repository;
+  final AuthRepository repository;
 
   @override
   Future<Output> execute(Input input) async {

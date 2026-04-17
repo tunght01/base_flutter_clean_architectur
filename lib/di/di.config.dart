@@ -12,15 +12,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
-import 'package:soft_dream_test/data/repository/app_repository_impl.dart'
+import 'package:soft_dream_test/data/repository/auth_repository_impl.dart'
     as _i352;
-import 'package:soft_dream_test/data/repository/source/firebase/firebase_auth_datasource.dart'
+import 'package:soft_dream_test/data/repository/source/firebase/auth_datasource.dart'
     as _i1056;
+import 'package:soft_dream_test/data/repository/source/firebase/cloud_store_data_source.dart'
+    as _i462;
 import 'package:soft_dream_test/di/di.dart' as _i570;
 import 'package:soft_dream_test/domain/navigation/app_navigator.dart' as _i1042;
-import 'package:soft_dream_test/domain/repository/app_repository.dart' as _i141;
+import 'package:soft_dream_test/domain/repository/auth_repository.dart'
+    as _i141;
 import 'package:soft_dream_test/domain/usecase/forgot_password_use_case.dart'
     as _i966;
 import 'package:soft_dream_test/domain/usecase/load_initial_resource_use_case.dart'
@@ -70,10 +74,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i852.CommonBloc>(() => _i852.CommonBloc());
     gh.factory<_i441.RouteGuard>(() => _i441.RouteGuard());
     gh.factory<_i614.MainBloc>(() => _i614.MainBloc());
-    gh.singleton<_i59.FirebaseAuth>(() => serviceModule.fireAuth);
-    gh.singleton<_i974.FirebaseFirestore>(
-      () => serviceModule.firebaseFirestore,
-    );
+    gh.lazySingleton<_i59.FirebaseAuth>(() => serviceModule.fireAuth);
+    gh.lazySingleton<_i974.FirebaseFirestore>(() => serviceModule.fireStore);
+    gh.lazySingleton<_i116.GoogleSignIn>(() => serviceModule.google);
     gh.lazySingleton<_i116.AppBloc>(() => _i116.AppBloc());
     gh.lazySingleton<_i67.AppRouter>(() => _i67.AppRouter());
     gh.lazySingleton<_i768.AccountInfoBloc>(() => _i768.AccountInfoBloc());
@@ -87,20 +90,26 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i21.BaseRouteInfoMapper>(),
       ),
     );
-    gh.lazySingleton<_i1056.FirebaseAuthDatasource>(
-      () => _i1056.FirebaseAuthDatasource(gh<_i59.FirebaseAuth>()),
+    gh.lazySingleton<_i462.FirebaseCloudStoreDataSource>(
+      () => _i462.FirebaseCloudStoreDataSource(gh<_i974.FirebaseFirestore>()),
     );
-    gh.lazySingleton<_i141.AppRepository>(
-      () => _i352.AppRepositoryImpl(gh<_i1056.FirebaseAuthDatasource>()),
+    gh.lazySingleton<_i1056.AuthDatasource>(
+      () => _i1056.AuthDatasource(
+        gh<_i59.FirebaseAuth>(),
+        gh<_i116.GoogleSignIn>(),
+      ),
+    );
+    gh.lazySingleton<_i141.AuthRepository>(
+      () => _i352.AuthRepositoryImpl(gh<_i1056.AuthDatasource>()),
     );
     gh.factory<_i966.ForgotPasswordUseCase>(
-      () => _i966.ForgotPasswordUseCase(gh<_i141.AppRepository>()),
+      () => _i966.ForgotPasswordUseCase(gh<_i141.AuthRepository>()),
     );
     gh.factory<_i787.LoginUseCase>(
-      () => _i787.LoginUseCase(gh<_i141.AppRepository>()),
+      () => _i787.LoginUseCase(gh<_i141.AuthRepository>()),
     );
     gh.factory<_i119.SignUpUseCase>(
-      () => _i119.SignUpUseCase(gh<_i141.AppRepository>()),
+      () => _i119.SignUpUseCase(gh<_i141.AuthRepository>()),
     );
     gh.factory<_i4.LoginBloc>(() => _i4.LoginBloc(gh<_i787.LoginUseCase>()));
     gh.factory<_i673.SignUpBloc>(

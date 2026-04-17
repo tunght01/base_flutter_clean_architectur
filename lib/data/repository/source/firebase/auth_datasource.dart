@@ -1,36 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton()
-class FirebaseAuthDatasource {
+class AuthDatasource {
   final FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
+  FirebaseFirestore _fireStore;
 
-  FirebaseAuthDatasource(this._firebaseAuth);
+  AuthDatasource(this._firebaseAuth, this._googleSignIn, this._fireStore);
 
   User? get currentUser => _firebaseAuth.currentUser;
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  Future<UserCredential> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    return await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+  Future<UserCredential> signInWithEmailAndPassword(String email, String password) async {
+    return await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
   }
 
   /// Sign up with email and password
-  Future<UserCredential> signUpWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    return await _firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+  Future<UserCredential> signUpWithEmailAndPassword(String email, String password) async {
+    return await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
   }
 
   /// Send password reset email
