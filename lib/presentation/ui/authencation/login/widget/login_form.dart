@@ -119,6 +119,7 @@ class _LoginFormState extends State<LoginForm>
                           controller: _usernameController,
                           focusNode: _usernameFocusNode,
                           required: true,
+                          isClear: true,
                           validator: (value) {
                             return emailValidator(_usernameController.text);
                           },

@@ -108,15 +108,17 @@ class _SignUpFormState extends State<SignUpForm>
                   buildWhen: (previous, current) {
                     return previous.signUpError != current.signUpError ||
                         previous.isFirstPress != current.isFirstPress ||
-                        previous.email != current.email;
+                        previous.fullName != current.fullName;
                   },
                   builder: (_, state) {
                     return AppTextFormField(
                       controller: _fullNameController,
                       focusNode: _fullNameFocusNode,
+                      isClear: true,
                       required: true,
-                      fillColor: AppColors.current.neutralBlack1100
-                          .withValues(alpha: 0.15),
+                      fillColor: AppColors.current.neutralBlack1100.withValues(
+                        alpha: 0.15,
+                      ),
                       title: S.current.full_name,
                       titleColor: AppColors.current.textSubTitle,
                       autoValidate: state.isFirstPress,
@@ -141,11 +143,13 @@ class _SignUpFormState extends State<SignUpForm>
                       controller: _usernameController,
                       focusNode: _usernameFocusNode,
                       required: true,
+                      isClear: true,
                       validator: (value) {
                         return emailValidator(_usernameController.text);
                       },
-                      fillColor: AppColors.current.neutralBlack1100
-                          .withValues(alpha: 0.15),
+                      fillColor: AppColors.current.neutralBlack1100.withValues(
+                        alpha: 0.15,
+                      ),
                       isError: state.signUpError != null,
                       title: S.current.login_email_label,
                       titleColor: AppColors.current.textSubTitle,

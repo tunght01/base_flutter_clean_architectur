@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:soft_dream_test/domain/usecase/forgot_password_use_case.dart';
+import 'package:soft_dream_test/domain/usecase/auth/forgot_password_use_case.dart';
 import 'package:soft_dream_test/presentation/base/bloc/base_bloc.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/forgot_password/bloc/forgot_password_event.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/forgot_password/bloc/forgot_password_state.dart';

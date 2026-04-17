@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:soft_dream_test/domain/navigation/app_route_info.dart';
-import 'package:soft_dream_test/domain/usecase/login_use_case.dart';
+import 'package:soft_dream_test/domain/usecase/auth/login_use_case.dart';
 import 'package:soft_dream_test/presentation/app/bloc/app_event.dart';
 import 'package:soft_dream_test/presentation/base/bloc/base_bloc.dart';
 import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_event.dart';

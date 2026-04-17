@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:soft_dream_test/domain/usecase/sign_up_use_case.dart';
+import 'package:soft_dream_test/domain/entities/request/create_user_request.dart';
+import 'package:soft_dream_test/domain/usecase/auth/sign_up_use_case.dart';
+import 'package:soft_dream_test/domain/usecase/cloud/save_user_profile_use_case.dart';
 import 'package:soft_dream_test/presentation/base/bloc/base_bloc.dart';
 import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/presentation/ui/sign_up/bloc/sign_up_event.dart';
@@ -11,7 +13,9 @@ import 'package:soft_dream_test/presentation/ui/sign_up/bloc/sign_up_state.dart'
 @Injectable()
 class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
   final SignUpUseCase _signUpUseCase;
-  SignUpBloc(this._signUpUseCase) : super(const SignUpState()) {
+  final SaveUserProfileUseCase _saveUserProfileUseCase;
+  SignUpBloc(this._signUpUseCase, this._saveUserProfileUseCase)
+    : super(const SignUpState()) {
     on<OnPressSignUpEvent>(_onPressSignUpEvent, transformer: log());
     on<OnChangeSignUpEmailEvent>(
       _onChangeEmailEvent,
@@ -37,6 +41,7 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
       (event, emit) => emit(state.copyWith(fullName: event.value)),
       transformer: debounceTime(),
     );
+    on<SaveUserProfileEvent>(_onSaveUserProfileEvent, transformer: log());
   }
 
   FutureOr<void> _onPressSignUpEvent(
@@ -51,8 +56,13 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
           return;
         }
         await _signUpUseCase.execute(
-          SignUpInput(email: state.email!, password: state.password!),
+          SignUpInput(
+            email: state.email!,
+            password: state.password!,
+            fullName: state.fullName!,
+          ),
         );
+        add(SaveUserProfileEvent());
       },
       doOnError: (e) async {
         emit(state.copyWith(signUpError: exceptionMessageMapper.map(e)));
@@ -80,6 +90,33 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
   ) {
     emit(
       state.copyWith(confirmPassword: event.confirmPassword, signUpError: null),
+    );
+  }
+
+  FutureOr<void> _onSaveUserProfileEvent(
+    SaveUserProfileEvent event,
+    Emitter<SignUpState> emit,
+  ) {
+    return runBlocCatching(
+      action: () async {
+        await _saveUserProfileUseCase.execute(
+          SaveUserProfileInput(
+            createUserRequest: CreateUserRequest(
+              email: state.email!,
+              fullName: state.fullName!,
+              uid: '',
+              emailVerified: false,
+            ),
+          ),
+        );
+        navigator.showSuccessSnackBar(
+          'Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản.',
+        );
+        navigator.pop();
+      },
+      doOnError: (e) async {
+        emit(state.copyWith(signUpError: exceptionMessageMapper.map(e)));
+      },
     );
   }
 }

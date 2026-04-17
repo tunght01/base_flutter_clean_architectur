@@ -40,6 +40,7 @@ class AppTextFormField extends FormField<String> {
     bool readOnly = false,
     bool required = false,
     bool isPassword = false,
+    bool isClear = false,
     bool enableInteractiveSelection = true,
     Widget? suffix,
     String? suffixIconPath,
@@ -53,7 +54,7 @@ class AppTextFormField extends FormField<String> {
     int? maxLength,
     int? maxLine,
     int? minLines,
-    double suffixIconSize = 24,
+    double suffixIconSize = 16,
     double? radius,
     bool autoValidate = false,
     bool alwaysValidate = false,
@@ -142,6 +143,9 @@ class AppTextFormField extends FormField<String> {
                              if (onChanged != null) {
                                onChanged(text);
                              }
+                           }
+                           if (isClear) {
+                             state._onChangeClear(text);
                            }
                          },
                          decoration: const InputDecoration()
@@ -273,6 +277,23 @@ class AppTextFormField extends FormField<String> {
                                              ),
                                            ),
                                          )
+                                       : (isClear && state._isClear)
+                                       ? InkResponse(
+                                           onTap: () {
+                                             state.onClearText();
+                                           },
+                                           radius: 20,
+                                           child: Padding(
+                                             padding: const EdgeInsets.all(
+                                               Dimens.d8,
+                                             ),
+                                             child: SizedBox(
+                                               width: suffixIconSize,
+                                               height: suffixIconSize,
+                                               child: Icon(Icons.clear),
+                                             ),
+                                           ),
+                                         )
                                        : suffixIconPath != null
                                        ? InkResponse(
                                            onTap: suffixIconTap,
@@ -349,10 +370,23 @@ class AppTextFormFieldState extends FormFieldState<String> {
   Timer? debounce;
   bool _obscureText = true;
 
+  bool _isClear = false;
+
   void onChangeObscureText() {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  void onClearText() {
+    setState(() {
+      textEditingController.clear();
+    });
+    _isClear = false;
+  }
+
+  void _onChangeClear(String? value, [ValueChanged<String?>? onChanged]) {
+    _isClear = value?.isNotEmpty ?? false;
   }
 
   void _onChangeHandler(String? value, [ValueChanged<String?>? onChanged]) {

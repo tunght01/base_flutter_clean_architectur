@@ -6,13 +6,13 @@ import 'package:soft_dream_test/domain/usecase/base/io/base_output.dart';
 
 @Injectable()
 class ForgotPasswordUseCase extends BaseFutureUseCase<ForgotPasswordInput, ForgotPasswordOutput> {
-  final AuthRepository _appRepository;
+  final AuthRepository _authRepository;
 
-  ForgotPasswordUseCase(this._appRepository);
+  ForgotPasswordUseCase(this._authRepository);
 
   @override
   Future<ForgotPasswordOutput> buildUseCase(ForgotPasswordInput input) async {
-    await _appRepository.sendPasswordResetEmail(input.email);
+    await _authRepository.sendPasswordResetEmail(input.email);
     return ForgotPasswordOutput();
   }
 }

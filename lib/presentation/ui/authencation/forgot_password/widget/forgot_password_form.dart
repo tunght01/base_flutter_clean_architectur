@@ -103,6 +103,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm>
                       controller: _emailController,
                       focusNode: _emailFocusNode,
                       required: true,
+                      isClear: true,
                       validator: (value) =>
                           emailValidator(_emailController.text),
                       fillColor: AppColors.current.neutralBlack1100.withValues(
@@ -171,7 +172,6 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm>
                     );
                   },
                 ),
-
               ],
             ),
           ),

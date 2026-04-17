@@ -37,3 +37,7 @@ class OnChangeAgreePoicyEvent extends SignUpEvent {
   final bool value;
   const OnChangeAgreePoicyEvent({required this.value});
 }
+
+class SaveUserProfileEvent extends SignUpEvent {
+  const SaveUserProfileEvent();
+}

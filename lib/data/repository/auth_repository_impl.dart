@@ -12,23 +12,25 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> signInWithEmailAndPassword(String email, String password) async {
-    final credential = await _authDatasource.signInWithEmailAndPassword(email, password);
+    final credential = await _authDatasource.signInWithEmailAndPassword(
+      email,
+      password,
+    );
     final user = credential.user!;
-    print(user);
   }
 
   @override
-  Future<AccountInfo> signUp({required String email, required String password, required String fullName}) async {
-    final credential = await _authDatasource.signUpWithEmailAndPassword(email, password);
-
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String fullName,
+  }) async {
+    final credential = await _authDatasource.signUpWithEmailAndPassword(
+      email,
+      password,
+    );
     final user = credential.user!;
-
-    // gửi verify email (khuyến nghị)
     await user.sendEmailVerification();
-    final now = Timestamp.now();
-
-    final response = AccountInfo(uid: user.uid, email: email, emailVerified: user.emailVerified, fullName: fullName, createdAt: now, updatedAt: now);
-    return response;
   }
 
   @override

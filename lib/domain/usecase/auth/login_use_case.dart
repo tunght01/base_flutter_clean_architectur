@@ -6,12 +6,12 @@ import 'package:soft_dream_test/domain/usecase/base/io/base_output.dart';
 
 @Injectable()
 class LoginUseCase extends BaseFutureUseCase<LoginInput, LoginOutput> {
-  const LoginUseCase(this._appRepository);
-  final AuthRepository _appRepository;
+  const LoginUseCase(this._authRepository);
+  final AuthRepository _authRepository;
 
   @override
   Future<LoginOutput> buildUseCase(LoginInput input) async {
-    await _appRepository.signInWithEmailAndPassword(input.email, input.password);
+    await _authRepository.signInWithEmailAndPassword(input.email, input.password);
     return LoginOutput();
   }
 }
