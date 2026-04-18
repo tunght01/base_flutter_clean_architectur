@@ -4,7 +4,7 @@ import 'package:soft_dream_test/data/repository/source/firebase/auth_datasource.
 import 'package:soft_dream_test/data/repository/source/firebase/cloud_store_data_source.dart';
 import 'package:soft_dream_test/domain/entities/account_info.dart';
 import 'package:soft_dream_test/domain/entities/request/create_user_request.dart';
-import 'package:soft_dream_test/domain/mapper/account_info_mapper.dart';
+import 'package:soft_dream_test/data/mapper/account_info_mapper.dart';
 import 'package:soft_dream_test/domain/repository/store_repository.dart';
 import 'package:soft_dream_test/shared/constants/data_constant.dart';
 

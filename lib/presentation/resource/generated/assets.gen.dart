@@ -29,18 +29,24 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_eye_slash.svg
   SvgGenImage get icEyeSlash => const SvgGenImage('assets/icons/ic_eye_slash.svg');
 
+  /// File path: assets/icons/il_empty.svg
+  SvgGenImage get ilEmpty => const SvgGenImage('assets/icons/il_empty.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [icArrowBack, icDangerCircle, icEye, icEyeSlash];
+  List<SvgGenImage> get values => [icArrowBack, icDangerCircle, icEye, icEyeSlash, ilEmpty];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/img_avatar_default.png
+  AssetGenImage get imgAvatarDefault => const AssetGenImage('assets/images/img_avatar_default.png');
+
   /// File path: assets/images/img_logo.png
   AssetGenImage get imgLogo => const AssetGenImage('assets/images/img_logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [imgLogo];
+  List<AssetGenImage> get values => [imgAvatarDefault, imgLogo];
 }
 
 class $AssetsJsonGen {

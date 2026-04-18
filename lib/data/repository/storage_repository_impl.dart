@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:soft_dream_test/data/repository/source/preference/app_preferences.dart';
 import 'package:soft_dream_test/data/repository/source/preference/model/preference_user_data.dart';
 import 'package:soft_dream_test/data/repository/source/secure_storage/secure_store_local_data_source.dart';
-import 'package:soft_dream_test/domain/mapper/storage/language_code_data_mapper.dart';
+import 'package:soft_dream_test/data/mapper/storage/language_code_data_mapper.dart';
 import 'package:soft_dream_test/domain/repository/storage_repository.dart';
 import 'package:soft_dream_test/shared/constants/secure_storage_constants.dart';
 import 'package:soft_dream_test/shared/utils/enums/app_enum.dart';
@@ -14,17 +14,36 @@ class StorageRepositoryImpl implements StorageRepository {
 
   /// mapper
   final LanguageCodeDataMapper _languageCodeDataMapper;
-  StorageRepositoryImpl(this._secureStoreLocalDataSource, this._appPreferences, this._languageCodeDataMapper);
+  StorageRepositoryImpl(
+    this._secureStoreLocalDataSource,
+    this._appPreferences,
+    this._languageCodeDataMapper,
+  );
 
   @override
   Future<bool> savePassword(String password) async {
-    await _secureStoreLocalDataSource.write(key: SecureStorageKeys.password, value: password);
+    await _secureStoreLocalDataSource.write(
+      key: SecureStorageKeys.password,
+      value: password,
+    );
     return true;
   }
 
   @override
-  Future<bool> saveCurrentUser({required String uid, String? fullName, String? email, String? avtUrl}) {
-    return _appPreferences.saveCurrentUser(PreferenceUserData(uid: uid, fullName: fullName, username: email, avatarUrl: avtUrl));
+  Future<bool> saveCurrentUser({
+    required String uid,
+    String? fullName,
+    String? email,
+    String? avtUrl,
+  }) {
+    return _appPreferences.saveCurrentUser(
+      PreferenceUserData(
+        uid: uid,
+        fullName: fullName,
+        username: email,
+        avatarUrl: avtUrl,
+      ),
+    );
   }
 
   @override
@@ -34,10 +53,19 @@ class StorageRepositoryImpl implements StorageRepository {
   bool get isDarkMode => _appPreferences.isDarkMode;
 
   @override
-  LanguageCode get languageCode => _languageCodeDataMapper.mapToEntity(_appPreferences.languageCode);
+  LanguageCode get languageCode =>
+      _languageCodeDataMapper.mapToEntity(_appPreferences.languageCode);
 
   @override
   Future<void> clearCurrentUserData() async {
     await _appPreferences.clearCurrentUserData();
   }
+
+  @override
+  Future<bool> saveIsFirsLaunchApp(bool isFirstLaunchApp) async {
+    return await _appPreferences.saveIsFirsLaunchApp(isFirstLaunchApp);
+  }
+
+  @override
+  bool get isFirstLaunchApp => _appPreferences.isFirstLaunchApp;
 }

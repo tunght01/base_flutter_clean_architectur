@@ -16,6 +16,10 @@ class GetInitialAppDataUseCase
   Future<GetInitialAppDataOutput> buildUseCase(
     GetInitialAppDataInput input,
   ) async {
+    if(_storageRepository.isFirstLaunchApp) {
+      await _storageRepository.saveIsFirsLaunchApp(false);
+    }
+
     return GetInitialAppDataOutput(
       isDarkMode: _storageRepository.isDarkMode,
       languageCode: _storageRepository.languageCode,

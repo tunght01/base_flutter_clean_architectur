@@ -5,4 +5,5 @@ class SharedPreferenceKeys {
   static const user = '_user';
   static const isDarkMode = 'isDarkMode';
   static const languageCode = 'languageCode';
+  static const isFirstLaunchApp = 'is_first_launch_app';
 }

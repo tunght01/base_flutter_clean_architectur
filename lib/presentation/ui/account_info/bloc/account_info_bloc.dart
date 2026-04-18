@@ -18,7 +18,8 @@ import 'package:soft_dream_test/presentation/utils/device_utils.dart';
 
 @LazySingleton()
 class AccountInfoBloc extends BaseBloc<AccountInfoEvent, AccountInfoState> {
-  AccountInfoBloc(this._getUserProfileUseCase, this._logoutUseCase) : super(const AccountInfoState()) {
+  AccountInfoBloc(this._getUserProfileUseCase, this._logoutUseCase)
+    : super(const AccountInfoState()) {
     on<AccountInfoInitEvent>(_onAccountInfoEvent, transformer: log());
     on<PressedLogout>(_onPressedLogoutEvent, transformer: log());
     on<RemoveDataAfterLogout>(_onRemoveDataAfterLogout, transformer: log());
@@ -29,7 +30,10 @@ class AccountInfoBloc extends BaseBloc<AccountInfoEvent, AccountInfoState> {
   final GetUserProfileUseCase _getUserProfileUseCase;
   final LogoutUseCase _logoutUseCase;
 
-  FutureOr<void> _onAccountInfoEvent(AccountInfoInitEvent event, Emitter<AccountInfoState> emit) {
+  FutureOr<void> _onAccountInfoEvent(
+    AccountInfoInitEvent event,
+    Emitter<AccountInfoState> emit,
+  ) {
     return runBlocCatching(
       handleLoading: false,
       action: () async {
@@ -39,16 +43,21 @@ class AccountInfoBloc extends BaseBloc<AccountInfoEvent, AccountInfoState> {
           unawaited(navigator.replace(const AppRouteInfo.main()));
         }
 
-        final response = await _getUserProfileUseCase.execute(GetUserProfileInput());
+        final response = await _getUserProfileUseCase.execute(
+          GetUserProfileInput(),
+        );
         emit(state.copyWith(accountInfo: response.accountInfo));
 
         if (DeviceUtils.isMobile()) {
-          final LocalPushNotificationHelper localPushNotification = getIt.get<LocalPushNotificationHelper>();
+          final LocalPushNotificationHelper localPushNotification = getIt
+              .get<LocalPushNotificationHelper>();
           await localPushNotification.getToken();
 
           /// xu ly remote message nhan khi chua dang nhap
           RemoteMessage? message;
-          message = await localPushNotification.getInitialMessage() ?? appBloc.state.remoteMessage;
+          message =
+              await localPushNotification.getInitialMessage() ??
+              appBloc.state.remoteMessage;
 
           if (message != null) {
             await localPushNotification.handleNotification(message);
@@ -60,10 +69,18 @@ class AccountInfoBloc extends BaseBloc<AccountInfoEvent, AccountInfoState> {
     );
   }
 
-  FutureOr<void> _onPressedLogoutEvent(PressedLogout event, Emitter<AccountInfoState> emit) async {
+  FutureOr<void> _onPressedLogoutEvent(
+    PressedLogout event,
+    Emitter<AccountInfoState> emit,
+  ) async {
     getIt.get<AppBloc>().add(const IsLoggedInStatusChanged(isLoggedIn: false));
     await _logoutUseCase.execute(LogoutInput(event.logoutAll));
   }
 
-  FutureOr<void> _onRemoveDataAfterLogout(RemoveDataAfterLogout event, Emitter<AccountInfoState> emit) {}
+  FutureOr<void> _onRemoveDataAfterLogout(
+    RemoveDataAfterLogout event,
+    Emitter<AccountInfoState> emit,
+  ) {
+    emit(state.copyWith(accountInfo: null));
+  }
 }

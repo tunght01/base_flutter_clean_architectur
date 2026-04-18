@@ -51,6 +51,13 @@ Luồng chạy qua 3 bước như sau:
 
 ---
 
+
+
+/// source tham khảo base hive : https://github.com/MohanedZekry/flutter-local-storage-clean-architecture/blob/master/lib/tasks/data/data_sources/local/hive/tasks.dart#L4C1-L19C2
+/// source code tham khảo clean architecture : https://github.com/ntminhdn/Flutter-Bloc-CleanArchitecture
+
+
+
 ## 🚀 Thiết lập & Khởi chạy (Dành cho Dev)
 
 Bạn cần chạy các lệnh sau để đảm bảo dự án tự động sinh ra các đoạn code cần thiết:

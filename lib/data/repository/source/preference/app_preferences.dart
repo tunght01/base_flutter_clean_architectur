@@ -27,6 +27,9 @@ class AppPreferences {
     return token.isNotEmpty;
   }
 
+  bool get isFirstLaunchApp =>
+      _sharedPreference.getBool(SharedPreferenceKeys.isFirstLaunchApp) ?? true;
+
   PreferenceUserData? get currentUser {
     final user = _sharedPreference.getString(SharedPreferenceKeys.user);
     if (user == null) {
@@ -62,5 +65,9 @@ class AppPreferences {
 
   Future<void> clearCurrentUserData() async {
     await Future.wait([_sharedPreference.remove(SharedPreferenceKeys.user)]);
+  }
+
+  Future<bool> saveIsFirsLaunchApp(bool isFirstLaunchApp) {
+    return _sharedPreference.setBool(SharedPreferenceKeys.isFirstLaunchApp, isFirstLaunchApp);
   }
 }

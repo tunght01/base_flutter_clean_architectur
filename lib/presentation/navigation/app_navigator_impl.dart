@@ -19,7 +19,7 @@ import '../../di/di.dart';
 class AppNavigatorImpl extends AppNavigator with LogMixin {
   AppNavigatorImpl(this._appRouter, this._appRouteInfoMapper);
 
-  final tabRoutes = const [HomeTab(), ProfileTab(), NotificationTab()];
+  final tabRoutes = const [HomeTab(), NotificationTab(), ProfileTab()];
 
   TabsRouter? tabsRouter;
 

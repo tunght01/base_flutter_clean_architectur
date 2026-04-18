@@ -37,5 +37,5 @@ class LogConfig {
   /// enable log usecase
   static const enableLogUseCaseInput = false;
   static const enableLogUseCaseOutput = false;
-  static const enableLogUseCaseError = false;
+  static const enableLogUseCaseError = kDebugMode;
 }

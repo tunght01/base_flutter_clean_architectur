@@ -5,9 +5,13 @@ abstract class StorageRepository {
   bool get isDarkMode;
   LanguageCode get languageCode;
 
+  bool get isFirstLaunchApp;
+
   Future<bool> savePassword(String password);
 
   Future<void> clearCurrentUserData();
 
   Future<bool> saveCurrentUser({required String uid, String? fullName, String? email, String? avtUrl});
+
+  Future<bool> saveIsFirsLaunchApp(bool isFirstLaunchApp);
 }

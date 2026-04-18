@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:intl/intl.dart';
+import 'package:soft_dream_test/shared/constants/ui_constants.dart';
 
 final NumberFormat integerFormat = NumberFormat('###,###,###,###,###', 'en_US');
 final NumberFormat integerFormat10 = NumberFormat(
@@ -13,6 +14,11 @@ final NumberFormat doubleFormat = NumberFormat(
 final NumberFormat double4Format = NumberFormat(
   '###,###,###,###,###.####',
   'en_US',
+);
+
+final NumberFormat formatPrice = NumberFormat.currency(
+  locale: 'vi_VN',
+  symbol: UiConstants.vnd,
 );
 
 enum Compact { million, billion }
@@ -58,22 +64,18 @@ extension NumNullExtensions on num? {
     }
   }
 
-  String get formatVolumeRemoveZero {
-    if (this != null) {
-      try {
-        if (this == 0) {
-          return '-';
-        }
-        return NumberFormat.currency(
-          symbol: '',
-          decimalDigits: 0,
-        ).format(this).replaceAll('.', ',');
-      } catch (e) {
-        return '-';
-      }
+  static String formatDouble(num? integer, [String? nullString]) {
+    if (_invalidInput(integer)) {
+      return nullString ?? '';
     }
-    return '-';
+    try {
+      return doubleFormat.format(integer);
+    } catch (e) {
+      return nullString ?? '';
+    }
   }
+
+  static bool _invalidInput(dynamic data) => data == null;
 
   num get min0 => max(this ?? 0, 0);
 }
@@ -115,6 +117,14 @@ extension DoubleExtensions on double {
 
   double div(double other) {
     return this / other;
+  }
+
+  String toPrice() {
+    try {
+      return formatPrice.format(this);
+    } catch (e) {
+      return '${toStringAsFixed(0)} ${UiConstants.vnd}';
+    }
   }
 }
 

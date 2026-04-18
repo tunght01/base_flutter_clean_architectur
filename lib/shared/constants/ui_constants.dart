@@ -7,7 +7,7 @@ class UiConstants {
   static const shimmerItemCount = 20;
 
   /// material app
-  static const materialAppTitle = 'XTInvest';
+  static const materialAppTitle = 'Soft Dream';
   static const taskMenuMaterialAppColor = Color.fromARGB(255, 153, 154, 251);
 
   /// orientation
@@ -42,10 +42,6 @@ class UiConstants {
   static const bannerDefaultElevation = 0.0;
   static const bannerDefaultRadius = 12.0;
   //
-  static const accountPrefix = '066C';
-  static const prefixSymbol = 'TK-';
-  static const accountLength = 10;
-  static const specialCharacters = '~`!@#\$%^&*()_-+={[}]|:;\'"<,>.?/';
 
-  static const channel = 'M';
+  static const vnd = 'VNĐ';
 }

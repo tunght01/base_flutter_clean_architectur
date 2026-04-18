@@ -22,6 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
+    "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
+    "confirm_remove": MessageLookupByLibrary.simpleMessage("Xác nhận xóa"),
+    "create_at_repository": MessageLookupByLibrary.simpleMessage(
+      "Ngày nhập kho",
+    ),
+    "description_product": MessageLookupByLibrary.simpleMessage(
+      "Mô tả sản phẩm",
+    ),
     "end": MessageLookupByLibrary.simpleMessage("Kết thúc"),
     "exist_email": MessageLookupByLibrary.simpleMessage(
       "Email này đã được sử dụng.",
@@ -48,6 +57,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
     "i_agree_policy": MessageLookupByLibrary.simpleMessage(
       "Tôi đồng ý với điều khoản và chính sách",
+    ),
+    "in_stock": MessageLookupByLibrary.simpleMessage("Còn hàng"),
+    "info_confirm_remove": MessageLookupByLibrary.simpleMessage(
+      "Bạn có chắc chắn muốn xoá sản phẩm này?",
     ),
     "invalid_credential": MessageLookupByLibrary.simpleMessage(
       "Email hoặc mật khẩu không chính xác.",
@@ -89,7 +102,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "login_password_label": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
     "login_welcome": MessageLookupByLibrary.simpleMessage("Xin chào"),
+    "no_records_yet": MessageLookupByLibrary.simpleMessage(
+      "Chưa có bản ghi nào",
+    ),
     "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
+    "out_stock": MessageLookupByLibrary.simpleMessage("Hết hàng"),
     "password_does_not_match_please_try_again":
         MessageLookupByLibrary.simpleMessage(
           "Nhập lại mật khẩu mới không khớp",
@@ -97,7 +114,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "please_agree_term_policy": MessageLookupByLibrary.simpleMessage(
       "Vui lòng đồng ý điều khoản và chính sách",
     ),
+    "product_detail": MessageLookupByLibrary.simpleMessage("Chi tiết sản phẩm"),
     "profile": MessageLookupByLibrary.simpleMessage("Thông tin"),
+    "sign_out": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
     "sign_up_button": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
     "sign_up_password_confirm_label": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",
@@ -106,5 +125,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản.",
     ),
     "sign_up_title": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+    "update_at_last": MessageLookupByLibrary.simpleMessage("Cập nhật lần cuối"),
   };
 }

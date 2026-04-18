@@ -5,6 +5,7 @@ import 'package:soft_dream_test/presentation/app/bloc/app_bloc.dart';
 import 'package:soft_dream_test/presentation/base/base_page_state.dart';
 import 'package:soft_dream_test/presentation/common_view/navigator/bottom_navigation_bar_widget.dart';
 import 'package:soft_dream_test/presentation/navigation/app_navigator_impl.dart';
+import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
 
 import '../../app/bloc/app_state.dart';
 import 'bloc/main.dart';
@@ -28,11 +29,11 @@ class _MainPageState extends BasePageState<MainPage, MainBloc> {
       buildWhen: (cur, pre) => cur.tabIndex != pre.tabIndex,
       builder: (context, state) {
         return AutoTabsScaffold(
-          extendBody: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.current.mobileBackground,
           animationDuration: Duration.zero,
           routes: (navigator as AppNavigatorImpl).tabRoutes,
-          floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.miniCenterDocked,
           bottomNavigationBuilder: (_, tabsRouter) {
             (navigator as AppNavigatorImpl).tabsRouter = tabsRouter;
             return BlocListener<AppBloc, AppState>(

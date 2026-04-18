@@ -4,8 +4,11 @@ import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
+import 'package:soft_dream_test/hive_registrar.g.dart';
+import 'package:soft_dream_test/shared/constants/hive_constant.dart';
 import 'di.config.dart';
+import 'package:soft_dream_test/data/repository/source/database/hive/model/product_hive_model.dart';
 
 @module
 abstract class ServiceModule {
@@ -20,6 +23,15 @@ abstract class ServiceModule {
 
   @LazySingleton()
   GoogleSignIn get google => GoogleSignIn.instance;
+
+
+
+  @preResolve
+  Future<Box<ProductHiveModel>> provideHiveDatabase() async {
+    await Hive.initFlutter();
+    Hive.registerAdapters();
+    return await Hive.openBox<ProductHiveModel>(HiveConstant.productBox);
+  }
 }
 
 final GetIt getIt = GetIt.instance;

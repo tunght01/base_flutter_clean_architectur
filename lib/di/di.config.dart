@@ -13,10 +13,21 @@ import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
+import 'package:hive_ce_flutter/hive_ce_flutter.dart' as _i965;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
+import 'package:soft_dream_test/data/mapper/account_info_mapper.dart' as _i766;
+import 'package:soft_dream_test/data/mapper/product_mapper.dart' as _i953;
+import 'package:soft_dream_test/data/mapper/storage/language_code_data_mapper.dart'
+    as _i556;
 import 'package:soft_dream_test/data/repository/auth_repository_impl.dart'
     as _i1052;
+import 'package:soft_dream_test/data/repository/product_repository_impl.dart'
+    as _i993;
+import 'package:soft_dream_test/data/repository/source/database/hive/model/product_hive_model.dart'
+    as _i622;
+import 'package:soft_dream_test/data/repository/source/database/hive/product_local_data_source_hive.dart'
+    as _i81;
 import 'package:soft_dream_test/data/repository/source/firebase/auth_datasource.dart'
     as _i704;
 import 'package:soft_dream_test/data/repository/source/firebase/cloud_store_data_source.dart'
@@ -30,13 +41,11 @@ import 'package:soft_dream_test/data/repository/storage_repository_impl.dart'
 import 'package:soft_dream_test/data/repository/store_repository_impl.dart'
     as _i811;
 import 'package:soft_dream_test/di/di.dart' as _i570;
-import 'package:soft_dream_test/domain/mapper/account_info_mapper.dart'
-    as _i829;
-import 'package:soft_dream_test/domain/mapper/storage/language_code_data_mapper.dart'
-    as _i835;
 import 'package:soft_dream_test/domain/navigation/app_navigator.dart' as _i1042;
 import 'package:soft_dream_test/domain/repository/auth_repository.dart'
     as _i146;
+import 'package:soft_dream_test/domain/repository/product_repository.dart'
+    as _i898;
 import 'package:soft_dream_test/domain/repository/storage_repository.dart'
     as _i301;
 import 'package:soft_dream_test/domain/repository/store_repository.dart'
@@ -53,10 +62,22 @@ import 'package:soft_dream_test/domain/usecase/cloud/get_user_profile_use_case.d
     as _i105;
 import 'package:soft_dream_test/domain/usecase/cloud/save_user_profile_use_case.dart'
     as _i166;
+import 'package:soft_dream_test/domain/usecase/create_product_use_case.dart'
+    as _i383;
+import 'package:soft_dream_test/domain/usecase/delete_product_use_case.dart'
+    as _i686;
+import 'package:soft_dream_test/domain/usecase/get_all_product_use_case.dart'
+    as _i601;
 import 'package:soft_dream_test/domain/usecase/get_initial_app_data_use_case.dart'
     as _i811;
+import 'package:soft_dream_test/domain/usecase/get_product_by_id_use_case.dart'
+    as _i223;
 import 'package:soft_dream_test/domain/usecase/load_initial_resource_use_case.dart'
     as _i982;
+import 'package:soft_dream_test/domain/usecase/seed_if_empty_product_use_case.dart'
+    as _i481;
+import 'package:soft_dream_test/domain/usecase/update_product_use_case.dart'
+    as _i362;
 import 'package:soft_dream_test/presentation/app/bloc/app_bloc.dart' as _i116;
 import 'package:soft_dream_test/presentation/base/bloc/common/common_bloc.dart'
     as _i852;
@@ -78,8 +99,12 @@ import 'package:soft_dream_test/presentation/ui/authencation/forgot_password/blo
     as _i443;
 import 'package:soft_dream_test/presentation/ui/authencation/login/bloc/login_bloc.dart'
     as _i4;
+import 'package:soft_dream_test/presentation/ui/home/bloc/home_bloc.dart'
+    as _i415;
 import 'package:soft_dream_test/presentation/ui/main/bloc/main_bloc.dart'
     as _i614;
+import 'package:soft_dream_test/presentation/ui/product_detail/bloc/detail_product_bloc.dart'
+    as _i980;
 import 'package:soft_dream_test/presentation/ui/sign_up/bloc/sign_up_bloc.dart'
     as _i673;
 import 'package:soft_dream_test/shared/helper/app_info.dart' as _i906;
@@ -92,17 +117,25 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final serviceModule = _$ServiceModule();
+    gh.factory<_i766.AccountInfoMapper>(() => const _i766.AccountInfoMapper());
+    gh.factory<_i953.ProductMapper>(() => _i953.ProductMapper());
+    gh.factory<_i556.LanguageCodeDataMapper>(
+      () => _i556.LanguageCodeDataMapper(),
+    );
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => serviceModule.prefs,
       preResolve: true,
     );
-    gh.factory<_i829.AccountInfoMapper>(() => const _i829.AccountInfoMapper());
-    gh.factory<_i835.LanguageCodeDataMapper>(
-      () => _i835.LanguageCodeDataMapper(),
+    await gh.factoryAsync<_i965.Box<_i622.ProductHiveModel>>(
+      () => serviceModule.provideHiveDatabase(),
+      preResolve: true,
     );
     gh.factory<_i852.CommonBloc>(() => _i852.CommonBloc());
     gh.factory<_i441.RouteGuard>(() => _i441.RouteGuard());
     gh.factory<_i614.MainBloc>(() => _i614.MainBloc());
+    gh.lazySingleton<_i81.ProductLocalDataSourceHive>(
+      () => _i81.ProductLocalDataSourceHive(),
+    );
     gh.lazySingleton<_i682.SecureStoreLocalDataSource>(
       () => const _i682.SecureStoreLocalDataSource(),
     );
@@ -120,11 +153,21 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i517.AppPreferences>(
       () => _i517.AppPreferences(gh<_i460.SharedPreferences>()),
     );
+    gh.lazySingleton<_i301.StorageRepository>(
+      () => _i126.StorageRepositoryImpl(
+        gh<_i682.SecureStoreLocalDataSource>(),
+        gh<_i517.AppPreferences>(),
+        gh<_i556.LanguageCodeDataMapper>(),
+      ),
+    );
     gh.lazySingleton<_i1042.AppNavigator>(
       () => _i34.AppNavigatorImpl(
         gh<_i67.AppRouter>(),
         gh<_i21.BaseRouteInfoMapper>(),
       ),
+    );
+    gh.factory<_i982.LoadInitialResourceUseCase>(
+      () => _i982.LoadInitialResourceUseCase(gh<_i301.StorageRepository>()),
     );
     gh.lazySingleton<_i675.CloudStoreDataSource>(
       () => _i675.CloudStoreDataSource(gh<_i974.FirebaseFirestore>()),
@@ -132,15 +175,36 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i704.AuthDatasource>(
       () => _i704.AuthDatasource(gh<_i59.FirebaseAuth>()),
     );
-    gh.lazySingleton<_i301.StorageRepository>(
-      () => _i126.StorageRepositoryImpl(
-        gh<_i682.SecureStoreLocalDataSource>(),
-        gh<_i517.AppPreferences>(),
-        gh<_i835.LanguageCodeDataMapper>(),
+    gh.lazySingleton<_i898.ProductRepository>(
+      () => _i993.ProductRepositoryImpl(
+        gh<_i81.ProductLocalDataSourceHive>(),
+        gh<_i953.ProductMapper>(),
       ),
+    );
+    gh.factory<_i383.CreateProductUseCase>(
+      () => _i383.CreateProductUseCase(gh<_i898.ProductRepository>()),
+    );
+    gh.factory<_i686.DeleteProductUseCase>(
+      () => _i686.DeleteProductUseCase(gh<_i898.ProductRepository>()),
+    );
+    gh.factory<_i601.GetAllProductUseCase>(
+      () => _i601.GetAllProductUseCase(gh<_i898.ProductRepository>()),
+    );
+    gh.factory<_i223.GetProductByIdUseCase>(
+      () => _i223.GetProductByIdUseCase(gh<_i898.ProductRepository>()),
+    );
+    gh.factory<_i362.UpdateProductUseCase>(
+      () => _i362.UpdateProductUseCase(gh<_i898.ProductRepository>()),
     );
     gh.factory<_i811.GetInitialAppDataUseCase>(
       () => _i811.GetInitialAppDataUseCase(gh<_i301.StorageRepository>()),
+    );
+    gh.factory<_i980.DetailProductBloc>(
+      () => _i980.DetailProductBloc(
+        gh<_i686.DeleteProductUseCase>(),
+        gh<_i362.UpdateProductUseCase>(),
+        gh<_i223.GetProductByIdUseCase>(),
+      ),
     );
     gh.lazySingleton<_i116.AppBloc>(
       () => _i116.AppBloc(gh<_i811.GetInitialAppDataUseCase>()),
@@ -149,7 +213,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i811.StoreRepositoryImpl(
         gh<_i517.AppPreferences>(),
         gh<_i704.AuthDatasource>(),
-        gh<_i829.AccountInfoMapper>(),
+        gh<_i766.AccountInfoMapper>(),
         gh<_i675.CloudStoreDataSource>(),
       ),
     );
@@ -159,8 +223,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i301.StorageRepository>(),
       ),
     );
-    gh.factory<_i982.LoadInitialResourceUseCase>(
-      () => _i982.LoadInitialResourceUseCase(gh<_i301.StorageRepository>()),
+    gh.factory<_i481.SeedIfEmptyProductUseCase>(
+      () => _i481.SeedIfEmptyProductUseCase(
+        gh<_i898.ProductRepository>(),
+        gh<_i301.StorageRepository>(),
+      ),
     );
     gh.lazySingleton<_i146.AuthRepository>(
       () => _i1052.AuthRepositoryImpl(gh<_i704.AuthDatasource>()),
@@ -177,6 +244,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i4.LoginBloc>(() => _i4.LoginBloc(gh<_i68.LoginUseCase>()));
     gh.factory<_i515.SignUpUseCase>(
       () => _i515.SignUpUseCase(gh<_i146.AuthRepository>()),
+    );
+    gh.factory<_i415.HomeBloc>(
+      () => _i415.HomeBloc(
+        gh<_i481.SeedIfEmptyProductUseCase>(),
+        gh<_i601.GetAllProductUseCase>(),
+        gh<_i383.CreateProductUseCase>(),
+      ),
     );
     gh.factory<_i1071.ForgotPasswordUseCase>(
       () => _i1071.ForgotPasswordUseCase(gh<_i146.AuthRepository>()),

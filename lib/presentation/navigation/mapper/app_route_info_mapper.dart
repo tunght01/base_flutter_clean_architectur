@@ -13,6 +13,7 @@ class AppRouteInfoMapper extends BaseRouteInfoMapper {
       forgotPassword: () => const ForgotPasswordRoute(),
       login: () => const LoginRoute(),
       main: () => const MainRoute(),
+      productDetail: (String id) => ProductDetailRoute(id: id),
     );
   }
 }

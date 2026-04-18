@@ -354,6 +354,101 @@ class S {
     );
   }
 
+  /// `Đăng xuất`
+  String get sign_out {
+    return Intl.message('Đăng xuất', name: 'sign_out', desc: '', args: []);
+  }
+
+  /// `Còn hàng`
+  String get in_stock {
+    return Intl.message('Còn hàng', name: 'in_stock', desc: '', args: []);
+  }
+
+  /// `Hết hàng`
+  String get out_stock {
+    return Intl.message('Hết hàng', name: 'out_stock', desc: '', args: []);
+  }
+
+  /// `Chi tiết sản phẩm`
+  String get product_detail {
+    return Intl.message(
+      'Chi tiết sản phẩm',
+      name: 'product_detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mô tả sản phẩm`
+  String get description_product {
+    return Intl.message(
+      'Mô tả sản phẩm',
+      name: 'description_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cập nhật lần cuối`
+  String get update_at_last {
+    return Intl.message(
+      'Cập nhật lần cuối',
+      name: 'update_at_last',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngày nhập kho`
+  String get create_at_repository {
+    return Intl.message(
+      'Ngày nhập kho',
+      name: 'create_at_repository',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chưa có bản ghi nào`
+  String get no_records_yet {
+    return Intl.message(
+      'Chưa có bản ghi nào',
+      name: 'no_records_yet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xác nhận xóa`
+  String get confirm_remove {
+    return Intl.message(
+      'Xác nhận xóa',
+      name: 'confirm_remove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có chắc chắn muốn xoá sản phẩm này?`
+  String get info_confirm_remove {
+    return Intl.message(
+      'Bạn có chắc chắn muốn xoá sản phẩm này?',
+      name: 'info_confirm_remove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Huỷ`
+  String get cancel {
+    return Intl.message('Huỷ', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Xác nhận`
+  String get confirm {
+    return Intl.message('Xác nhận', name: 'confirm', desc: '', args: []);
+  }
+
   /// `Kết thúc`
   String get end {
     return Intl.message('Kết thúc', name: 'end', desc: '', args: []);

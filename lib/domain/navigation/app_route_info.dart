@@ -9,4 +9,5 @@ abstract class AppRouteInfo with _$AppRouteInfo {
   const factory AppRouteInfo.forgotPassword() = _ForgotPassword;
   const factory AppRouteInfo.login() = _Login;
   const factory AppRouteInfo.main() = _Main;
+  const factory AppRouteInfo.productDetail({required String id}) = _ProductDetail;
 }

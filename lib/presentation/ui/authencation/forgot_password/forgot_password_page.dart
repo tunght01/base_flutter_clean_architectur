@@ -40,7 +40,7 @@ class _ForgotPasswordPageState
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: Dimens.d24),
+            padding: const EdgeInsets.symmetric(horizontal: Dimens.d16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

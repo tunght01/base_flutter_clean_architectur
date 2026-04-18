@@ -25,7 +25,6 @@
     "sign_up_button": "Tạo tài khoản",
     "sign_up_password_confirm_label": "Xác nhận mật khẩu",
     "password_does_not_match_please_try_again":"Nhập lại mật khẩu mới không khớp",
-
     "forgot_password_title": "Quên mật khẩu",
     "forgot_password_instruction": "Vui lòng nhập địa chỉ email liên kết với tài khoản của bạn để nhận liên kết đặt lại mật khẩu.",
     "forgot_password_send_button": "Gửi email đặt lại mật khẩu",
@@ -36,6 +35,17 @@
     "please_agree_term_policy":"Vui lòng đồng ý điều khoản và chính sách",
     "full_name":"Họ và tên",
     "sign_up_success":"Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản.",
-
+    "sign_out":"Đăng xuất",
+    "in_stock":"Còn hàng",
+    "out_stock":"Hết hàng",
+    "product_detail":"Chi tiết sản phẩm",
+    "description_product":"Mô tả sản phẩm",
+    "update_at_last":"Cập nhật lần cuối",
+    "create_at_repository":"Ngày nhập kho",
+    "no_records_yet":"Chưa có bản ghi nào",
+    "confirm_remove":"Xác nhận xóa",
+    "info_confirm_remove":"Bạn có chắc chắn muốn xoá sản phẩm này?",
+    "cancel":"Huỷ",
+    "confirm":"Xác nhận",
     "end":"Kết thúc"
 }

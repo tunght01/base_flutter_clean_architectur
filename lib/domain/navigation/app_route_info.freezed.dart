@@ -55,14 +55,15 @@ extension AppRouteInfoPatterns on AppRouteInfo {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _OpenAccount value)?  openAccount,TResult Function( _ForgotPassword value)?  forgotPassword,TResult Function( _Login value)?  login,TResult Function( _Main value)?  main,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _OpenAccount value)?  openAccount,TResult Function( _ForgotPassword value)?  forgotPassword,TResult Function( _Login value)?  login,TResult Function( _Main value)?  main,TResult Function( _ProductDetail value)?  productDetail,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _OpenAccount() when openAccount != null:
 return openAccount(_that);case _ForgotPassword() when forgotPassword != null:
 return forgotPassword(_that);case _Login() when login != null:
 return login(_that);case _Main() when main != null:
-return main(_that);case _:
+return main(_that);case _ProductDetail() when productDetail != null:
+return productDetail(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return main(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _OpenAccount value)  openAccount,required TResult Function( _ForgotPassword value)  forgotPassword,required TResult Function( _Login value)  login,required TResult Function( _Main value)  main,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _OpenAccount value)  openAccount,required TResult Function( _ForgotPassword value)  forgotPassword,required TResult Function( _Login value)  login,required TResult Function( _Main value)  main,required TResult Function( _ProductDetail value)  productDetail,}){
 final _that = this;
 switch (_that) {
 case _OpenAccount():
 return openAccount(_that);case _ForgotPassword():
 return forgotPassword(_that);case _Login():
 return login(_that);case _Main():
-return main(_that);case _:
+return main(_that);case _ProductDetail():
+return productDetail(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +106,15 @@ return main(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _OpenAccount value)?  openAccount,TResult? Function( _ForgotPassword value)?  forgotPassword,TResult? Function( _Login value)?  login,TResult? Function( _Main value)?  main,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _OpenAccount value)?  openAccount,TResult? Function( _ForgotPassword value)?  forgotPassword,TResult? Function( _Login value)?  login,TResult? Function( _Main value)?  main,TResult? Function( _ProductDetail value)?  productDetail,}){
 final _that = this;
 switch (_that) {
 case _OpenAccount() when openAccount != null:
 return openAccount(_that);case _ForgotPassword() when forgotPassword != null:
 return forgotPassword(_that);case _Login() when login != null:
 return login(_that);case _Main() when main != null:
-return main(_that);case _:
+return main(_that);case _ProductDetail() when productDetail != null:
+return productDetail(_that);case _:
   return null;
 
 }
@@ -128,13 +131,14 @@ return main(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  openAccount,TResult Function()?  forgotPassword,TResult Function()?  login,TResult Function()?  main,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  openAccount,TResult Function()?  forgotPassword,TResult Function()?  login,TResult Function()?  main,TResult Function( String id)?  productDetail,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OpenAccount() when openAccount != null:
 return openAccount();case _ForgotPassword() when forgotPassword != null:
 return forgotPassword();case _Login() when login != null:
 return login();case _Main() when main != null:
-return main();case _:
+return main();case _ProductDetail() when productDetail != null:
+return productDetail(_that.id);case _:
   return orElse();
 
 }
@@ -152,13 +156,14 @@ return main();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  openAccount,required TResult Function()  forgotPassword,required TResult Function()  login,required TResult Function()  main,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  openAccount,required TResult Function()  forgotPassword,required TResult Function()  login,required TResult Function()  main,required TResult Function( String id)  productDetail,}) {final _that = this;
 switch (_that) {
 case _OpenAccount():
 return openAccount();case _ForgotPassword():
 return forgotPassword();case _Login():
 return login();case _Main():
-return main();case _:
+return main();case _ProductDetail():
+return productDetail(_that.id);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +180,14 @@ return main();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  openAccount,TResult? Function()?  forgotPassword,TResult? Function()?  login,TResult? Function()?  main,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  openAccount,TResult? Function()?  forgotPassword,TResult? Function()?  login,TResult? Function()?  main,TResult? Function( String id)?  productDetail,}) {final _that = this;
 switch (_that) {
 case _OpenAccount() when openAccount != null:
 return openAccount();case _ForgotPassword() when forgotPassword != null:
 return forgotPassword();case _Login() when login != null:
 return login();case _Main() when main != null:
-return main();case _:
+return main();case _ProductDetail() when productDetail != null:
+return productDetail(_that.id);case _:
   return null;
 
 }
@@ -316,5 +322,71 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _ProductDetail extends AppRouteInfo {
+  const _ProductDetail({required this.id}): super._();
+  
+
+ final  String id;
+
+/// Create a copy of AppRouteInfo
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ProductDetailCopyWith<_ProductDetail> get copyWith => __$ProductDetailCopyWithImpl<_ProductDetail>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductDetail&&(identical(other.id, id) || other.id == id));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'AppRouteInfo.productDetail(id: $id)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ProductDetailCopyWith<$Res> implements $AppRouteInfoCopyWith<$Res> {
+  factory _$ProductDetailCopyWith(_ProductDetail value, $Res Function(_ProductDetail) _then) = __$ProductDetailCopyWithImpl;
+@useResult
+$Res call({
+ String id
+});
+
+
+
+
+}
+/// @nodoc
+class __$ProductDetailCopyWithImpl<$Res>
+    implements _$ProductDetailCopyWith<$Res> {
+  __$ProductDetailCopyWithImpl(this._self, this._then);
+
+  final _ProductDetail _self;
+  final $Res Function(_ProductDetail) _then;
+
+/// Create a copy of AppRouteInfo
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+  return _then(_ProductDetail(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 // dart format on

@@ -3,7 +3,7 @@ import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/shared/constants/locale_constants.dart';
 import 'package:soft_dream_test/shared/constants/server_request_response_constants.dart';
 
-enum BottomTab { home, profile, notification }
+enum BottomTab { home, notification, profile }
 
 extension BottomTabX on BottomTab {
   Widget get icon {
@@ -44,8 +44,14 @@ extension BottomTabX on BottomTab {
 enum InitialAppRoute { login, main }
 
 enum LanguageCode {
-  en(localeCode: LocaleConstants.en, serverValue: ServerRequestResponseConstants.en),
-  vi(localeCode: LocaleConstants.vi, serverValue: ServerRequestResponseConstants.vi);
+  en(
+    localeCode: LocaleConstants.en,
+    serverValue: ServerRequestResponseConstants.en,
+  ),
+  vi(
+    localeCode: LocaleConstants.vi,
+    serverValue: ServerRequestResponseConstants.vi,
+  );
 
   const LanguageCode({required this.localeCode, required this.serverValue});
   final String localeCode;
