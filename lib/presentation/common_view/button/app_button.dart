@@ -155,7 +155,7 @@ class AppButtonState extends State<AppButton> {
                                 color:
                                     widget.labelColor ??
                                     (widget.enabled
-                                        ? AppColors.current.textBody
+                                        ? Colors.white
                                         : AppColors.current.textDisable),
                               ),
                           maxLines: 2,

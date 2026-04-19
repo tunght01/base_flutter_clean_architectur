@@ -198,7 +198,7 @@ class AppColors {
     mobileCard4 = const Color(0xff3F3F3F);
     mobileTab = const Color(0xff111111);
     mobileStrokeTab = const Color(0xff202020);
-    mobileBackground = Colors.white;
+    mobileBackground = Color(0xff111111);
     mobileNavigation = const Color(0xff0F0F0F);
     mobileStrokeNavigation = const Color(0xff171717);
     mobileStrokeCard4 = const Color(0xff848484);
@@ -349,6 +349,7 @@ class AppColors {
     iconWeak = neutralBlack500;
     iconOnColor = neutralWhite50;
     iconBlack = neutralWhite50;
+    mobileBackground = Color(0xff111111);
 
     /// border
     border = gray100;

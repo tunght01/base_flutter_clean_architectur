@@ -11,7 +11,16 @@ abstract class StorageRepository {
 
   Future<void> clearCurrentUserData();
 
-  Future<bool> saveCurrentUser({required String uid, String? fullName, String? email, String? avtUrl});
+  Future<bool> saveCurrentUser({
+    required String uid,
+    String? fullName,
+    String? email,
+    String? avtUrl,
+  });
 
   Future<bool> saveIsFirsLaunchApp(bool isFirstLaunchApp);
+
+  Future<bool> saveDarkModeApp(bool isDarkMode);
+
+  Future<bool> saveLanguageApp(String languageApp);
 }

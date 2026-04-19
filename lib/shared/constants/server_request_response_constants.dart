@@ -8,6 +8,8 @@ class ServerRequestResponseConstants {
 
   /// language code
   static const en = 'EN';
+  static const enFlag = '🇬🇧';
+  static const viFlag = '🇻🇳';
   static const vi = 'VI';
 
   /// gender

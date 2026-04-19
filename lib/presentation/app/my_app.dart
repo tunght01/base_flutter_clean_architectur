@@ -57,8 +57,10 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
 
   @override
   void didChangeDependencies() {
+    // AppColors.of() intentionally NOT called here: this context is above
+    // MaterialApp and never reflects its ThemeMode changes. AppColors.current
+    // is updated directly inside the BlocBuilder instead.
     AppDimen.of(context);
-    AppColors.of(context);
     super.didChangeDependencies();
   }
 
@@ -79,7 +81,6 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
   @override
   void dispose() {
     connectionUtils.dispose();
-    bloc.add(const DisconnectSocket());
     super.dispose();
   }
 
@@ -101,10 +102,7 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
               } else if (state.connectivityType.contains(
                 ConnectivityResult.none,
               )) {
-                bloc.add(const DisconnectSocket());
-              } else {
-                bloc.add(const ConnectSocket());
-              }
+              } else {}
             },
           ),
           BlocListener<AppBloc, AppState>(
@@ -133,10 +131,15 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
               previous.isDarkTheme != current.isDarkTheme ||
               previous.languageCode != current.languageCode,
           builder: (context, state) {
+            AppThemeSetting.currentAppThemeType = state.isDarkTheme
+                ? AppThemeType.dark
+                : AppThemeType.light;
+            AppColors.current = state.isDarkTheme
+                ? AppColors.defaultAppColor
+                : AppColors.lightAppColor;
             return AnnotatedRegion<SystemUiOverlayStyle>(
               value: const SystemUiOverlayStyle(
                 systemNavigationBarColor: Colors.black,
-                // navigation bar color, the one Im looking for
                 statusBarColor: Colors.transparent,
               ),
               child: OverlaySupport.global(

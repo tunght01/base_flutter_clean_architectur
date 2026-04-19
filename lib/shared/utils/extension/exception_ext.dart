@@ -15,9 +15,11 @@ extension FirebaseExeptionExt on AppFirebaseExceptionType {
       case AppFirebaseExceptionType.invalidEmail:
         return S.current.login_error_invalid_email;
       case AppFirebaseExceptionType.emailAlreadyInUse:
-        return 'Email này đã được sử dụng.';
+        return S.current.exist_email;
       case AppFirebaseExceptionType.tooManyRequests:
         return S.current.login_error_too_many_requests;
+      case AppFirebaseExceptionType.networkRequestFailed:
+        return S.current.error_no_internet;
       case AppFirebaseExceptionType.unknown:
         return S.current.login_error_unknown;
       case AppFirebaseExceptionType.permissionDeny:

@@ -13,13 +13,13 @@ class ExceptionMessageMapper {
       AppExceptionType.remote =>
         switch ((appException as RemoteException).kind) {
           RemoteExceptionKind.badCertificate => 'ERROR badCertificate',
-          RemoteExceptionKind.noInternet => 'ERROR noInternet',
-          RemoteExceptionKind.network => 'ERROR network',
+          RemoteExceptionKind.noInternet => S.current.error_no_internet,
+          RemoteExceptionKind.network => S.current.error_network,
           RemoteExceptionKind.serverDefined =>
             appException.generalServerMessage ?? 'ERROR serverDefined',
           RemoteExceptionKind.serverUndefined =>
             appException.generalServerMessage ?? 'ERROR serverUndefined',
-          RemoteExceptionKind.timeout => 'ERROR timeout',
+          RemoteExceptionKind.timeout => S.current.error_timeout,
           RemoteExceptionKind.cancellation => 'ERROR cancellation',
           RemoteExceptionKind.unknown => 'ERROR unknown',
           RemoteExceptionKind.refreshTokenFailed => 'ERROR refreshTokenFailed',

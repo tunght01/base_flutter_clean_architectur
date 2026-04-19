@@ -148,6 +148,7 @@ class _LoginFormState extends State<LoginForm>
                     return AppTextFormField(
                       maxLength: 50,
                       required: true,
+                      isClear: true,
                       controller: _passwordController,
                       focusNode: _passwordFocusNode,
                       validator: passwordValidator,

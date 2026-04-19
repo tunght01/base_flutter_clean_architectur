@@ -8,6 +8,9 @@ part 'detail_product_state.freezed.dart';
 abstract class DetailProductState extends BaseBlocState
     with _$DetailProductState {
   const DetailProductState._();
-  const factory DetailProductState({ProductEntity? product, String? id}) =
-      _DetailProductState;
+  const factory DetailProductState({
+    ProductEntity? product,
+    String? id,
+    @Default(false) bool isEdit,
+  }) = _DetailProductState;
 }

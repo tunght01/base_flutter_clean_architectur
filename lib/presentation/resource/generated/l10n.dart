@@ -449,6 +449,196 @@ class S {
     return Intl.message('Xác nhận', name: 'confirm', desc: '', args: []);
   }
 
+  /// `Chỉnh sửa Sản Phẩm`
+  String get edit_product {
+    return Intl.message(
+      'Chỉnh sửa Sản Phẩm',
+      name: 'edit_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tạo mới Sản Phẩm`
+  String get create_product {
+    return Intl.message(
+      'Tạo mới Sản Phẩm',
+      name: 'create_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tên Sản Phẩm`
+  String get name_product {
+    return Intl.message(
+      'Tên Sản Phẩm',
+      name: 'name_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Giá bán (VND)`
+  String get price_product {
+    return Intl.message(
+      'Giá bán (VND)',
+      name: 'price_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mô tả ngắn`
+  String get description_short {
+    return Intl.message(
+      'Mô tả ngắn',
+      name: 'description_short',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tình trạng kho hàng`
+  String get status_repo_order {
+    return Intl.message(
+      'Tình trạng kho hàng',
+      name: 'status_repo_order',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Còn hàng`
+  String get show_in_stock {
+    return Intl.message('Còn hàng', name: 'show_in_stock', desc: '', args: []);
+  }
+
+  /// `Hết hàng`
+  String get show_out_stock {
+    return Intl.message('Hết hàng', name: 'show_out_stock', desc: '', args: []);
+  }
+
+  /// `Lưu`
+  String get save {
+    return Intl.message('Lưu', name: 'save', desc: '', args: []);
+  }
+
+  /// `Tạo`
+  String get create {
+    return Intl.message('Tạo', name: 'create', desc: '', args: []);
+  }
+
+  /// `Không có kết nối mạng. Vui lòng thử lại.`
+  String get error_no_internet {
+    return Intl.message(
+      'Không có kết nối mạng. Vui lòng thử lại.',
+      name: 'error_no_internet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đường truyền mạng yếu. Vui lòng thử lại sau.`
+  String get error_timeout {
+    return Intl.message(
+      'Đường truyền mạng yếu. Vui lòng thử lại sau.',
+      name: 'error_timeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lỗi kết nối mạng.`
+  String get error_network {
+    return Intl.message(
+      'Lỗi kết nối mạng.',
+      name: 'error_network',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Giao diện`
+  String get interface_app {
+    return Intl.message('Giao diện', name: 'interface_app', desc: '', args: []);
+  }
+
+  /// `Bạn có chắc chắn muốn đăng xuất không?`
+  String get confirm_sign_out {
+    return Intl.message(
+      'Bạn có chắc chắn muốn đăng xuất không?',
+      name: 'confirm_sign_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngôn ngữ`
+  String get language {
+    return Intl.message('Ngôn ngữ', name: 'language', desc: '', args: []);
+  }
+
+  /// `Tối`
+  String get dark {
+    return Intl.message('Tối', name: 'dark', desc: '', args: []);
+  }
+
+  /// `Sáng`
+  String get light {
+    return Intl.message('Sáng', name: 'light', desc: '', args: []);
+  }
+
+  /// `Tiếng Việt`
+  String get vietnamese {
+    return Intl.message('Tiếng Việt', name: 'vietnamese', desc: '', args: []);
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message('English', name: 'english', desc: '', args: []);
+  }
+
+  /// `Mật khẩu không hợp lệ!`
+  String get invalid_password {
+    return Intl.message(
+      'Mật khẩu không hợp lệ!',
+      name: 'invalid_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mật khẩu không khớp.`
+  String get not_match_password {
+    return Intl.message(
+      'Mật khẩu không khớp.',
+      name: 'not_match_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trường không được để trống`
+  String get field_not_empty {
+    return Intl.message(
+      'Trường không được để trống',
+      name: 'field_not_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mật khẩu phải từ 6–50 ký tự`
+  String get password_have_to_over_6_charactor {
+    return Intl.message(
+      'Mật khẩu phải từ 6–50 ký tự',
+      name: 'password_have_to_over_6_charactor',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Kết thúc`
   String get end {
     return Intl.message('Kết thúc', name: 'end', desc: '', args: []);
@@ -459,7 +649,10 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
-    return const <Locale>[Locale.fromSubtags(languageCode: 'vi')];
+    return const <Locale>[
+      Locale.fromSubtags(languageCode: 'vi'),
+      Locale.fromSubtags(languageCode: 'en'),
+    ];
   }
 
   @override

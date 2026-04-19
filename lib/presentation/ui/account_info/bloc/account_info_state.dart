@@ -7,6 +7,8 @@ part 'account_info_state.freezed.dart';
 @freezed
 abstract class AccountInfoState extends BaseBlocState with _$AccountInfoState {
   const AccountInfoState._();
-  const factory AccountInfoState({AccountInfo? accountInfo}) =
-      _AccountInfoState;
+  const factory AccountInfoState({
+    AccountInfo? accountInfo,
+    @Default(false) bool isEdit,
+  }) = _AccountInfoState;
 }

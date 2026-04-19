@@ -23,6 +23,7 @@ class AccountInfoBloc extends BaseBloc<AccountInfoEvent, AccountInfoState> {
     on<AccountInfoInitEvent>(_onAccountInfoEvent, transformer: log());
     on<PressedLogout>(_onPressedLogoutEvent, transformer: log());
     on<RemoveDataAfterLogout>(_onRemoveDataAfterLogout, transformer: log());
+    on<UserEditProductEvent>(_onUserEditProductEvent, transformer: log());
 
     navigator = getIt.get();
     appBloc = getIt.get();
@@ -43,11 +44,13 @@ class AccountInfoBloc extends BaseBloc<AccountInfoEvent, AccountInfoState> {
           unawaited(navigator.replace(const AppRouteInfo.main()));
         }
 
+        /// lay toan bo thong tin khach hang
         final response = await _getUserProfileUseCase.execute(
           GetUserProfileInput(),
         );
         emit(state.copyWith(accountInfo: response.accountInfo));
 
+        /// check neu la mobile thi lay message de khi user  vao bang link thong bao roi xu ly su kien khi user chua dang nhap
         if (DeviceUtils.isMobile()) {
           final LocalPushNotificationHelper localPushNotification = getIt
               .get<LocalPushNotificationHelper>();
@@ -82,5 +85,12 @@ class AccountInfoBloc extends BaseBloc<AccountInfoEvent, AccountInfoState> {
     Emitter<AccountInfoState> emit,
   ) {
     emit(state.copyWith(accountInfo: null));
+  }
+
+  void _onUserEditProductEvent(
+    UserEditProductEvent event,
+    Emitter<AccountInfoState> emit,
+  ) {
+    emit(state.copyWith(isEdit: event.value));
   }
 }

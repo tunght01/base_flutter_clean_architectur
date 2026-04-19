@@ -1,36 +1,37 @@
+import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
 import 'package:soft_dream_test/shared/regex/app_regex.dart';
 
 mixin ValidatorUtils {
   String? passwordValidator(String? value) {
     if (value?.isEmpty ?? true) {
-      return 'Mật khẩu phải từ 6–50 ký tự.';
+      return S.current.password_have_to_over_6_charactor;
     }
     if (value!.length < 6 && value.length > 50) {
-      return 'Mật khẩu phải từ 6–50 ký tự.';
+      return S.current.password_have_to_over_6_charactor;
     }
     return null;
   }
 
   String? emailValidator(String? value, {String? emptyFieldMessage}) {
     if (value?.isEmpty ?? true) {
-      return emptyFieldMessage ?? 'Email không được để trống.';
+      return emptyFieldMessage ?? S.current.login_error_empty_email;
     }
     if (!AppRegex.emailContainRegex.hasMatch(value ?? '')) {
-      return 'Email không hợp lệ!';
+      return S.current.login_error_invalid_email;
     }
     return null;
   }
 
   String? emptyValidator(String? value, {String? emptyFieldMessage}) {
     if (value?.isEmpty ?? true) {
-      return emptyFieldMessage ?? 'Trường không được để trống';
+      return emptyFieldMessage ?? S.current.field_not_empty;
     }
     return null;
   }
 
   String? samePasswordValidator(String? password, String? rePassword) {
     if (password != rePassword) {
-      return 'Mật khẩu không khớp';
+      return S.current.not_match_password;
     }
     return emptyValidator(rePassword);
   }
@@ -61,7 +62,7 @@ mixin ValidatorUtils {
         (value ?? '').toLowerCase() == (value ?? '') ||
         !hasNumber(value ?? '') ||
         !hasSpecialChar(value ?? '')) {
-      return 'Mật khẩu không hợp lệ!';
+      return S.current.invalid_password;
     }
     return null;
   }

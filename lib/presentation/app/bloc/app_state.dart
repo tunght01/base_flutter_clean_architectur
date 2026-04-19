@@ -9,5 +9,14 @@ part 'app_state.freezed.dart';
 @freezed
 abstract class AppState extends BaseBlocState with _$AppState {
   const AppState._();
-  const factory AppState({RemoteMessage? remoteMessage, @Default(false) bool appInitiated, @Default(false) bool isLoggedIn, @Default(false) bool savedAccount, @Default(false) bool isDarkTheme, @Default(false) bool isGoToNotify, @Default(LanguageCode.vi) LanguageCode languageCode, @Default([]) List<ConnectivityResult> connectivityType}) = _AppState;
+  const factory AppState({
+    RemoteMessage? remoteMessage,
+    @Default(false) bool appInitiated,
+    @Default(false) bool isLoggedIn,
+    @Default(false) bool savedAccount,
+    @Default(false) bool isDarkTheme,
+    @Default(false) bool isGoToNotify,
+    @Default(LanguageCode.vi) LanguageCode languageCode,
+    @Default([]) List<ConnectivityResult> connectivityType,
+  }) = _AppState;
 }

@@ -251,78 +251,111 @@ class AppTextFormField extends FormField<String> {
                                ),
                                suffixIcon:
                                    suffixIcon ??
-                                   (isPassword
-                                       ? InkResponse(
-                                           onTap: () {
-                                             state.onChangeObscureText();
-                                           },
-                                           radius: 20,
-                                           child: Padding(
-                                             padding: const EdgeInsets.all(
-                                               Dimens.d8,
-                                             ),
-                                             child: SizedBox(
-                                               width: suffixIconSize,
-                                               height: suffixIconSize,
-                                               child: !state._obscureText
-                                                   ? Assets.icons.icEye.svg(
-                                                       width: 10,
-                                                       height: 10,
-                                                     )
-                                                   : Assets.icons.icEyeSlash
-                                                         .svg(
-                                                           width: 10,
-                                                           height: 10,
-                                                         ),
-                                             ),
-                                           ),
-                                         )
-                                       : (isClear && state._isClear)
-                                       ? InkResponse(
+                                   (() {
+                                     List<Widget> suffixWidgets = [];
+                                     if (isClear && state._isClear) {
+                                       suffixWidgets.add(
+                                         InkResponse(
                                            onTap: () {
                                              state.onClearText();
                                            },
                                            radius: 20,
                                            child: Padding(
-                                             padding: const EdgeInsets.all(
-                                               Dimens.d8,
-                                             ),
-                                             child: SizedBox(
-                                               width: suffixIconSize,
-                                               height: suffixIconSize,
-                                               child: Icon(Icons.clear),
-                                             ),
-                                           ),
-                                         )
-                                       : suffixIconPath != null
-                                       ? InkResponse(
-                                           onTap: suffixIconTap,
-                                           child: Padding(
                                              padding:
                                                  const EdgeInsets.symmetric(
-                                                   horizontal: Dimens.d16,
+                                                   horizontal: Dimens.d4,
                                                    vertical: Dimens.d8,
                                                  ),
                                              child: SizedBox(
                                                width: suffixIconSize,
                                                height: suffixIconSize,
-                                               child: SvgPicture.asset(
-                                                 suffixIconPath,
-                                                 colorFilter: ColorFilter.mode(
-                                                   hasError
-                                                       ? AppColors
-                                                             .current
-                                                             .errorDefault
-                                                       : AppColors
-                                                             .current
-                                                             .iconOnColor,
-                                                   BlendMode.srcIn,
-                                                 ),
+                                               child: Icon(
+                                                 Icons.clear,
+                                                 size: suffixIconSize,
+                                                 color: AppColors
+                                                     .current
+                                                     .textSubTitle,
                                                ),
                                              ),
                                            ),
-                                         )
-                                       : kSpacingWidth16),
+                                         ),
+                                       );
+                                     }
+                                     if (isPassword && state.textEditingController.text.isNotEmpty) {
+                                       suffixWidgets.add(
+                                         InkResponse(
+                                           onTap: () {
+                                             state.onChangeObscureText();
+                                           },
+                                           radius: 20,
+                                           child: Padding(
+                                             padding:
+                                                 const EdgeInsets.symmetric(
+                                                   horizontal: Dimens.d4,
+                                                   vertical: Dimens.d8,
+                                                 ),
+                                             child: SizedBox(
+                                               width: suffixIconSize,
+                                               height: suffixIconSize,
+                                               child: !state._obscureText
+                                                   ? Icon(
+                                                       Icons.visibility_outlined,
+                                                       size: suffixIconSize,
+                                                       color: AppColors.current.textSubTitle,
+                                                     )
+                                                   : Icon(
+                                                       Icons.visibility_off_outlined,
+                                                       size: suffixIconSize,
+                                                       color: AppColors.current.textSubTitle,
+                                                     ),
+                                             ),
+                                           ),
+                                         ),
+                                       );
+                                     }
+                                     if (suffixWidgets.isNotEmpty) {
+                                       return Padding(
+                                         padding: const EdgeInsets.only(
+                                           right: Dimens.d8,
+                                         ),
+                                         child: Row(
+                                           mainAxisSize: MainAxisSize.min,
+                                           mainAxisAlignment:
+                                               MainAxisAlignment.end,
+                                           children: suffixWidgets,
+                                         ),
+                                       );
+                                     } else if (suffixIconPath != null) {
+                                       return InkResponse(
+                                         onTap: suffixIconTap,
+                                         child: Padding(
+                                           padding: const EdgeInsets.symmetric(
+                                             horizontal: Dimens.d16,
+                                             vertical: Dimens.d8,
+                                           ),
+                                           child: SizedBox(
+                                             width: suffixIconSize,
+                                             height: suffixIconSize,
+                                             child: SvgPicture.asset(
+                                               suffixIconPath,
+                                               colorFilter: ColorFilter.mode(
+                                                 hasError
+                                                     ? AppColors
+                                                           .current
+                                                           .errorDefault
+                                                     : AppColors
+                                                           .current
+                                                           .iconOnColor,
+                                                 BlendMode.srcIn,
+                                               ),
+                                             ),
+                                           ),
+                                         ),
+                                       );
+                                     } else {
+                                       return kSpacingWidth16;
+                                     }
+                                   }()),
                                enabled: enabled,
                              ),
                        ),

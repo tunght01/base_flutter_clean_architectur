@@ -16,3 +16,8 @@ class PressedLogout extends AccountInfoEvent {
   final bool logoutAll;
   const PressedLogout([this.logoutAll = false]);
 }
+
+class UserEditProductEvent extends AccountInfoEvent {
+  final bool value;
+  const UserEditProductEvent([this.value = false]);
+}

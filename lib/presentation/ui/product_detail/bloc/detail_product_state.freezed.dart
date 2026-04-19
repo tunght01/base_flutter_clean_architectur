@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DetailProductState {
 
- ProductEntity? get product; String? get id;
+ ProductEntity? get product; String? get id; bool get isEdit;
 /// Create a copy of DetailProductState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $DetailProductStateCopyWith<DetailProductState> get copyWith => _$DetailProductS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailProductState&&(identical(other.product, product) || other.product == product)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailProductState&&(identical(other.product, product) || other.product == product)&&(identical(other.id, id) || other.id == id)&&(identical(other.isEdit, isEdit) || other.isEdit == isEdit));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,product,id);
+int get hashCode => Object.hash(runtimeType,product,id,isEdit);
 
 @override
 String toString() {
-  return 'DetailProductState(product: $product, id: $id)';
+  return 'DetailProductState(product: $product, id: $id, isEdit: $isEdit)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $DetailProductStateCopyWith<$Res>  {
   factory $DetailProductStateCopyWith(DetailProductState value, $Res Function(DetailProductState) _then) = _$DetailProductStateCopyWithImpl;
 @useResult
 $Res call({
- ProductEntity? product, String? id
+ ProductEntity? product, String? id, bool isEdit
 });
 
 
@@ -62,11 +62,12 @@ class _$DetailProductStateCopyWithImpl<$Res>
 
 /// Create a copy of DetailProductState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? product = freezed,Object? id = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? product = freezed,Object? id = freezed,Object? isEdit = null,}) {
   return _then(_self.copyWith(
 product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
 as ProductEntity?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,isEdit: null == isEdit ? _self.isEdit : isEdit // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProductEntity? product,  String? id)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProductEntity? product,  String? id,  bool isEdit)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DetailProductState() when $default != null:
-return $default(_that.product,_that.id);case _:
+return $default(_that.product,_that.id,_that.isEdit);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.product,_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProductEntity? product,  String? id)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProductEntity? product,  String? id,  bool isEdit)  $default,) {final _that = this;
 switch (_that) {
 case _DetailProductState():
-return $default(_that.product,_that.id);case _:
+return $default(_that.product,_that.id,_that.isEdit);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.product,_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProductEntity? product,  String? id)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProductEntity? product,  String? id,  bool isEdit)?  $default,) {final _that = this;
 switch (_that) {
 case _DetailProductState() when $default != null:
-return $default(_that.product,_that.id);case _:
+return $default(_that.product,_that.id,_that.isEdit);case _:
   return null;
 
 }
@@ -207,11 +208,12 @@ return $default(_that.product,_that.id);case _:
 
 
 class _DetailProductState extends DetailProductState {
-  const _DetailProductState({this.product, this.id}): super._();
+  const _DetailProductState({this.product, this.id, this.isEdit = false}): super._();
   
 
 @override final  ProductEntity? product;
 @override final  String? id;
+@override@JsonKey() final  bool isEdit;
 
 /// Create a copy of DetailProductState
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +225,16 @@ _$DetailProductStateCopyWith<_DetailProductState> get copyWith => __$DetailProdu
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DetailProductState&&(identical(other.product, product) || other.product == product)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DetailProductState&&(identical(other.product, product) || other.product == product)&&(identical(other.id, id) || other.id == id)&&(identical(other.isEdit, isEdit) || other.isEdit == isEdit));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,product,id);
+int get hashCode => Object.hash(runtimeType,product,id,isEdit);
 
 @override
 String toString() {
-  return 'DetailProductState(product: $product, id: $id)';
+  return 'DetailProductState(product: $product, id: $id, isEdit: $isEdit)';
 }
 
 
@@ -243,7 +245,7 @@ abstract mixin class _$DetailProductStateCopyWith<$Res> implements $DetailProduc
   factory _$DetailProductStateCopyWith(_DetailProductState value, $Res Function(_DetailProductState) _then) = __$DetailProductStateCopyWithImpl;
 @override @useResult
 $Res call({
- ProductEntity? product, String? id
+ ProductEntity? product, String? id, bool isEdit
 });
 
 
@@ -260,11 +262,12 @@ class __$DetailProductStateCopyWithImpl<$Res>
 
 /// Create a copy of DetailProductState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? product = freezed,Object? id = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? product = freezed,Object? id = freezed,Object? isEdit = null,}) {
   return _then(_DetailProductState(
 product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
 as ProductEntity?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,isEdit: null == isEdit ? _self.isEdit : isEdit // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

@@ -18,7 +18,8 @@ class LocalPushNotificationHelper with LogMixin {
   static const _androidDefaultIcon = '@mipmap/ic_launcher';
   static const _bitCount = 31;
   FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-  int get _randomNotificationId => Random().nextInt(pow(2, _bitCount).toInt() - 1);
+  int get _randomNotificationId =>
+      Random().nextInt(pow(2, _bitCount).toInt() - 1);
 
   Future<void> init() async {
     /// Initialize the plugin
@@ -27,7 +28,11 @@ class LocalPushNotificationHelper with LogMixin {
 
     /// don't request permission here
     /// we use firebase_messaging package to request permission instead
-    const iOSInit = DarwinInitializationSettings(requestAlertPermission: false, requestBadgePermission: false, requestSoundPermission: false);
+    const iOSInit = DarwinInitializationSettings(
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false,
+    );
     const init = InitializationSettings(android: androidInit, iOS: iOSInit);
 
     /// init local notification
@@ -42,7 +47,18 @@ class LocalPushNotificationHelper with LogMixin {
     ///
     /// We use this channel in the `AndroidManifest.xml` file to override the
     /// default FCM channel to enable heads up notifications.
-    await FlutterLocalNotificationsPlugin().resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(const AndroidNotificationChannel(_channelId, _channelName, description: _channelDescription, importance: Importance.max));
+    await FlutterLocalNotificationsPlugin()
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(
+          const AndroidNotificationChannel(
+            _channelId,
+            _channelName,
+            description: _channelDescription,
+            importance: Importance.max,
+          ),
+        );
 
     await initializeMessaging();
     requestPermissions();
@@ -53,7 +69,9 @@ class LocalPushNotificationHelper with LogMixin {
   }
 
   Future<void> initializeMessaging() async {
-    await firebaseMessaging.getInitialMessage().then((RemoteMessage? message) async {
+    await firebaseMessaging.getInitialMessage().then((
+      RemoteMessage? message,
+    ) async {
       if (message != null) {
         if (getIt.get<AppBloc>().state.isLoggedIn) {
           handleNotification(message);
@@ -65,7 +83,13 @@ class LocalPushNotificationHelper with LogMixin {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       final RemoteNotification? notification = message.notification;
       handleNotification(message);
-      notify(AppNotification(title: notification?.title ?? '', message: notification?.body ?? '', notificationId: message.messageId ?? ''));
+      notify(
+        AppNotification(
+          title: notification?.title ?? '',
+          message: notification?.body ?? '',
+          notificationId: message.messageId ?? '',
+        ),
+      );
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       if (getIt.get<AppBloc>().state.isLoggedIn) {
@@ -78,15 +102,36 @@ class LocalPushNotificationHelper with LogMixin {
 
   Future<void> handleNotification(RemoteMessage message) async {
     if (getIt.get<AppBloc>().state.isLoggedIn) {
-      getIt.get<AppBloc>().add(const IsGoToNotifyChangedEvent(isGotoNotidy: true));
+      /// neu user dang nhap roi, user nhan dieu huong tu notification emit su kien de dieu huong toi man notification
+      getIt.get<AppBloc>().add(
+        const IsGoToNotifyChangedEvent(isGotoNotidy: true),
+      );
     }
   }
 
   Future<void> notify(AppNotification notification) async {
-    final androidPlatformChannelSpecifics = AndroidNotificationDetails(_channelId, _channelName, channelDescription: _channelDescription, priority: Priority.max, importance: Importance.max, enableLights: true, icon: _androidDefaultIcon);
-    const iOSPlatformChannelSpecifics = DarwinNotificationDetails(interruptionLevel: InterruptionLevel.timeSensitive, presentSound: true, presentList: true, presentAlert: true, presentBadge: true, presentBanner: true);
+    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      _channelId,
+      _channelName,
+      channelDescription: _channelDescription,
+      priority: Priority.max,
+      importance: Importance.max,
+      enableLights: true,
+      icon: _androidDefaultIcon,
+    );
+    const iOSPlatformChannelSpecifics = DarwinNotificationDetails(
+      interruptionLevel: InterruptionLevel.timeSensitive,
+      presentSound: true,
+      presentList: true,
+      presentAlert: true,
+      presentBadge: true,
+      presentBanner: true,
+    );
 
-    final platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+    final platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
 
     await FlutterLocalNotificationsPlugin()
         .show(
@@ -96,7 +141,9 @@ class LocalPushNotificationHelper with LogMixin {
           notificationDetails: platformChannelSpecifics,
           // TODO: handle later payload: jsonEncode(data),
         )
-        .onError((error, stackTrace) => logE('Can not show notification cause $error'));
+        .onError(
+          (error, stackTrace) => logE('Can not show notification cause $error'),
+        );
   }
 
   Future<String> getToken() {
@@ -110,7 +157,11 @@ class LocalPushNotificationHelper with LogMixin {
   }
 
   void requestPermissions() {
-    FlutterLocalNotificationsPlugin().resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(alert: true, badge: true, sound: true);
+    FlutterLocalNotificationsPlugin()
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >()
+        ?.requestPermissions(alert: true, badge: true, sound: true);
 
     firebaseMessaging.requestPermission(provisional: true);
   }

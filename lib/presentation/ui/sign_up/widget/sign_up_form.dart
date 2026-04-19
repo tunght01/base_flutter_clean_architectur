@@ -177,6 +177,7 @@ class _SignUpFormState extends State<SignUpForm>
                       focusNode: _passwordFocusNode,
                       validator: passwordValidator,
                       isPassword: true,
+                      isClear: true,
                       titleColor: AppColors.current.textSubTitle,
                       fillColor: AppColors.current.neutralBlack1100.withValues(
                         alpha: 0.15,
@@ -211,6 +212,7 @@ class _SignUpFormState extends State<SignUpForm>
                           value,
                         );
                       },
+                      isClear: true,
                       isPassword: true,
                       titleColor: AppColors.current.textSubTitle,
                       fillColor: AppColors.current.neutralBlack1100.withValues(

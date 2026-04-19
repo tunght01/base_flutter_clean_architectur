@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AccountInfoState {
 
- AccountInfo? get accountInfo;
+ AccountInfo? get accountInfo; bool get isEdit;
 /// Create a copy of AccountInfoState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AccountInfoStateCopyWith<AccountInfoState> get copyWith => _$AccountInfoStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountInfoState&&(identical(other.accountInfo, accountInfo) || other.accountInfo == accountInfo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountInfoState&&(identical(other.accountInfo, accountInfo) || other.accountInfo == accountInfo)&&(identical(other.isEdit, isEdit) || other.isEdit == isEdit));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,accountInfo);
+int get hashCode => Object.hash(runtimeType,accountInfo,isEdit);
 
 @override
 String toString() {
-  return 'AccountInfoState(accountInfo: $accountInfo)';
+  return 'AccountInfoState(accountInfo: $accountInfo, isEdit: $isEdit)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AccountInfoStateCopyWith<$Res>  {
   factory $AccountInfoStateCopyWith(AccountInfoState value, $Res Function(AccountInfoState) _then) = _$AccountInfoStateCopyWithImpl;
 @useResult
 $Res call({
- AccountInfo? accountInfo
+ AccountInfo? accountInfo, bool isEdit
 });
 
 
@@ -62,10 +62,11 @@ class _$AccountInfoStateCopyWithImpl<$Res>
 
 /// Create a copy of AccountInfoState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accountInfo = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? accountInfo = freezed,Object? isEdit = null,}) {
   return _then(_self.copyWith(
 accountInfo: freezed == accountInfo ? _self.accountInfo : accountInfo // ignore: cast_nullable_to_non_nullable
-as AccountInfo?,
+as AccountInfo?,isEdit: null == isEdit ? _self.isEdit : isEdit // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -150,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AccountInfo? accountInfo)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AccountInfo? accountInfo,  bool isEdit)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AccountInfoState() when $default != null:
-return $default(_that.accountInfo);case _:
+return $default(_that.accountInfo,_that.isEdit);case _:
   return orElse();
 
 }
@@ -171,10 +172,10 @@ return $default(_that.accountInfo);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AccountInfo? accountInfo)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AccountInfo? accountInfo,  bool isEdit)  $default,) {final _that = this;
 switch (_that) {
 case _AccountInfoState():
-return $default(_that.accountInfo);case _:
+return $default(_that.accountInfo,_that.isEdit);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +192,10 @@ return $default(_that.accountInfo);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AccountInfo? accountInfo)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AccountInfo? accountInfo,  bool isEdit)?  $default,) {final _that = this;
 switch (_that) {
 case _AccountInfoState() when $default != null:
-return $default(_that.accountInfo);case _:
+return $default(_that.accountInfo,_that.isEdit);case _:
   return null;
 
 }
@@ -206,10 +207,11 @@ return $default(_that.accountInfo);case _:
 
 
 class _AccountInfoState extends AccountInfoState {
-  const _AccountInfoState({this.accountInfo}): super._();
+  const _AccountInfoState({this.accountInfo, this.isEdit = false}): super._();
   
 
 @override final  AccountInfo? accountInfo;
+@override@JsonKey() final  bool isEdit;
 
 /// Create a copy of AccountInfoState
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +223,16 @@ _$AccountInfoStateCopyWith<_AccountInfoState> get copyWith => __$AccountInfoStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AccountInfoState&&(identical(other.accountInfo, accountInfo) || other.accountInfo == accountInfo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AccountInfoState&&(identical(other.accountInfo, accountInfo) || other.accountInfo == accountInfo)&&(identical(other.isEdit, isEdit) || other.isEdit == isEdit));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,accountInfo);
+int get hashCode => Object.hash(runtimeType,accountInfo,isEdit);
 
 @override
 String toString() {
-  return 'AccountInfoState(accountInfo: $accountInfo)';
+  return 'AccountInfoState(accountInfo: $accountInfo, isEdit: $isEdit)';
 }
 
 
@@ -241,7 +243,7 @@ abstract mixin class _$AccountInfoStateCopyWith<$Res> implements $AccountInfoSta
   factory _$AccountInfoStateCopyWith(_AccountInfoState value, $Res Function(_AccountInfoState) _then) = __$AccountInfoStateCopyWithImpl;
 @override @useResult
 $Res call({
- AccountInfo? accountInfo
+ AccountInfo? accountInfo, bool isEdit
 });
 
 
@@ -258,10 +260,11 @@ class __$AccountInfoStateCopyWithImpl<$Res>
 
 /// Create a copy of AccountInfoState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accountInfo = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? accountInfo = freezed,Object? isEdit = null,}) {
   return _then(_AccountInfoState(
 accountInfo: freezed == accountInfo ? _self.accountInfo : accountInfo // ignore: cast_nullable_to_non_nullable
-as AccountInfo?,
+as AccountInfo?,isEdit: null == isEdit ? _self.isEdit : isEdit // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

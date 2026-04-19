@@ -9,6 +9,7 @@ enum AppFirebaseExceptionType {
   emailAlreadyInUse('email-already-in-use'),
   tooManyRequests('too-many-requests'),
   permissionDeny('permission-denied'),
+  networkRequestFailed('network-request-failed'),
   unknown('unknown');
 
   final String code;

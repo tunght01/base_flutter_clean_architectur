@@ -55,6 +55,8 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
           navigator.showWarningSnackBar(S.current.please_agree_term_policy);
           return;
         }
+
+        /// dang ky tai khoan
         await _signUpUseCase.execute(
           SignUpInput(
             email: state.email!,
@@ -99,6 +101,7 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
   ) {
     return runBlocCatching(
       action: () async {
+        /// sau khi dang ki thanh cong cap nhat luu duu lieu user len firebase store
         await _saveUserProfileUseCase.execute(
           SaveUserProfileInput(
             createUserRequest: CreateUserRequest(

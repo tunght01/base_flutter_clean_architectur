@@ -3,6 +3,7 @@ import 'package:soft_dream_test/presentation/common_view/spacing/spacing_const.d
 import 'package:soft_dream_test/presentation/resource/dimens/dimens.dart';
 import 'package:soft_dream_test/presentation/resource/generated/assets.gen.dart';
 import 'package:soft_dream_test/presentation/resource/generated/l10n.dart';
+import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_text_styles.dart';
 
 class EmptyWidget extends StatelessWidget {
@@ -23,7 +24,9 @@ class EmptyWidget extends StatelessWidget {
             kSpacingHeight8,
             Text(
               message ?? S.current.no_records_yet,
-              style: AppTextStyle.medium12(),
+              style: AppTextStyle.medium12(
+                color: AppColors.of(context).textTitle,
+              ),
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_colors.dart';
 import 'package:soft_dream_test/presentation/resource/styles/app_text_styles.dart';
+
 import '../spacing/spacing_const.dart';
 import 'app_leading.dart';
 
@@ -43,7 +44,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       decoration: linearGradient != null
           ? BoxDecoration(gradient: linearGradient)
           : BoxDecoration(
-              color: backgroundColor ?? AppColors.current.mobileBackground,
+              color: backgroundColor ?? AppColors.of(context).mobileBackground,
             ),
       child: AppBar(
         backgroundColor: Colors.transparent,
@@ -61,7 +62,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
                 label!,
                 style: AppTextStyle.semiBold16(
                   responsive: false,
-                  color: labelColor ?? AppColors.current.textTitle,
+                  color: labelColor ?? AppColors.of(context).textTitle,
                 ),
               )
             : title,
@@ -72,7 +73,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
             PreferredSize(
               preferredSize: const Size.fromHeight(1),
               child: Container(
-                color: bottomColor ?? AppColors.current.mobileStrokeTab,
+                color: bottomColor ?? AppColors.of(context).mobileStrokeTab,
                 height: 1,
               ),
             ),

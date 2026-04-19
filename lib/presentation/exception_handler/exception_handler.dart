@@ -31,6 +31,7 @@ class ExceptionHandler {
             break;
           case RemoteExceptionKind.noInternet:
           case RemoteExceptionKind.timeout:
+            await _showErrorSnackBar(message: message);
             break;
           case RemoteExceptionKind.serverDefined:
             await _showErrorSnackBar(message: message);

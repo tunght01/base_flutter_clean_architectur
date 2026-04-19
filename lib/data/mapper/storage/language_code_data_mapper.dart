@@ -9,13 +9,13 @@ class LanguageCodeDataMapper extends BaseDataMapper<String, LanguageCode>
   @override
   LanguageCode mapToEntity(String? data) {
     return LanguageCode.values.firstOrNullWhere(
-          (element) => element.serverValue == data,
+          (element) => element.localeCode == data,
         ) ??
         LanguageCode.defaultValue;
   }
 
   @override
   String mapToData(LanguageCode entity) {
-    return entity.serverValue;
+    return entity.localeCode;
   }
 }
