@@ -29,3 +29,16 @@ class OnPressProductEvent extends HomeEvent {
   final String id;
   const OnPressProductEvent(this.id);
 }
+
+class OnUpdateQueryEvent extends HomeEvent {
+  final String query;
+  const OnUpdateQueryEvent(this.query);
+}
+
+class OnSelectedInStockEvent extends HomeEvent {
+  const OnSelectedInStockEvent();
+}
+
+class FilterProductEvent extends HomeEvent {
+  const FilterProductEvent();
+}

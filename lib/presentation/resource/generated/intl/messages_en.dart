@@ -92,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalid_password": MessageLookupByLibrary.simpleMessage(
       "Invalid password!",
     ),
+    "invalid_price": MessageLookupByLibrary.simpleMessage("Invalid price."),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "light": MessageLookupByLibrary.simpleMessage("Light"),
     "login_button": MessageLookupByLibrary.simpleMessage("Sign in"),
@@ -150,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_detail": MessageLookupByLibrary.simpleMessage("Product detail"),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "search_product": MessageLookupByLibrary.simpleMessage("Search product"),
     "show_in_stock": MessageLookupByLibrary.simpleMessage("In stock"),
     "show_out_stock": MessageLookupByLibrary.simpleMessage("Out of stock"),
     "sign_out": MessageLookupByLibrary.simpleMessage("Sign out"),

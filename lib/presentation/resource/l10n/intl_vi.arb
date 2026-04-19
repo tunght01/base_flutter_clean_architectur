@@ -71,5 +71,7 @@
     "not_match_password":"Mật khẩu không khớp.",
     "field_not_empty":"Trường không được để trống",
     "password_have_to_over_6_charactor":"Mật khẩu phải từ 6–50 ký tự",
+    "search_product":"Tìm kiếm sản phẩm",
+    "invalid_price":"Giá không hợp lệ.",
     "end":"Kết thúc"
 }

@@ -108,7 +108,7 @@ class _ProductFormSheetState extends State<ProductFormSheet>
                 title: S.current.price_product,
                 autoValidate: true,
                 inputType: TextInputType.number,
-                validator: (value) => emptyValidator(_priceCtrl.text),
+                validator: (value) => priceValidator(_priceCtrl.text),
                 controller: _priceCtrl,
                 fillColor: AppColors.current.neutralBlack1100.withValues(
                   alpha: 0.15,

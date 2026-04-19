@@ -639,6 +639,26 @@ class S {
     );
   }
 
+  /// `Tìm kiếm sản phẩm`
+  String get search_product {
+    return Intl.message(
+      'Tìm kiếm sản phẩm',
+      name: 'search_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Giá không hợp lệ.`
+  String get invalid_price {
+    return Intl.message(
+      'Giá không hợp lệ.',
+      name: 'invalid_price',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Kết thúc`
   String get end {
     return Intl.message('Kết thúc', name: 'end', desc: '', args: []);

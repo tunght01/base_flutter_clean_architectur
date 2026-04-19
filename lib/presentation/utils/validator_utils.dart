@@ -66,4 +66,22 @@ mixin ValidatorUtils {
     }
     return null;
   }
+
+  String? priceValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return S.current.field_not_empty;
+    }
+
+    final price = double.tryParse(value.trim());
+
+    if (price == null) {
+      return S.current.invalid_price;
+    }
+
+    if (price <= 0) {
+      return S.current.invalid_price;
+    }
+
+    return null; // hợp lệ
+  }
 }

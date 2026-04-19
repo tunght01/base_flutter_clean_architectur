@@ -15,13 +15,18 @@ class GetAllProductUseCase
 
   @override
   Future<GetAllProductOutput> buildUseCase(GetAllProductInput input) async {
-    final response = await _repository.getAll();
+    final response = await _repository.getAll(
+      inStockOnly: input.inStockOnly,
+      query: input.query,
+    );
     return GetAllProductOutput(products: response);
   }
 }
 
 class GetAllProductInput extends BaseInput {
-  const GetAllProductInput();
+  final String? query;
+  final bool? inStockOnly;
+  const GetAllProductInput(this.query, this.inStockOnly);
 }
 
 class GetAllProductOutput extends BaseOutput {

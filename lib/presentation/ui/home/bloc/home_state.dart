@@ -10,5 +10,7 @@ abstract class HomeState extends BaseBlocState with _$HomeState {
   const factory HomeState({
     List<ProductEntity>? originalProduct,
     List<ProductEntity>? listProduct,
+    @Default(false) bool isSelectedInStock,
+    String? query,
   }) = _HomeState;
 }

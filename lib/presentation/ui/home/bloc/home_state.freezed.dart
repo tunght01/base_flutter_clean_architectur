@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
 
- List<ProductEntity>? get originalProduct; List<ProductEntity>? get listProduct;
+ List<ProductEntity>? get originalProduct; List<ProductEntity>? get listProduct; bool get isSelectedInStock; String? get query;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&const DeepCollectionEquality().equals(other.originalProduct, originalProduct)&&const DeepCollectionEquality().equals(other.listProduct, listProduct));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&const DeepCollectionEquality().equals(other.originalProduct, originalProduct)&&const DeepCollectionEquality().equals(other.listProduct, listProduct)&&(identical(other.isSelectedInStock, isSelectedInStock) || other.isSelectedInStock == isSelectedInStock)&&(identical(other.query, query) || other.query == query));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(originalProduct),const DeepCollectionEquality().hash(listProduct));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(originalProduct),const DeepCollectionEquality().hash(listProduct),isSelectedInStock,query);
 
 @override
 String toString() {
-  return 'HomeState(originalProduct: $originalProduct, listProduct: $listProduct)';
+  return 'HomeState(originalProduct: $originalProduct, listProduct: $listProduct, isSelectedInStock: $isSelectedInStock, query: $query)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- List<ProductEntity>? originalProduct, List<ProductEntity>? listProduct
+ List<ProductEntity>? originalProduct, List<ProductEntity>? listProduct, bool isSelectedInStock, String? query
 });
 
 
@@ -62,11 +62,13 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? originalProduct = freezed,Object? listProduct = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? originalProduct = freezed,Object? listProduct = freezed,Object? isSelectedInStock = null,Object? query = freezed,}) {
   return _then(_self.copyWith(
 originalProduct: freezed == originalProduct ? _self.originalProduct : originalProduct // ignore: cast_nullable_to_non_nullable
 as List<ProductEntity>?,listProduct: freezed == listProduct ? _self.listProduct : listProduct // ignore: cast_nullable_to_non_nullable
-as List<ProductEntity>?,
+as List<ProductEntity>?,isSelectedInStock: null == isSelectedInStock ? _self.isSelectedInStock : isSelectedInStock // ignore: cast_nullable_to_non_nullable
+as bool,query: freezed == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -151,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ProductEntity>? originalProduct,  List<ProductEntity>? listProduct)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ProductEntity>? originalProduct,  List<ProductEntity>? listProduct,  bool isSelectedInStock,  String? query)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.originalProduct,_that.listProduct);case _:
+return $default(_that.originalProduct,_that.listProduct,_that.isSelectedInStock,_that.query);case _:
   return orElse();
 
 }
@@ -172,10 +174,10 @@ return $default(_that.originalProduct,_that.listProduct);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ProductEntity>? originalProduct,  List<ProductEntity>? listProduct)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ProductEntity>? originalProduct,  List<ProductEntity>? listProduct,  bool isSelectedInStock,  String? query)  $default,) {final _that = this;
 switch (_that) {
 case _HomeState():
-return $default(_that.originalProduct,_that.listProduct);case _:
+return $default(_that.originalProduct,_that.listProduct,_that.isSelectedInStock,_that.query);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +194,10 @@ return $default(_that.originalProduct,_that.listProduct);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ProductEntity>? originalProduct,  List<ProductEntity>? listProduct)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ProductEntity>? originalProduct,  List<ProductEntity>? listProduct,  bool isSelectedInStock,  String? query)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.originalProduct,_that.listProduct);case _:
+return $default(_that.originalProduct,_that.listProduct,_that.isSelectedInStock,_that.query);case _:
   return null;
 
 }
@@ -207,7 +209,7 @@ return $default(_that.originalProduct,_that.listProduct);case _:
 
 
 class _HomeState extends HomeState {
-  const _HomeState({final  List<ProductEntity>? originalProduct, final  List<ProductEntity>? listProduct}): _originalProduct = originalProduct,_listProduct = listProduct,super._();
+  const _HomeState({final  List<ProductEntity>? originalProduct, final  List<ProductEntity>? listProduct, this.isSelectedInStock = false, this.query}): _originalProduct = originalProduct,_listProduct = listProduct,super._();
   
 
  final  List<ProductEntity>? _originalProduct;
@@ -228,6 +230,8 @@ class _HomeState extends HomeState {
   return EqualUnmodifiableListView(value);
 }
 
+@override@JsonKey() final  bool isSelectedInStock;
+@override final  String? query;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +243,16 @@ _$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&const DeepCollectionEquality().equals(other._originalProduct, _originalProduct)&&const DeepCollectionEquality().equals(other._listProduct, _listProduct));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&const DeepCollectionEquality().equals(other._originalProduct, _originalProduct)&&const DeepCollectionEquality().equals(other._listProduct, _listProduct)&&(identical(other.isSelectedInStock, isSelectedInStock) || other.isSelectedInStock == isSelectedInStock)&&(identical(other.query, query) || other.query == query));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_originalProduct),const DeepCollectionEquality().hash(_listProduct));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_originalProduct),const DeepCollectionEquality().hash(_listProduct),isSelectedInStock,query);
 
 @override
 String toString() {
-  return 'HomeState(originalProduct: $originalProduct, listProduct: $listProduct)';
+  return 'HomeState(originalProduct: $originalProduct, listProduct: $listProduct, isSelectedInStock: $isSelectedInStock, query: $query)';
 }
 
 
@@ -259,7 +263,7 @@ abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<ProductEntity>? originalProduct, List<ProductEntity>? listProduct
+ List<ProductEntity>? originalProduct, List<ProductEntity>? listProduct, bool isSelectedInStock, String? query
 });
 
 
@@ -276,11 +280,13 @@ class __$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? originalProduct = freezed,Object? listProduct = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? originalProduct = freezed,Object? listProduct = freezed,Object? isSelectedInStock = null,Object? query = freezed,}) {
   return _then(_HomeState(
 originalProduct: freezed == originalProduct ? _self._originalProduct : originalProduct // ignore: cast_nullable_to_non_nullable
 as List<ProductEntity>?,listProduct: freezed == listProduct ? _self._listProduct : listProduct // ignore: cast_nullable_to_non_nullable
-as List<ProductEntity>?,
+as List<ProductEntity>?,isSelectedInStock: null == isSelectedInStock ? _self.isSelectedInStock : isSelectedInStock // ignore: cast_nullable_to_non_nullable
+as bool,query: freezed == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

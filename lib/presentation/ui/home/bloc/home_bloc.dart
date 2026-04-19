@@ -24,6 +24,12 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
     on<CreateProductEvent>(_onCreateProductEvent, transformer: log());
     on<OnPressProductEvent>(_onOnPressProductEvent, transformer: log());
     on<HomePageRefreshed>(_onHomePageRefreshed, transformer: log());
+    on<FilterProductEvent>(_onFilterProductEvent, transformer: log());
+    on<OnUpdateQueryEvent>(_onOnUpdateQueryEvent, transformer: debounceTime());
+    on<OnSelectedInStockEvent>(
+      _onOnSelectedInStockEvent,
+      transformer: debounceTime(),
+    );
   }
 
   final SeedIfEmptyProductUseCase _seedIfEmptyProductUseCase;
@@ -107,11 +113,38 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
     return runBlocCatching(
       handleLoading: handleLoading,
       action: () async {
-        final output = await _allProductUseCase.execute(GetAllProductInput());
+        final inStock = state.isSelectedInStock;
+
+        final output = await _allProductUseCase.execute(
+          GetAllProductInput(state.query, inStock),
+        );
         emit(state.copyWith(listProduct: output.products));
       },
       doOnSuccessOrError: doOnSuccessOrError,
       maxRetries: 3,
     );
+  }
+
+  FutureOr<void> _onFilterProductEvent(
+    FilterProductEvent event,
+    Emitter<HomeState> emit,
+  ) async {
+    await _getProducts(handleLoading: false, emit: emit);
+  }
+
+  void _onOnUpdateQueryEvent(
+    OnUpdateQueryEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    emit(state.copyWith(query: event.query));
+  }
+
+  void _onOnSelectedInStockEvent(
+    OnSelectedInStockEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    final inStock = state.isSelectedInStock;
+
+    emit(state.copyWith(isSelectedInStock: !inStock));
   }
 }

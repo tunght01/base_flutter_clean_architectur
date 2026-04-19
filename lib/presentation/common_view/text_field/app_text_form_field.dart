@@ -257,7 +257,9 @@ class AppTextFormField extends FormField<String> {
                                        suffixWidgets.add(
                                          InkResponse(
                                            onTap: () {
-                                             state.onClearText();
+                                             state.onClearText((value) {
+                                               onChanged?.call(value);
+                                             });
                                            },
                                            radius: 20,
                                            child: Padding(
@@ -281,7 +283,11 @@ class AppTextFormField extends FormField<String> {
                                          ),
                                        );
                                      }
-                                     if (isPassword && state.textEditingController.text.isNotEmpty) {
+                                     if (isPassword &&
+                                         state
+                                             .textEditingController
+                                             .text
+                                             .isNotEmpty) {
                                        suffixWidgets.add(
                                          InkResponse(
                                            onTap: () {
@@ -299,14 +305,20 @@ class AppTextFormField extends FormField<String> {
                                                height: suffixIconSize,
                                                child: !state._obscureText
                                                    ? Icon(
-                                                       Icons.visibility_outlined,
+                                                       Icons
+                                                           .visibility_outlined,
                                                        size: suffixIconSize,
-                                                       color: AppColors.current.textSubTitle,
+                                                       color: AppColors
+                                                           .current
+                                                           .textSubTitle,
                                                      )
                                                    : Icon(
-                                                       Icons.visibility_off_outlined,
+                                                       Icons
+                                                           .visibility_off_outlined,
                                                        size: suffixIconSize,
-                                                       color: AppColors.current.textSubTitle,
+                                                       color: AppColors
+                                                           .current
+                                                           .textSubTitle,
                                                      ),
                                              ),
                                            ),
@@ -411,11 +423,12 @@ class AppTextFormFieldState extends FormFieldState<String> {
     });
   }
 
-  void onClearText() {
+  void onClearText(ValueChanged<String?>? onChanged) {
     setState(() {
       textEditingController.clear();
     });
     _isClear = false;
+    onChanged?.call('');
   }
 
   void _onChangeClear(String? value) {

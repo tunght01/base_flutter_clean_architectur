@@ -88,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalid_password": MessageLookupByLibrary.simpleMessage(
       "Mật khẩu không hợp lệ!",
     ),
+    "invalid_price": MessageLookupByLibrary.simpleMessage("Giá không hợp lệ."),
     "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
     "light": MessageLookupByLibrary.simpleMessage("Sáng"),
     "login_button": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
@@ -150,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_detail": MessageLookupByLibrary.simpleMessage("Chi tiết sản phẩm"),
     "profile": MessageLookupByLibrary.simpleMessage("Thông tin"),
     "save": MessageLookupByLibrary.simpleMessage("Lưu"),
+    "search_product": MessageLookupByLibrary.simpleMessage("Tìm kiếm sản phẩm"),
     "show_in_stock": MessageLookupByLibrary.simpleMessage("Còn hàng"),
     "show_out_stock": MessageLookupByLibrary.simpleMessage("Hết hàng"),
     "sign_out": MessageLookupByLibrary.simpleMessage("Đăng xuất"),

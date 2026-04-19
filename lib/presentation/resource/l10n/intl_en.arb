@@ -71,5 +71,7 @@
     "not_match_password": "Passwords do not match.",
     "field_not_empty": "This field cannot be empty.",
     "password_have_to_over_6_charactor": "Password must be between 6–50 characters.",
+    "search_product":"Search product",
+    "invalid_price":"Invalid price.",
     "end": "End"
 }
