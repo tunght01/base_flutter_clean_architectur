@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "already_account": MessageLookupByLibrary.simpleMessage(
+      "Bạn đã có tài khoản? ",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
     "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
     "confirm_remove": MessageLookupByLibrary.simpleMessage("Xác nhận xóa"),

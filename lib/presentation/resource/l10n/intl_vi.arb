@@ -73,5 +73,6 @@
     "password_have_to_over_6_charactor":"Mật khẩu phải từ 6–50 ký tự",
     "search_product":"Tìm kiếm sản phẩm",
     "invalid_price":"Giá không hợp lệ.",
+    "already_account":"Bạn đã có tài khoản? ",
     "end":"Kết thúc"
 }

@@ -659,6 +659,16 @@ class S {
     );
   }
 
+  /// `Bạn đã có tài khoản? `
+  String get already_account {
+    return Intl.message(
+      'Bạn đã có tài khoản? ',
+      name: 'already_account',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Kết thúc`
   String get end {
     return Intl.message('Kết thúc', name: 'end', desc: '', args: []);

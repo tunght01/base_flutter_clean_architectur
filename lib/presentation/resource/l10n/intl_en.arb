@@ -73,5 +73,6 @@
     "password_have_to_over_6_charactor": "Password must be between 6–50 characters.",
     "search_product":"Search product",
     "invalid_price":"Invalid price.",
+    "already_account":"Do you already have an account? ",
     "end": "End"
 }
