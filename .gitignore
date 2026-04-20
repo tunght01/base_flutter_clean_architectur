@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase config files — chứa API keys, không được commit
+google-services.json
+GoogleService-Info.plist
