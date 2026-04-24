@@ -226,7 +226,7 @@ class _LoginFormState extends State<LoginForm>
                         Expanded(
                           child: AppButton(
                             isLoading: state.showLoginButtonLoading,
-                            label: S.current.login_button,
+                            label: S.current.create,
                             labelTextStyle: AppTextStyle.bold16(
                               color: Colors.white,
                             ),

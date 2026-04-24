@@ -222,6 +222,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i223.GetProductByIdUseCase>(
       () => _i223.GetProductByIdUseCase(gh<_i898.ProductRepository>()),
     );
+    gh.factory<_i481.SeedIfEmptyProductUseCase>(
+      () => _i481.SeedIfEmptyProductUseCase(gh<_i898.ProductRepository>()),
+    );
     gh.factory<_i362.UpdateProductUseCase>(
       () => _i362.UpdateProductUseCase(gh<_i898.ProductRepository>()),
     );
@@ -230,6 +233,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i515.SignUpUseCase>(
       () => _i515.SignUpUseCase(gh<_i146.AuthRepository>()),
+    );
+    gh.factory<_i415.HomeBloc>(
+      () => _i415.HomeBloc(
+        gh<_i481.SeedIfEmptyProductUseCase>(),
+        gh<_i601.GetAllProductUseCase>(),
+        gh<_i383.CreateProductUseCase>(),
+      ),
     );
     gh.factory<_i980.DetailProductBloc>(
       () => _i980.DetailProductBloc(
@@ -259,12 +269,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i301.StorageRepository>(),
       ),
     );
-    gh.factory<_i481.SeedIfEmptyProductUseCase>(
-      () => _i481.SeedIfEmptyProductUseCase(
-        gh<_i898.ProductRepository>(),
-        gh<_i301.StorageRepository>(),
-      ),
-    );
     gh.factory<_i1071.ForgotPasswordUseCase>(
       () => _i1071.ForgotPasswordUseCase(gh<_i146.AuthRepository>()),
     );
@@ -282,13 +286,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i673.SignUpBloc(
         gh<_i515.SignUpUseCase>(),
         gh<_i166.SaveUserProfileUseCase>(),
-      ),
-    );
-    gh.factory<_i415.HomeBloc>(
-      () => _i415.HomeBloc(
-        gh<_i481.SeedIfEmptyProductUseCase>(),
-        gh<_i601.GetAllProductUseCase>(),
-        gh<_i383.CreateProductUseCase>(),
       ),
     );
     gh.lazySingleton<_i768.AccountInfoBloc>(

@@ -9,10 +9,9 @@ import 'base/future/base_future_use_case.dart';
 
 @Injectable()
 class SeedIfEmptyProductUseCase extends BaseFutureUseCase<SeedIfEmptyProductInput, SeedIfEmptyProductOutput> {
-  const SeedIfEmptyProductUseCase(this._repository, this._storeRepository);
+  const SeedIfEmptyProductUseCase(this._repository);
 
   final ProductRepository _repository;
-  final StorageRepository _storeRepository;
 
   @override
   Future<SeedIfEmptyProductOutput> buildUseCase(SeedIfEmptyProductInput input) async {
