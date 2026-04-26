@@ -20,6 +20,9 @@ import 'package:soft_dream_test/shared/helper/stream/dispose_bag.dart';
 import 'package:soft_dream_test/shared/mixin/log_mixin.dart';
 import 'package:soft_dream_test/shared/utils/log_utils.dart';
 import 'package:soft_dream_test/shared/utils/num_utils.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:soft_dream_test/shared/exception/firebase/app_firebase_exception.dart';
+import 'package:soft_dream_test/shared/exception/uncaught/app_uncaught_exception.dart';
 
 abstract class BaseBloc<E extends BaseBlocEvent, S extends BaseBlocState>
     extends BaseBlocDelegate<E, S>
@@ -185,6 +188,28 @@ abstract class BaseBlocDelegate<
           ),
         );
       }
+    } on dynamic catch (e) {
+      if (handleLoading) {
+        hideLoading();
+      }
+      final AppException appException = e is FirebaseException
+          ? AppFirebaseException(code: e.code, message: e.message)
+          : e is TimeoutException
+              ? const RemoteException(kind: RemoteExceptionKind.timeout)
+              : AppUncaughtException(e);
+          
+      await doOnSuccessOrError?.call();
+      await doOnError?.call(appException);
+
+      if (handleError || (forceHandleError?.call(appException) ?? _forceHandleError(appException))) {
+        await addException(
+          AppExceptionWrapper(
+            appException: appException,
+            exceptionCompleter: Completer<void>(),
+            overrideMessage: overrideErrorMessage,
+          ),
+        );
+      }
     } finally {
       await recursion?.future;
       await doOnEventCompleted?.call();
@@ -275,6 +300,26 @@ abstract class BaseBlocDelegate<
           ),
         );
       }
+    } on dynamic catch (e) {
+      if (handleLoading) {
+        hideLoading();
+      }
+      final AppException appException = e is FirebaseException
+          ? AppFirebaseException(code: e.code, message: e.message)
+          : AppUncaughtException(e);
+
+      await doOnSuccessOrError?.call();
+      await doOnError?.call(appException);
+
+      if (handleError || (forceHandleError?.call(appException) ?? _forceHandleError(appException))) {
+        await addException(
+          AppExceptionWrapper(
+            appException: appException,
+            exceptionCompleter: Completer<void>(),
+            overrideMessage: overrideErrorMessage,
+          ),
+        );
+      }
     } finally {
       await recursion?.future;
       await doOnEventCompleted?.call();
@@ -283,6 +328,8 @@ abstract class BaseBlocDelegate<
 
   bool _forceHandleError(AppException appException) {
     return appException is RemoteException &&
-        appException.kind == RemoteExceptionKind.refreshTokenFailed;
+        (appException.kind == RemoteExceptionKind.refreshTokenFailed ||
+            appException.kind == RemoteExceptionKind.noInternet ||
+            appException.kind == RemoteExceptionKind.timeout);
   }
 }
