@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "516007133404",
+    "project_id": "softdream-test",
+    "storage_bucket": "softdream-test.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516007133404:android:6466d08b36bc8a76a6f419",
+        "android_client_info": {
+          "package_name": "com.example.soft_dream_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-kI439WeMilJaUxr3OD276U7UaAzAFlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
